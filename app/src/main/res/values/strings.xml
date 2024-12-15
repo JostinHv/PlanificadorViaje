@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">PlanificadorViaje</string>
+    <string name="aplicacion_name">WizGo</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_itinerary">Intinerario</string>
+    <string name="title_account">Cuenta</string>
+    <string name="logout">Cerrar Sesión</string>
+    <string name="save_changes">Guardar Cambios</string>
+    <string name="email">Correo Electronico</string>
+    <string name="name">Nombre</string>
+    <string name="add_plan">Agregar plan</string>
+    <string name="plan_name">Nombre del plan</string>
+    <string name="plan_type">Tipo de plan</string>
+    <string name="plan_date">Fecha del plan</string>
+    <string name="plan_details">Detalles del plan</string>
+    <string name="save_plan">Guardar plan</string>
+    <string name="search">Buscar</string>
+    <string name="filter">Filtros</string>
+    <string name="edit">Editar</string>
+    <string name="share">Compartir</string>
+    <string name="delete">Eliminar</string>
+    <string name="itinerary_details">Detalles itinerario</string>
+    <string name="account">Cuenta</string>
+    <string name="add_collaborator">Agregar colaborador</string>
+    <string name="export">Exportar</string>
+    <string name="sort">Ordenar</string>
+    <string name="settings">Configuración</string>
+    <string name="upcoming_trip">Viaje proximo</string>
+    <string name="your_itineraries">Tu itinerario</string>
+    <string name="itinerary">Itinerario</string>
+    <string name="home">Inicio</string>
+    <string name="plan">Plan</string>
+    <string name="itinerary_dates">%1$s - %2$s</string>
+    <string name="create_itinerary">Crear Itinerario</string>
+    <string name="itinerary_name">Nombre de Itinerario</string>
+    <string name="destination">Destino</string>
+    <string name="date_range">Rango de fechas</string>
+    <string name="description">Descripcion</string>
+    <string name="select_plan_type">Tipo de plan</string>
+    <string name="create_plan">Crear Plan</string>
+    <string name="plan_type_flight">Vuelo</string>
+    <string name="plan_type_accommodation">Hospedaje</string>
+    <string name="plan_type_car_rental">Alquilar Vehiculo</string>
+    <string name="plan_type_meeting">Reunion</string>
+    <string name="plan_type_activity">Actividad</string>
+    <string name="plan_type_restaurant">Restaurante</string>
+    <string name="plan_type_transport">Transporte</string>
+    <string name="add_itinerary">Agregar itinerario</string>
+    <string name="itinerary_detail">Detalle del itinerario</string>
+    <string name="travelers">Viajeros</string>
+    <string name="autenticando">Autenticando...</string>
+</resources>

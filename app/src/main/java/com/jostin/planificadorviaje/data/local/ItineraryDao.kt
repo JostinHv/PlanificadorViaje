@@ -1,0 +1,23 @@
+package com.jostin.planificadorviaje.data.local
+
+// data/local/ItineraryDao.kt
+import androidx.room.*
+import com.jostin.planificadorviaje.data.model.Itinerary
+
+@Dao
+interface ItineraryDao {
+    @Query("SELECT * FROM itineraries")
+    suspend fun getAll(): List<Itinerary>
+
+    @Query("SELECT * FROM itineraries WHERE id = :id")
+    suspend fun getById(id: String): Itinerary
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(itinerary: Itinerary)
+
+    @Update
+    suspend fun update(itinerary: Itinerary)
+
+    @Query("DELETE FROM itineraries WHERE id = :id")
+    suspend fun deleteById(id: String)
+}

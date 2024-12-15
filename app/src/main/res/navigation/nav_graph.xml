@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.jostin.planificadorviaje.ui.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_createItineraryFragment"
+            app:destination="@id/createItineraryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_itineraryDetailFragment"
+            app:destination="@id/itineraryDetailFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/selectPlanTypeFragment"
+        android:name="com.jostin.planificadorviaje.ui.plan.SelectPlanTypeFragment"
+        android:label="Select Plan Type"
+        tools:layout="@layout/fragment_select_plan_type">
+        <action
+            android:id="@+id/action_selectPlanTypeFragment_to_createPlanFragment"
+            app:destination="@id/createPlanFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/itineraryFragment"
+        android:name="com.jostin.planificadorviaje.ui.itinerary.ItineraryFragment"
+        android:label="@string/itinerary"
+        tools:layout="@layout/fragment_itinerary">
+        <action
+            android:id="@+id/action_itineraryFragment_to_planFragment"
+            app:destination="@id/planFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/planFragment"
+        android:name="com.jostin.planificadorviaje.ui.plan.PlanFragment"
+        android:label="@string/plan"
+        tools:layout="@layout/fragment_plan" />
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.jostin.planificadorviaje.ui.account.AccountFragment"
+        android:label="@string/account"
+        tools:layout="@layout/fragment_account">
+    <action
+        android:id="@+id/action_accountFragment_to_loginFragment"
+        app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createItineraryFragment"
+        android:name="com.jostin.planificadorviaje.ui.itinerary.CreateItineraryFragment"
+        android:label="@string/create_itinerary"
+        tools:layout="@layout/fragment_create_itinerary">
+        <action
+            android:id="@+id/action_createItineraryFragment_to_selectPlanTypeFragment"
+            app:destination="@id/selectPlanTypeFragment" />
+        <action
+            android:id="@+id/action_createItineraryFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.jostin.planificadorviaje.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <!--        <action-->
+        <!--            android:id="@+id/action_loginFragment_to_registroUsuarioFragment"-->
+        <!--            app:destination="@id/registroUsuarioFragment" />-->
+        <!--        <action-->
+        <!--            android:id="@+id/action_loginFragment_to_adminHomeFragment"-->
+        <!--            app:destination="@id/adminHomeFragment"-->
+        <!--            app:popUpTo="@id/loginFragment"-->
+        <!--            app:popUpToInclusive="true"/>-->
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/itineraryDetailFragment"
+        android:name="com.jostin.planificadorviaje.ui.itinerary.ItineraryDetailFragment"
+        android:label="@string/itinerary_detail"
+        tools:layout="@layout/fragment_itinerary_detail">
+        <argument
+            android:name="itineraryId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_itineraryDetailFragment_to_selectPlanTypeFragment"
+            app:destination="@id/selectPlanTypeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createPlanFragment"
+        android:name="com.jostin.planificadorviaje.ui.plan.CreatePlanFragment"
+        android:label="@string/create_plan"
+        tools:layout="@layout/fragment_create_plan">
+        <argument
+            android:name="planType"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_createPlanFragment_to_itineraryFragment"
+            app:destination="@id/itineraryFragment" />
+        <action
+            android:id="@+id/action_createPlanFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+
+</navigation>
