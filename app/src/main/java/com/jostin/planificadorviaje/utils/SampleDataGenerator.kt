@@ -11,6 +11,7 @@ object SampleDataGenerator {
         return listOf(
             Itinerary(
                 id = "1",
+                userId = "2",
                 name = "Vacaciones en París",
                 destination = "París, Francia",
                 startDate = Date(),
@@ -19,13 +20,14 @@ object SampleDataGenerator {
                 coverImageUrl = "https://example.com/paris.jpg",
                 plans = generateSamplePlans(),
                 sharedWith = listOf(
-                    User(id = "2", name = "Jane Smith", email = "jane.smith@example.com"),
-                    User(id = "3", name = "John Doe", email = "john.doe@example.com")
+                    User(id = "3", name = "Jane Smith", email = "jane@a.com"),
+                    User(id = "2", name = "John Doe", email = "john@a.com")
                 ),
                 coverImage = "https://example.com/paris.jpg"
             ),
             Itinerary(
                 id = "2",
+                userId = "3",
                 name = "Aventura en Tokio",
                 destination = "Tokio, Japón",
                 startDate = Date(System.currentTimeMillis() + 30 * 24 * 60 * 60 * 1000),

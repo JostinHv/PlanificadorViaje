@@ -52,4 +52,5 @@
     <string name="itinerary_detail">Detalle del itinerario</string>
     <string name="travelers">Viajeros</string>
     <string name="autenticando">Autenticando...</string>
+    <string name="no_trips_available">No tiene ningún itinerario aún.</string>
 </resources>

@@ -8,6 +8,7 @@ import java.util.Date
 data class Itinerary(
     @PrimaryKey val id: String,
     val name: String,
+    val userId: String,
     val destination: String,
     val startDate: Date,
     val endDate: Date,

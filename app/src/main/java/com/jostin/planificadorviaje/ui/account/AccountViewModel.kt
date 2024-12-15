@@ -15,25 +15,26 @@ class AccountViewModel(private val repository: UserRepository) : ViewModel() {
     private val _user = MutableLiveData<User>()
     val user: LiveData<User> = _user
 
-    fun loadUser() {
+    fun loadUser(context: Context) {
         viewModelScope.launch {
-            // Intenta obtener el usuario actual
-            val currentUser = repository.getCurrentUser()
-            if (currentUser != null) {
-                _user.value = currentUser
-            } else {
-                // Si no hay usuario, crea un usuario vacío o muestra un error
-                _user.value = User(name = "Usuario", email = "example@example.com")
-            }
+            val currentUser = UserSessionManager.getCurrentUser()
+            _user.value = currentUser ?: User(
+                id = "",
+                name = "Invitado",
+                email = "guest@example.com",
+                profilePicture = ""
+            )
         }
     }
 
-    fun updateUser(user: User) {
+    fun updateUser(user: User, context: Context) {
         viewModelScope.launch {
-            repository.updateUser(user)
-            _user.value = user
+            repository.updateUser(user) // Actualiza en el repositorio
+            UserSessionManager.saveUser(context, user) // Actualiza la sesión activa
+            _user.value = user // Actualiza el `LiveData` para reflejar los cambios en la UI
         }
     }
+
 
     fun logout(context: Context) {
         viewModelScope.launch {

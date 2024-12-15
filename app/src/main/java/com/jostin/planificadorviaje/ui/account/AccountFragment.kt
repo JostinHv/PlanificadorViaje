@@ -37,7 +37,7 @@ class AccountFragment : Fragment() {
         observeViewModel()
 
         // Cargar el usuario actual
-        viewModel.loadUser()
+        viewModel.loadUser(requireContext())
     }
 
     private fun setupViews() {
@@ -50,9 +50,9 @@ class AccountFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            // Actualiza el usuario en el repositorio
-            viewModel.updateUser(User(name = name, email = email))
+            viewModel.updateUser(User(name = name, email = email), requireContext())
         }
+
 
         binding.logoutButton.setOnClickListener {
             viewModel.logout(requireContext()) // Pasa el contexto para limpiar la sesión

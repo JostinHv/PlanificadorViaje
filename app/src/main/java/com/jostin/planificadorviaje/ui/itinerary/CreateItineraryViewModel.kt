@@ -15,6 +15,7 @@ class CreateItineraryViewModel(private val repository: ItineraryRepository) : Vi
 
     fun createItinerary(
         name: String,
+        userId: String,
         destination: String,
         startDate: Date,
         endDate: Date,
@@ -26,13 +27,14 @@ class CreateItineraryViewModel(private val repository: ItineraryRepository) : Vi
         val itinerary = Itinerary(
             id = UUID.randomUUID().toString(), // Generar un ID único
             name = name,
+            userId = userId,
             destination = destination,
             startDate = startDate,
             endDate = endDate,
             description = description,
             coverImage = "",
-            plans = emptyList(),
-            sharedWith = emptyList(),
+            plans = plans,
+            sharedWith = sharedWith,
             coverImageUrl = ""
         )
 

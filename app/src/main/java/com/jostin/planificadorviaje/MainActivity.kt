@@ -1,6 +1,7 @@
 package com.jostin.planificadorviaje
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
@@ -40,9 +41,18 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        // Set default transitions
-        navController.addOnDestinationChangedListener { _, _, _ ->
-            // You can add custom logic here if needed
+        // Escuchar cambios en el destino y ajustar la visibilidad del BottomNavigationView
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.loginFragment -> {
+                    // Ocultar el BottomNavigationView en el login
+                    bottomNavigationView.visibility = View.GONE
+                }
+                else -> {
+                    // Mostrar el BottomNavigationView en otros fragmentos
+                    bottomNavigationView.visibility = View.VISIBLE
+                }
+            }
         }
 
     }

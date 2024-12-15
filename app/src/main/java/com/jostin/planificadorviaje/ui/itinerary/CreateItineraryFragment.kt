@@ -11,7 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.jostin.planificadorviaje.PlanificadorViajeApplication
+import com.jostin.planificadorviaje.data.model.User
 import com.jostin.planificadorviaje.databinding.FragmentCreateItineraryBinding
+import com.jostin.planificadorviaje.utils.UserSessionManager
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -72,10 +74,22 @@ class CreateItineraryFragment : Fragment() {
             return
         }
 
+        val userId = UserSessionManager.getCurrentUser()?.id ?: ""
+        val sharedWith = listOf(UserSessionManager.getCurrentUser()!!)
         // Crear el itinerario usando el ViewModel
-        viewModel.createItinerary(name, destination, startDate!!, endDate!!, description, "" ,emptyList(), emptyList())
-        Toast.makeText(requireContext(), "Itinerario creado exitosamente", Toast.LENGTH_SHORT).show()
-
+        viewModel.createItinerary(
+            name,
+            userId,
+            destination,
+            startDate!!,
+            endDate!!,
+            description,
+            "",
+            emptyList(),
+            sharedWith,
+        )
+        Toast.makeText(requireContext(), "Itinerario creado exitosamente", Toast.LENGTH_SHORT)
+            .show()
         // Navegar hacia atrás
         findNavController().navigateUp()
     }

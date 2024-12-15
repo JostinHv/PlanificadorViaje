@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.chip.Chip
 import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.data.local.AppDatabase
 import com.jostin.planificadorviaje.data.local.LocalDataSource
@@ -71,7 +72,7 @@ class ItineraryDetailFragment : Fragment() {
             // Configure shared users
             travelersChipGroup.removeAllViews()
             itinerary.sharedWith.forEach { user ->
-                val chip = com.google.android.material.chip.Chip(requireContext()).apply {
+                val chip = Chip(requireContext()).apply {
                     text = user.name
                     isCheckable = false
                 }

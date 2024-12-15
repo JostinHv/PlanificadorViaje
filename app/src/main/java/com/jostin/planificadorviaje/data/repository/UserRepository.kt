@@ -12,10 +12,6 @@ class UserRepository(private val localDataSource: LocalDataSource) {
     suspend fun getAllUsers(): List<User> {
         return localDataSource.getAllUsers()
     }
-    suspend fun getCurrentUser(): User? {
-        return localDataSource.getAllUsers().firstOrNull() // Asume un único usuario
-    }
-
     suspend fun updateUser(user: User) {
         localDataSource.updateUser(user)
     }
@@ -29,7 +25,6 @@ class UserRepository(private val localDataSource: LocalDataSource) {
             false
         }
     }
-
     suspend fun getUserByEmail(email: String): User? {
         return localDataSource.getUserByEmail(email)
     }

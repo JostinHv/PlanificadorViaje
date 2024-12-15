@@ -5,37 +5,54 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jostin.planificadorviaje.data.model.Itinerary
-import com.jostin.planificadorviaje.data.model.Plan
 import com.jostin.planificadorviaje.data.repository.ItineraryRepository
+import com.jostin.planificadorviaje.utils.UserSessionManager
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: ItineraryRepository) : ViewModel() {
 
-    private val _upcomingItinerary = MutableLiveData<Itinerary>()
     private val _itineraries = MutableLiveData<List<Itinerary>>()
-    val upcomingItinerary: LiveData<Itinerary> get() = _upcomingItinerary
-    val itineraries: LiveData<List<Itinerary>> = _itineraries
+    val itineraries: LiveData<List<Itinerary>> get() = _itineraries
+
+    private val _upcomingItinerary = MutableLiveData<Itinerary?>()
+    val upcomingItinerary: LiveData<Itinerary?> get() = _upcomingItinerary
 
     init {
-        loadItineraries()
+        fetchItineraries()
+        fetchUpcomingItinerary()
     }
 
-    public fun loadItineraries() {
+    /**
+     * Fetch itineraries for the current user.
+     */
+    fun fetchItineraries() {
         viewModelScope.launch {
-            val sampleItineraries = repository.getItineraries()
-            _itineraries.value = sampleItineraries
+            val currentUser = UserSessionManager.getCurrentUser()
+            _itineraries.value = if (currentUser != null) {
+                repository.getItinerariesForUser(currentUser.id)
+            } else {
+                emptyList()
+            }
         }
     }
 
-    fun loadUpcomingItinerary() {
+    /**
+     * Fetch the next upcoming itinerary.
+     */
+    fun fetchUpcomingItinerary() {
         viewModelScope.launch {
-            _upcomingItinerary.value = repository.getUpcomingItinerary()
+            val upcoming = repository.getUpcomingItinerary()
+            _upcomingItinerary.value = upcoming
         }
     }
+
+    /**
+     * Create a new itinerary and reload the list.
+     */
     fun createItinerary(itinerary: Itinerary) {
         viewModelScope.launch {
             repository.createItinerary(itinerary)
-            loadItineraries()
+            fetchItineraries()
         }
     }
 }

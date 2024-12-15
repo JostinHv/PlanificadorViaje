@@ -37,6 +37,7 @@ class LoginFragment : Fragment() {
         val tvWelcomeAdmin = binding.tvWelcomeAdmin
         val btnRegister = binding.btnRegister
 
+
         // Toggle visibility cuando se presiona la imagen
         ivLogo.setOnClickListener {
             // Alternar visibilidad del TextView
@@ -48,6 +49,8 @@ class LoginFragment : Fragment() {
                 btnRegister.visibility = View.VISIBLE
             }
         }
+
+
 
         // Configurar el botón de inicio de sesión
         binding.btnLogin.setOnClickListener {

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/travel_background"
                 android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"/>
+                app:layout_collapseMode="parallax" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
@@ -46,6 +47,28 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- Empty state layout -->
+            <LinearLayout
+                android:id="@+id/emptyStateLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/emptyStateMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_trips_available"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:gravity="center"
+                    android:padding="16dp" />
+
+            </LinearLayout>
+
+            <!-- Upcoming trip layout -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,6 +77,7 @@
                 app:cardElevation="4dp">
 
                 <LinearLayout
+                    android:id="@+id/upcomingTripLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -63,33 +87,36 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/upcoming_trip"
-                        android:textAppearance="?attr/textAppearanceHeadline6"/>
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
 
                     <TextView
                         android:id="@+id/upcomingTripName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:textAppearance="?attr/textAppearanceBody1"/>
+                        android:textAppearance="?attr/textAppearanceBody1" />
 
                     <TextView
                         android:id="@+id/upcomingTripDates"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:textAppearance="?attr/textAppearanceBody2"/>
+                        android:textAppearance="?attr/textAppearanceBody2" />
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Your itineraries title -->
             <TextView
+                android:id="@+id/yourItinerariesTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/your_itineraries"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp" />
 
+            <!-- RecyclerView for itineraries -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/itinerariesRecyclerView"
                 android:layout_width="match_parent"
