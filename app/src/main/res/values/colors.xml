@@ -15,4 +15,33 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
+    <color name="form_colorPrimary">#1E3D58</color>
+    <color name="colorPrimary">#1E3D58</color>
+    <!--Favoritos Color-->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="price_color">#4CAF50</color>
+    <color name="favorite_color">#FF4081</color>
+    <color name="stroke_color">#E0E0E0</color>
+    <!--    Asientos Color-->
+    <color name="seat_available">#FFFFFF</color>
+    <color name="seat_selected">#08A4BD</color>
+    <color name="seat_occupied">#CCCCCC</color>
+    <color name="seat_number_color">#000000</color>
+    <color name="form_colorPrimaryDark">#14293D</color>
+    <color name="form_colorAccent">#08A4BD</color>
+    <color name="form_colorBackground">#F5F5F5</color>
+    <color name="divider_color">#EEEEEE</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+    <color name="dark_blue">#253F66</color>
+    <color name="gray_200">#EEEEEE</color>
+    <color name="gray_400">#BDBDBD</color>
+    <color name="gray_600">#757575</color>
+    <color name="colorBlue">#2196F3</color>
+    <color name="colorGray">#B0BEC5</color>
+    <color name="colorDarkGray">#607D8B</color>
+    <color name="colorYellow">#FFEB3B</color>
 </resources>

@@ -16,6 +16,10 @@
         <item name="android:statusBarColor">@color/primary_variant</item>
     </style>
 
+    <style name="ToolbarTitle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <!-- Base application theme. -->
     <style name="PBarTheme">
         <item name="colorSecondary">#08A4BD</item>

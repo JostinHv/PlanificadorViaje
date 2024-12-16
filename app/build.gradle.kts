@@ -4,6 +4,7 @@ plugins {
     id("kotlin-kapt") // Asegúrate de incluir el plugin para KAPT
     id("androidx.navigation.safeargs.kotlin") // Habilita Safe Args aquí
     id("com.google.dagger.hilt.android") // Habilita Dagger Hilt aquí
+    id("com.google.gms.google-services")
     kotlin("kapt")
 
 }
@@ -72,6 +73,11 @@ dependencies {
     //RETROFIT
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // Google Maps
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation ("com.google.maps.android:android-maps-utils:3.8.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

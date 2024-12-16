@@ -23,7 +23,8 @@ class SelectPlanTypeFragment : Fragment() {
         PlanType.MEETING,
         PlanType.ACTIVITY,
         PlanType.RESTAURANT,
-        PlanType.TRANSPORT
+        PlanType.TRANSPORT,
+        PlanType.PACKAGE_TRIP,
     )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -39,12 +40,21 @@ class SelectPlanTypeFragment : Fragment() {
         }
 
         val adapter = PlanTypeAdapter(planTypes) { planType: PlanType ->
-            val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToCreatePlanFragment(
-                getString(planType.nameRes)
-            )
-            findNavController().navigate(action)
+            when (planType) {
+                PlanType.PACKAGE_TRIP -> {
+                    // Si selecciona "Plan de Viaje Paquete", redirige a ViajesFragment
+                    val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToViajesFragment()
+                    findNavController().navigate(action)
+                }
+                else -> {
+                    // Para otros tipos, redirige a CreatePlanFragment
+                    val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToCreatePlanFragment(
+                        getString(planType.nameRes)
+                    )
+                    findNavController().navigate(action)
+                }
+            }
         }
-
         binding.planTypesRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.planTypesRecyclerView.adapter = adapter
     }

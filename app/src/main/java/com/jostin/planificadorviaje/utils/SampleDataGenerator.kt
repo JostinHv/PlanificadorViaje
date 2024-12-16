@@ -1,5 +1,6 @@
 package com.jostin.planificadorviaje.utils
 
+import com.jostin.planificadorviaje.data.model.City
 import com.jostin.planificadorviaje.data.model.Itinerary
 import com.jostin.planificadorviaje.data.model.Plan
 import com.jostin.planificadorviaje.data.model.PlanType
@@ -96,6 +97,22 @@ object SampleDataGenerator {
                 password = "1234",
                 profilePicture = "https://example.com/jane.jp"
             )
+        )
+
+    }
+
+    fun getCities(): List<City> {
+        return listOf(
+            City("1", "Lima"),
+            City("2", "Cusco"),
+            City("3", "Arequipa"),
+            City("4", "Trujillo"),
+            City("5", "Piura"),
+            City("6", "Iquitos"),
+            City("7", "Puno"),
+            City("8", "Tacna"),
+            City("9", "Chiclayo"),
+            City("10", "Huancayo")
         )
     }
 }

@@ -8,7 +8,6 @@ import com.jostin.planificadorviaje.data.model.Plan
 import com.jostin.planificadorviaje.data.repository.PlanRepository
 import kotlinx.coroutines.launch
 
-// ui/plan/PlanViewModel.kt
 class PlanViewModel(private val repository: PlanRepository) : ViewModel() {
     private val _plan = MutableLiveData<Plan>()
     val plan: LiveData<Plan> = _plan

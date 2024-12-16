@@ -26,7 +26,11 @@ class CreatePlanFragment : Fragment() {
     private val binding get() = _binding!!
     private val args: CreatePlanFragmentArgs by navArgs()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentCreatePlanBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -52,91 +56,103 @@ class CreatePlanFragment : Fragment() {
         when (planType) {
             getString(PlanType.FLIGHT.nameRes) -> setupFlightFields()
             getString(PlanType.ACCOMMODATION.nameRes) -> setupAccommodationFields()
-            getString(PlanType.CAR_RENTAL.nameRes)-> setupCarRentalFields()
-            getString(PlanType.MEETING.nameRes)-> setupMeetingFields()
+            getString(PlanType.CAR_RENTAL.nameRes) -> setupCarRentalFields()
+            getString(PlanType.MEETING.nameRes) -> setupMeetingFields()
             getString(PlanType.ACTIVITY.nameRes) -> setupActivityFields()
             getString(PlanType.RESTAURANT.nameRes) -> setupRestaurantFields()
             getString(PlanType.TRANSPORT.nameRes) -> setupTransportFields()
+            else -> { /* Do nothing */
+            }
         }
     }
 
+    //Quisiera hacer que mi plan de Viaje que al seleccionarlo tenga un flujo, donde pasara a otra vista para ingresar
     private fun setupFlightFields() {
         binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Airline"))
-            addView(createInputField("Flight Number"))
-            addView(createInputField("Departure Airport"))
-            addView(createInputField("Arrival Airport"))
-            addView(createDateTimeField("Departure Time"))
-            addView(createDateTimeField("Arrival Time"))
+            addView(createInputField("Aerolínea"))
+            addView(createInputField("Número de Vuelo"))
+            addView(createInputField("Aeropuerto de Salida"))
+            addView(createInputField("Aeropuerto de Llegada"))
+            addView(createDateTimeField("Hora de Salida"))
+            addView(createDateTimeField("Hora de Llegada"))
         }
     }
 
     private fun setupAccommodationFields() {
         binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Hotel Name"))
-            addView(createInputField("Address"))
-            addView(createDateTimeField("Check-in Date"))
-            addView(createDateTimeField("Check-out Date"))
-            addView(createInputField("Room Type"))
+            addView(createInputField("Nombre del Hotel"))
+            addView(createInputField("Dirección"))
+            addView(createDateTimeField("Fecha de Check-in"))
+            addView(createDateTimeField("Fecha de Check-out"))
+            addView(createInputField("Tipo de Habitación"))
         }
     }
 
     private fun setupCarRentalFields() {
         binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Rental Company"))
-            addView(createInputField("Car Model"))
-            addView(createDateTimeField("Pick-up Date"))
-            addView(createDateTimeField("Drop-off Date"))
-            addView(createInputField("Pick-up Location"))
-            addView(createInputField("Drop-off Location"))
+            addView(createInputField("Compañía de Alquiler"))
+            addView(createInputField("Modelo del Coche"))
+            addView(createDateTimeField("Fecha de Recogida"))
+            addView(createDateTimeField("Fecha de Devolución"))
+            addView(createInputField("Lugar de Recogida"))
+            addView(createInputField("Lugar de Devolución"))
         }
     }
 
     private fun setupMeetingFields() {
         binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Meeting Title"))
-            addView(createInputField("Location"))
-            addView(createDateTimeField("Date and Time"))
-            addView(createInputField("Attendees"))
+            addView(createInputField("Título de la Reunión"))
+            addView(createInputField("Ubicación"))
+            addView(createDateTimeField("Fecha y Hora"))
+            addView(createInputField("Asistentes"))
         }
     }
 
     private fun setupActivityFields() {
         binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Activity Name"))
-            addView(createInputField("Location"))
-            addView(createDateTimeField("Date and Time"))
-            addView(createInputField("Duration"))
+            addView(createInputField("Nombre de la Actividad"))
+            addView(createInputField("Ubicación"))
+            addView(createDateTimeField("Fecha y Hora"))
+            addView(createInputField("Duración"))
         }
     }
 
     private fun setupRestaurantFields() {
         binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Restaurant Name"))
-            addView(createInputField("Address"))
-            addView(createDateTimeField("Date and Time"))
-            addView(createInputField("Cuisine Type"))
+            addView(createInputField("Nombre del Restaurante"))
+            addView(createInputField("Dirección"))
+            addView(createDateTimeField("Fecha y Hora"))
+            addView(createInputField("Tipo de Cocina"))
         }
     }
 
     private fun setupTransportFields() {
         binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Transport Type"))
-            addView(createInputField("From"))
-            addView(createInputField("To"))
-            addView(createDateTimeField("Departure Time"))
-            addView(createDateTimeField("Arrival Time"))
+            addView(createInputField("Tipo de Transporte"))
+            addView(createInputField("Desde"))
+            addView(createInputField("Hacia"))
+            addView(createDateTimeField("Hora de Salida"))
+            addView(createDateTimeField("Hora de Llegada"))
         }
     }
 
+
     private fun createInputField(hint: String): View {
-        val textInputLayout = layoutInflater.inflate(R.layout.item_text_input, binding.dynamicFieldsContainer, false) as TextInputLayout
+        val textInputLayout = layoutInflater.inflate(
+            R.layout.item_text_input,
+            binding.dynamicFieldsContainer,
+            false
+        ) as TextInputLayout
         textInputLayout.hint = hint
         return textInputLayout
     }
 
     private fun createDateTimeField(hint: String): View {
-        val textInputLayout = layoutInflater.inflate(R.layout.item_text_input, binding.dynamicFieldsContainer, false) as TextInputLayout
+        val textInputLayout = layoutInflater.inflate(
+            R.layout.item_text_input,
+            binding.dynamicFieldsContainer,
+            false
+        ) as TextInputLayout
         textInputLayout.hint = hint
         val editText = textInputLayout.editText
         editText?.inputType = InputType.TYPE_NULL

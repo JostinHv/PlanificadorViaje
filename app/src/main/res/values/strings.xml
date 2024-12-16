@@ -53,4 +53,15 @@
     <string name="travelers">Viajeros</string>
     <string name="autenticando">Autenticando...</string>
     <string name="no_trips_available">No tiene ningún itinerario aún.</string>
+    <string name="plan_type_package_trip">Paquete de Plan de Viaje</string>
+    <string name="hospedaje_title">Alojamiento</string>
+    <string name="destination_hint">Destino</string>
+    <string name="check_in_date_hint">Fecha de entrada</string>
+    <string name="check_out_date_hint">Fecha de salida</string>
+    <string name="guests_hint">Personas</string>
+    <string name="search_hospedaje">Buscar alojamientos</string>
+    <string name="description_title">Descripción</string>
+    <string name="transport_title">Transporte</string>
+    <string name="lima_description">Lima es la capital del Perú, ubicada en la costa central del país, a orillas del Océano Pacífico. Conocida como la "Ciudad de los Reyes", esta combina la rica herencia colonial con el dinamismo de una ciudad moderna.</string>
+    <string name="accommodation_title">Alojamiento</string>
 </resources>
