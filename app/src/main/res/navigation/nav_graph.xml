@@ -156,15 +156,13 @@
     <!-- Hospedaje -->
     <fragment
         android:id="@+id/hospedajeFragment"
-        android:name="com.jostin.planificadorviaje.ui.viaje.hospedaje.HospedajeFragment"
+        android:name="com.jostin.planificadorviaje.ui.viaje.hospedaje.HotelFragment"
         android:label="Hospedaje">
-        <action
-            android:id="@+id/actionHospedajeFragmentToResultadosHospedajeFragment"
-            app:destination="@id/resultadosHospedajeFragment" />
         <action
             android:id="@+id/actionHospedajeToResultadosHospedaje"
             app:destination="@id/resultadosHospedajeFragment">
         </action>
+
     </fragment>
 
     <!-- Resultados Hospedaje -->
@@ -172,6 +170,18 @@
         android:id="@+id/resultadosHospedajeFragment"
         android:name="com.jostin.planificadorviaje.ui.viaje.hospedaje.ResultadosHospedajeFragment"
         android:label="Resultados Hospedaje">
+        <argument
+            android:name="checkInDate"
+            app:argType="string" />
+        <argument
+            android:name="checkOutDate"
+            app:argType="string" />
+        <argument
+            android:name="personCount"
+            app:argType="integer" />
+        <argument
+            android:name="selectedClass"
+            app:argType="string" />
         <action
             android:id="@+id/actionToConfirmarReserva"
             app:destination="@id/confirmarReservaFragment" />
@@ -185,8 +195,9 @@
         <argument
             android:name="hotelId"
             app:argType="string" />
+
         <action
-            android:id="@+id/actionToReservaConfirmada"
+            android:id="@+id/action_confirmarReservaFragment_to_resumenFragment"
             app:destination="@id/resumenReservaFragment" />
     </fragment>
     <!-- Reserva Confirmada -->

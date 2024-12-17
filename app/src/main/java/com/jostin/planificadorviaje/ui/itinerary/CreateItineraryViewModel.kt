@@ -1,14 +1,13 @@
 package com.jostin.planificadorviaje.ui.itinerary
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jostin.planificadorviaje.data.model.Itinerary
 import com.jostin.planificadorviaje.data.model.Plan
 import com.jostin.planificadorviaje.data.model.User
 import com.jostin.planificadorviaje.data.repository.ItineraryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.net.URL
 import java.util.*
 
 class CreateItineraryViewModel(private val repository: ItineraryRepository) : ViewModel() {
@@ -20,7 +19,6 @@ class CreateItineraryViewModel(private val repository: ItineraryRepository) : Vi
         startDate: Date,
         endDate: Date,
         description: String,
-        coverImageURL: String,
         plans: List<Plan>,
         sharedWith: List<User>
     ) {

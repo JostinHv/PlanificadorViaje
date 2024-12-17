@@ -1,12 +1,10 @@
 package com.jostin.planificadorviaje.data.repository
 
-import android.util.Log
-import com.jostin.planificadorviaje.data.local.LocalDataSource
+import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
 import com.jostin.planificadorviaje.data.model.Itinerary
 import com.jostin.planificadorviaje.utils.SampleDataGenerator
 
 class ItineraryRepository(private val localDataSource: LocalDataSource) {
-
 
     suspend fun getItineraries(): List<Itinerary> {
         return localDataSource.getItineraries()
@@ -38,15 +36,10 @@ class ItineraryRepository(private val localDataSource: LocalDataSource) {
     }
 
     suspend fun initializeSampleData() {
-        // Verifica si la base de datos está vacía y si es así, agrega los datos iniciales
         if (localDataSource.getItineraries().isEmpty()) {
             val sampleItineraries = SampleDataGenerator.generateSampleItineraries()
             sampleItineraries.forEach { localDataSource.createItinerary(it) }
         }
     }
 
-    // Opción adicional: Mantén los datos de muestra para propósitos de prueba si lo necesitas
-    private fun getSampleItineraries(): List<Itinerary> {
-        return SampleDataGenerator.generateSampleItineraries()
-    }
 }

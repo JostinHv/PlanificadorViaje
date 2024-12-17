@@ -9,14 +9,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.jostin.planificadorviaje.databinding.FragmentHospedajeBinding
+import com.jostin.planificadorviaje.databinding.FragmentHotelBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+@AndroidEntryPoint
+class HotelFragment : Fragment() {
 
-class HospedajeFragment : Fragment() {
-
-    private var _binding: FragmentHospedajeBinding? = null
+    private var _binding: FragmentHotelBinding? = null
     private val binding get() = _binding!!
 
     private var personCount = 1
@@ -25,7 +26,7 @@ class HospedajeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHospedajeBinding.inflate(inflater, container, false)
+        _binding = FragmentHotelBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -114,11 +115,11 @@ class HospedajeFragment : Fragment() {
             }
 
             // Navegar al fragmento ResultadosHospedajeFragment
-            val action = HospedajeFragmentDirections.actionHospedajeToResultadosHospedaje(
-//                checkInDate = checkInDate,
-//                checkOutDate = checkOutDate,
-//                personCount = personCount,
-//                selectedClass = selectedClass
+            val action = HotelFragmentDirections.actionHospedajeToResultadosHospedaje(
+                checkInDate = checkInDate,
+                checkOutDate = checkOutDate,
+                personCount = personCount,
+                selectedClass = selectedClass
             )
             findNavController().navigate(action)
 

@@ -6,9 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jostin.planificadorviaje.data.model.Itinerary
 import com.jostin.planificadorviaje.data.repository.ItineraryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ItineraryDetailViewModel(private val repository: ItineraryRepository) : ViewModel() {
+@HiltViewModel
+class ItineraryDetailViewModel @Inject constructor(
+    private val repository: ItineraryRepository
+) : ViewModel() {
 
     private val _itinerary = MutableLiveData<Itinerary>()
     val itinerary: LiveData<Itinerary> = _itinerary

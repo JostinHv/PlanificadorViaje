@@ -1,4 +1,4 @@
-package com.jostin.planificadorviaje.data.local
+package com.jostin.planificadorviaje.data.local.dao
 
 // data/local/ItineraryDao.kt
 import androidx.room.*

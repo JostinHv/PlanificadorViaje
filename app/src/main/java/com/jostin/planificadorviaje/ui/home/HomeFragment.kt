@@ -10,22 +10,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.data.local.AppDatabase
-import com.jostin.planificadorviaje.data.local.LocalDataSource
+import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
 import com.jostin.planificadorviaje.data.model.Itinerary
 import com.jostin.planificadorviaje.data.repository.ItineraryRepository
 import com.jostin.planificadorviaje.databinding.FragmentHomeBinding
 import com.jostin.planificadorviaje.utils.DateUtils.Companion.formatDateRange
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: HomeViewModel by viewModels {
-        val database = AppDatabase.getDatabase(requireContext())
-        val localDataSource = LocalDataSource(database)
-        HomeViewModelFactory(ItineraryRepository(localDataSource))
-    }
+    private val homeViewModel: HomeViewModel by viewModels()
 
     private val itineraryAdapter by lazy {
         ItineraryAdapter { itinerary ->
@@ -51,7 +49,7 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.fetchItineraries()
+        homeViewModel.fetchItineraries()
     }
 
     /**
@@ -77,12 +75,12 @@ class HomeFragment : Fragment() {
      * Observe changes in ViewModel data.
      */
     private fun observeViewModel() {
-        viewModel.itineraries.observe(viewLifecycleOwner) { itineraries ->
+        homeViewModel.itineraries.observe(viewLifecycleOwner) { itineraries ->
             itineraryAdapter.submitList(itineraries)
             toggleEmptyState(itineraries.isEmpty())
         }
 
-        viewModel.upcomingItinerary.observe(viewLifecycleOwner) { itinerary ->
+        homeViewModel.upcomingItinerary.observe(viewLifecycleOwner) { itinerary ->
             itinerary?.let { displayUpcomingItinerary(itinerary) }
         }
     }

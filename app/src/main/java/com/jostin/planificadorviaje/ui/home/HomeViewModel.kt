@@ -7,9 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.jostin.planificadorviaje.data.model.Itinerary
 import com.jostin.planificadorviaje.data.repository.ItineraryRepository
 import com.jostin.planificadorviaje.utils.UserSessionManager
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(private val repository: ItineraryRepository) : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val itineraryRepository: ItineraryRepository) :
+    ViewModel() {
 
     private val _itineraries = MutableLiveData<List<Itinerary>>()
     val itineraries: LiveData<List<Itinerary>> get() = _itineraries
@@ -29,7 +33,7 @@ class HomeViewModel(private val repository: ItineraryRepository) : ViewModel() {
         viewModelScope.launch {
             val currentUser = UserSessionManager.getCurrentUser()
             _itineraries.value = if (currentUser != null) {
-                repository.getItinerariesForUser(currentUser.id)
+                itineraryRepository.getItinerariesForUser(currentUser.id)
             } else {
                 emptyList()
             }
@@ -41,7 +45,7 @@ class HomeViewModel(private val repository: ItineraryRepository) : ViewModel() {
      */
     fun fetchUpcomingItinerary() {
         viewModelScope.launch {
-            val upcoming = repository.getUpcomingItinerary()
+            val upcoming = itineraryRepository.getUpcomingItinerary()
             _upcomingItinerary.value = upcoming
         }
     }
@@ -51,7 +55,7 @@ class HomeViewModel(private val repository: ItineraryRepository) : ViewModel() {
      */
     fun createItinerary(itinerary: Itinerary) {
         viewModelScope.launch {
-            repository.createItinerary(itinerary)
+            itineraryRepository.createItinerary(itinerary)
             fetchItineraries()
         }
     }

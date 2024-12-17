@@ -7,16 +7,20 @@ import androidx.lifecycle.viewModelScope
 import com.jostin.planificadorviaje.data.model.Itinerary
 import com.jostin.planificadorviaje.data.model.Plan
 import com.jostin.planificadorviaje.data.repository.ItineraryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ItineraryViewModel(private val repository: ItineraryRepository) : ViewModel() {
+@HiltViewModel
+class ItineraryViewModel @Inject constructor(private val itineraryRepository: ItineraryRepository) :
+    ViewModel() {
 
     private val _itinerary = MutableLiveData<List<Itinerary>>()
     val itinerary: LiveData<List<Itinerary>> get() = _itinerary
 
     fun fetchItineraries() {
         viewModelScope.launch {
-            val itineraries = repository.getItineraries()
+            val itineraries = itineraryRepository.getItineraries()
             _itinerary.postValue(itineraries)
         }
     }

@@ -1,11 +1,8 @@
 // data/repository/UserRepository.kt
 package com.jostin.planificadorviaje.data.repository
 
-import android.content.Context
-import com.jostin.planificadorviaje.data.local.LocalDataSource
+import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
 import com.jostin.planificadorviaje.data.model.User
-import com.jostin.planificadorviaje.utils.SampleDataGenerator
-import com.jostin.planificadorviaje.utils.UserSessionManager
 
 class UserRepository(private val localDataSource: LocalDataSource) {
 

@@ -1,6 +1,5 @@
 package com.jostin.planificadorviaje.ui.itinerary
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.jostin.planificadorviaje.PlanificadorViajeApplication
-import com.jostin.planificadorviaje.data.model.User
 import com.jostin.planificadorviaje.databinding.FragmentCreateItineraryBinding
 import com.jostin.planificadorviaje.utils.UserSessionManager
 import java.text.SimpleDateFormat
@@ -84,7 +82,6 @@ class CreateItineraryFragment : Fragment() {
             startDate!!,
             endDate!!,
             description,
-            "",
             emptyList(),
             sharedWith,
         )

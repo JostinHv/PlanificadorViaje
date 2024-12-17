@@ -11,26 +11,21 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.Chip
 import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.data.local.AppDatabase
-import com.jostin.planificadorviaje.data.local.LocalDataSource
 import com.jostin.planificadorviaje.databinding.FragmentItineraryDetailBinding
-import com.jostin.planificadorviaje.ui.itinerary.ItineraryDetailViewModel
 import com.jostin.planificadorviaje.data.model.Itinerary
 import com.jostin.planificadorviaje.data.repository.ItineraryRepository
-import com.jostin.planificadorviaje.ui.itinerary.ItineraryDetailViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
+@AndroidEntryPoint
 class ItineraryDetailFragment : Fragment() {
 
     private var _binding: FragmentItineraryDetailBinding? = null
     private val binding get() = _binding!!
     private val args: ItineraryDetailFragmentArgs by navArgs()
-    private val database by lazy { AppDatabase.getDatabase(requireContext()) }
-    private val repository by lazy { ItineraryRepository(LocalDataSource(database)) }
 
-    private val viewModel: ItineraryDetailViewModel by viewModels {
-        ItineraryDetailViewModelFactory(repository)
-    }
+    private val viewModel: ItineraryDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

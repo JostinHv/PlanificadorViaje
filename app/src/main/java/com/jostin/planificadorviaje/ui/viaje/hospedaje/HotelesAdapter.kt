@@ -30,9 +30,9 @@ class HotelesAdapter(
 
         fun bind(hotel: Hotel) {
             binding.apply {
-                categoriaText.text = hotel.categoria
-                nombreHotelText.text = hotel.nombre
-                precioText.text = "Precio por noche S/${hotel.precioNoche.toInt()}"
+                categoriaText.text = hotel.category
+                nombreHotelText.text = hotel.name
+                precioText.text = "Precio por noche S/${hotel.price_per_person.toInt()}"
 
                 verReservaButton.setOnClickListener {
                     onReservaClick(hotel)

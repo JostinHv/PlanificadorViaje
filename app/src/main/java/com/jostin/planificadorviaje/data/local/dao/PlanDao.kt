@@ -1,12 +1,10 @@
-package com.jostin.planificadorviaje.data.local
+package com.jostin.planificadorviaje.data.local.dao
 
 import androidx.room.*
 import com.jostin.planificadorviaje.data.model.Plan
 
 @Dao
 interface PlanDao {
-    @Query("SELECT * FROM plans WHERE itineraryId = :itineraryId")
-    suspend fun getPlansForItinerary(itineraryId: String): List<Plan>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(plan: Plan)

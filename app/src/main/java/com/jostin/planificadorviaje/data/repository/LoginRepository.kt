@@ -1,6 +1,6 @@
 package com.jostin.planificadorviaje.data.repository
 
-import com.jostin.planificadorviaje.data.local.UserDao
+import com.jostin.planificadorviaje.data.local.dao.UserDao
 import com.jostin.planificadorviaje.data.model.User
 import javax.inject.Inject
 

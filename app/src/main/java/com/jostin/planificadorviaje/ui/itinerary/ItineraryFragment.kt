@@ -10,22 +10,18 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.utils.DateUtils.formatDate
 import com.jostin.planificadorviaje.R
-import com.jostin.planificadorviaje.data.local.LocalDataSource
+import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
 import com.jostin.planificadorviaje.data.local.AppDatabase
 import com.jostin.planificadorviaje.data.repository.ItineraryRepository
 import com.jostin.planificadorviaje.databinding.FragmentItineraryBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ItineraryFragment : Fragment() {
 
     private lateinit var binding: FragmentItineraryBinding
 
-    // Instancia del repositorio y el ViewModel
-    private val database by lazy { AppDatabase.getDatabase(requireContext()) }
-    private val repository by lazy { ItineraryRepository(LocalDataSource(database)) }
-    private val viewModel: ItineraryViewModel by viewModels {
-        ItineraryViewModelFactory(repository)
-    }
-
+    private val viewModel: ItineraryViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

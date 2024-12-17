@@ -7,19 +7,25 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jostin.planificadorviaje.data.model.Reserva
 import com.jostin.planificadorviaje.databinding.FragmentConfirmarReservaBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class ConfirmarReservaFragment : Fragment() {
     private var _binding: FragmentConfirmarReservaBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: HospedajeViewModel by viewModels()
+    private val viewModel: HotelViewModel by viewModels()
     private val args: ConfirmarReservaFragmentArgs by navArgs() // Recibir los argumentos
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentConfirmarReservaBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -28,11 +34,12 @@ class ConfirmarReservaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupToolbar()
-        observeReserva()
         setupConfirmarButton()
 
-        // Cargar los datos de la reserva seleccionada utilizando el argumento hotelId
+        // Cargar la reserva seleccionada utilizando el argumento hotelId
+//        viewModel.loadReserva(args.hotelId, args.fechaEntrada, args.fechaSalida, args.personas)
         viewModel.loadReserva(args.hotelId)
+        observeReserva()
     }
 
     private fun setupToolbar() {
@@ -51,7 +58,7 @@ class ConfirmarReservaFragment : Fragment() {
 
     private fun updateReservaUI(reserva: Reserva) {
         binding.apply {
-            hotelNameText.text = reserva.hotel.nombre
+            hotelNameText.text = reserva.hotel.name
             fechaEntradaText.text = "Fecha de Entrada: ${reserva.fechaEntrada}"
             fechaSalidaText.text = "Fecha de Salida: ${reserva.fechaSalida}"
             personasText.text = "Personas: ${reserva.personas}"
@@ -62,7 +69,10 @@ class ConfirmarReservaFragment : Fragment() {
 
     private fun setupConfirmarButton() {
         binding.confirmarButton.setOnClickListener {
-            // Aquí puedes procesar la reserva y navegar al siguiente fragmento
+            // Procesar lógica adicional antes de navegar
+            findNavController().navigate(
+                ConfirmarReservaFragmentDirections.actionConfirmarReservaFragmentToResumenFragment()
+            )
         }
     }
 

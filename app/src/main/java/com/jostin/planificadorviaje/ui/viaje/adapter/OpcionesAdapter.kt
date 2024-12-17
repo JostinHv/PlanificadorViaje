@@ -23,9 +23,9 @@ class OpcionesAdapter(private val onItemClick: (OpcionViaje) -> Unit) :
         fun bind(opcion: OpcionViaje) {
             binding.tvHoraSalida.text = opcion.horaSalida
             binding.tvHoraLlegada.text = opcion.horaLlegada
-            binding.tvDuracion.text = opcion.duracion
-            binding.tvPrecio.text = opcion.precio
-            binding.btnChoose.setOnClickListener { onItemClick(opcion) }
+            binding.durationText.text = opcion.duracion
+            binding.priceText.text = opcion.precio
+            binding.chooseButton.setOnClickListener { onItemClick(opcion) }
         }
     }
 }
