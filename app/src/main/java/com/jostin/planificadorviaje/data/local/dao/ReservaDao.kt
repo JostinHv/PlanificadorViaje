@@ -25,5 +25,5 @@ interface ReservaDao {
     suspend fun deleteById(id: String)
 
     @Query("SELECT * FROM reserva WHERE hotel_id = :hotelId")
-    suspend fun getByHotelId(hotelId: String): Reserva?
+    suspend fun getByHotelId(hotelId: String): Reserva
 }

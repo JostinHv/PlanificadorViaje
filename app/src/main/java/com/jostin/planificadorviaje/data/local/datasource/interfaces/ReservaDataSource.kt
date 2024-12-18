@@ -8,5 +8,5 @@ interface ReservaDataSource {
     suspend fun createReserva(reserva: Reserva)
     suspend fun updateReserva(reserva: Reserva)
     suspend fun deleteReserva(id: String)
-    suspend fun getReservaByHotelId(hotelId: String): Reserva?
+    suspend fun getReservaByHotelId(hotelId: String): Reserva
 }

@@ -41,7 +41,6 @@ class ConfirmarReservaFragment : Fragment() {
         setupConfirmarButton()
 
         // Cargar la reserva seleccionada utilizando el argumento hotelId
-        // viewModel.loadReserva(args.hotelId, args.fechaEntrada, args.fechaSalida, args.personas)
         viewModel.loadReserva(args.hotelId, fechaEntrada, fechaSalida, personas)
         observeReserva()
     }
@@ -75,7 +74,7 @@ class ConfirmarReservaFragment : Fragment() {
         binding.confirmarButton.setOnClickListener {
             // Procesar lógica adicional antes de navegar
             findNavController().navigate(
-                ConfirmarReservaFragmentDirections.actionConfirmarReservaFragmentToResumenFragment()
+                ConfirmarReservaFragmentDirections.actionConfirmarReservaFragmentToResumenFragment(viewModel.getReservaSeleccionada().hotel.id)
             )
         }
     }

@@ -25,7 +25,7 @@ class ReservaLocalDataSource(private val database: AppDatabase) : ReservaDataSou
         database.reservaDao().deleteById(id)
     }
 
-    override suspend fun getReservaByHotelId(hotelId: String): Reserva? {
+    override suspend fun getReservaByHotelId(hotelId: String): Reserva {
         return database.reservaDao().getByHotelId(hotelId)
     }
 }

@@ -160,8 +160,7 @@
         android:label="Hospedaje">
         <action
             android:id="@+id/actionHospedajeToResultadosHospedaje"
-            app:destination="@id/resultadosHospedajeFragment">
-        </action>
+            app:destination="@id/resultadosHospedajeFragment"></action>
     </fragment>
 
     <!-- Resultados Hospedaje -->
@@ -173,7 +172,8 @@
         <argument
             android:name="checkInDate"
             app:argType="string" />
-        <argument android:name="checkOutDate"
+        <argument
+            android:name="checkOutDate"
             app:argType="string" />
         <argument
             android:name="personCount"
@@ -208,7 +208,12 @@
     <fragment
         android:id="@+id/resumenReservaFragment"
         android:name="com.jostin.planificadorviaje.ui.viaje.resumen.ResumenFragment"
-        android:label="Resumen Reserva" />
+        android:label="Resumen Reserva">
+        <argument
+            android:name="reservaId"
+            app:argType="string" />
+    </fragment>
+
     <fragment
         android:id="@+id/viajesFragment"
         android:name="com.jostin.planificadorviaje.ui.viaje.ViajesFragment"

@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+
 @AndroidEntryPoint
 class HotelFragment : Fragment() {
 

@@ -35,7 +35,7 @@ class ReservaRepository(private val localDataSource: LocalDataSource) {
         }
     }
 
-   suspend fun getReservaByHotelId(hotelId: String): Reserva? {
+   suspend fun getReservaByHotelId(hotelId: String): Reserva {
        Log.d("ReservaRepository", "getReservaByHotelId: $hotelId")
         return localDataSource.getReservaByHotelId(hotelId)
     }

@@ -35,22 +35,6 @@ class ResultadosHospedajeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//         Usar argumentos pasados
-        val checkInDate = args.checkInDate
-        val checkOutDate = args.checkOutDate
-        val personCount = args.personCount
-//
-//        // Configurar el título de la barra de herramientas
-//        binding.toolbar.title = "Resultados para $personCount persona(s)"
-//
-//        // Mostrar un mensaje con los detalles recibidos
-//        Toast.makeText(
-//            requireContext(),
-//            "Fechas: $checkInDate - $checkOutDate, Clase: $selectedClass",
-//            Toast.LENGTH_LONG
-//        ).show()
-
         setupToolbar()
         setupRecyclerView()
         observeHoteles()

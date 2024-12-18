@@ -8,6 +8,7 @@ import com.jostin.planificadorviaje.data.model.Reserva
 import com.jostin.planificadorviaje.data.model.TipoHabitacion
 import com.jostin.planificadorviaje.data.repository.HotelRepository
 import com.jostin.planificadorviaje.data.repository.ReservaRepository
+import com.jostin.planificadorviaje.utils.UserSessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -41,22 +42,24 @@ class ConfirmarReservaViewModel @Inject constructor(
                 val reserva = reservaRepository.getReservaByHotelId(hotelId)
                 Log.d("ConfirmarReservaViewModel", "Reserva obtenida: $reserva")
 
-                if (reserva != null) {
-                    reserva.fechaEntrada = fechaEntrada
-                    reserva.fechaSalida = fechaSalida
-                    reserva.personas = personas
-                    // Calcular el precio total de la reserva
-                    val tipoHabitacionEnum = convertirTipoHabitacion(reserva.tipoHabitacion)
-                    reserva.precioTotal = calcularPrecioTotal(
-                        reserva.hotel,
-                        tipoHabitacionEnum,
-                        personas,
-                        calcularNoches(fechaEntrada, fechaSalida)
-                    )
-                }
+                reserva.fechaEntrada = fechaEntrada
+                reserva.fechaSalida = fechaSalida
+                reserva.personas = personas
+                val user = UserSessionManager.getCurrentUser()
+                reserva.user = user; // Asignar el usuario actual a la reserva
+                // Calcular el precio total de la reserva
+                val tipoHabitacionEnum = convertirTipoHabitacion(reserva.tipoHabitacion)
+                reserva.precioTotal = calcularPrecioTotal(
+                    reserva.hotel,
+                    tipoHabitacionEnum,
+                    personas,
+                    calcularNoches(fechaEntrada, fechaSalida)
+                )
 
                 // Actualizar el estado de la reserva seleccionada
                 _reservaSeleccionada.value = reserva
+                // Actualizar la reserva en la base de datos
+                reservaRepository.updateReserva(reserva)
             } catch (e: Exception) {
                 Log.e(
                     "ConfirmarReservaViewModel",
@@ -100,5 +103,10 @@ class ConfirmarReservaViewModel @Inject constructor(
     private fun convertirTipoHabitacion(tipoHabitacion: String): TipoHabitacion {
         return TipoHabitacion.entries.firstOrNull { it.nombre == tipoHabitacion }
             ?: TipoHabitacion.SUITE // Valor por defecto si no coincide
+    }
+
+    // Obtener reserva no nula
+    fun getReservaSeleccionada(): Reserva {
+        return _reservaSeleccionada.value ?: throw IllegalStateException("Reserva no encontrada")
     }
 }
