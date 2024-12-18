@@ -93,7 +93,7 @@ class ResumenFragment : Fragment() {
             // Toggle la visibilidad del contenido
             val isExpanded = content.visibility == View.VISIBLE
             content.visibility = if (isExpanded) View.GONE else View.VISIBLE
-
+            
             // Actualizar el ícono según el estado
             val newIcon = if (isExpanded) {
                 R.drawable.ic_expand_more
