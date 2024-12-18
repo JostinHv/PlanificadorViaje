@@ -136,7 +136,7 @@ object SampleDataGenerator {
             Hotel(
                 id = "1",
                 name = "Hotel París",
-                category = "5 estrellas",
+                stars = 5.0,
                 price_per_person = 200.0,
                 price_per_day = 400.0,
                 checkIn = "15:00",
@@ -147,7 +147,7 @@ object SampleDataGenerator {
             Hotel(
                 id = "2",
                 name = "Hotel Tokio",
-                category = "4 estrellas",
+                stars = 4.5,
                 price_per_person = 150.0,
                 price_per_day = 300.0,
                 checkIn = "15:00",
@@ -158,7 +158,7 @@ object SampleDataGenerator {
             Hotel(
                 id = "3",
                 name = "Hotel Costa del Sol",
-                category = "4 estrellas",
+                stars = 4.0,
                 price_per_person = 180.0,
                 price_per_day = 350.0,
                 checkIn = "14:00",
@@ -169,7 +169,7 @@ object SampleDataGenerator {
             Hotel(
                 id = "4",
                 name = "Hotel New York",
-                category = "5 estrellas",
+                stars = 3.5,
                 price_per_person = 250.0,
                 price_per_day = 500.0,
                 checkIn = "15:00",
@@ -180,7 +180,7 @@ object SampleDataGenerator {
             Hotel(
                 id = "5",
                 name = "Hotel London",
-                category = "5 estrellas",
+                stars = 5.0,
                 price_per_person = 220.0,
                 price_per_day = 450.0,
                 checkIn = "15:00",

@@ -13,12 +13,13 @@ import com.jostin.planificadorviaje.data.model.Reserva
 import com.jostin.planificadorviaje.databinding.FragmentConfirmarReservaBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
 class ConfirmarReservaFragment : Fragment() {
     private var _binding: FragmentConfirmarReservaBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: HotelViewModel by viewModels()
+    private val viewModel: ConfirmarReservaViewModel by viewModels()
     private val args: ConfirmarReservaFragmentArgs by navArgs() // Recibir los argumentos
 
     override fun onCreateView(
@@ -32,13 +33,16 @@ class ConfirmarReservaFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        //         Usar argumentos pasados
+        val fechaEntrada = args.fechaEntrada
+        val fechaSalida = args.fechaSalida
+        val personas = args.personas
         setupToolbar()
         setupConfirmarButton()
 
         // Cargar la reserva seleccionada utilizando el argumento hotelId
-//        viewModel.loadReserva(args.hotelId, args.fechaEntrada, args.fechaSalida, args.personas)
-        viewModel.loadReserva(args.hotelId)
+        // viewModel.loadReserva(args.hotelId, args.fechaEntrada, args.fechaSalida, args.personas)
+        viewModel.loadReserva(args.hotelId, fechaEntrada, fechaSalida, personas)
         observeReserva()
     }
 

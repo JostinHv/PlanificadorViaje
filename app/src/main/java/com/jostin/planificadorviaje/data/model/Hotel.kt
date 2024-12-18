@@ -8,7 +8,7 @@ import androidx.room.Embedded
 data class Hotel(
     @PrimaryKey val id: String,
     val name: String,
-    val category: String,
+    val stars: Double,
     val price_per_person: Double,
     val price_per_day: Double,
     val checkIn: String,

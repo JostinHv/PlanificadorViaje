@@ -65,4 +65,7 @@
     <string name="lima_description">Lima es la capital del Perú, ubicada en la costa central del país, a orillas del Océano Pacífico. Conocida como la "Ciudad de los Reyes", esta combina la rica herencia colonial con el dinamismo de una ciudad moderna.</string>
     <string name="accommodation_title">Alojamiento</string>
     <string name="choose">Elegir</string>
+    <!-- Other string resources -->
+    <string name="price_per_night">S/%d por noche</string>
+    <string name="price_per_person">S/%d por persona</string>
 </resources>

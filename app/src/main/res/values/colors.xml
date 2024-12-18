@@ -44,4 +44,5 @@
     <color name="colorGray">#B0BEC5</color>
     <color name="colorDarkGray">#607D8B</color>
     <color name="colorYellow">#FFEB3B</color>
+    <color name="placeholder_color">#CCCCCC</color>
 </resources>

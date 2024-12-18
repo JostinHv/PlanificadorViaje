@@ -1,10 +1,15 @@
 package com.jostin.planificadorviaje.ui.viaje.hospedaje
 
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.data.model.Hotel
 import com.jostin.planificadorviaje.databinding.ItemHotelBinding
 
@@ -30,14 +35,27 @@ class HotelesAdapter(
 
         fun bind(hotel: Hotel) {
             binding.apply {
-                categoriaText.text = hotel.category
+                starsRatingBar.rating = hotel.stars.toFloat()
                 nombreHotelText.text = hotel.name
-                precioText.text = "Precio por noche S/${hotel.price_per_person.toInt()}"
-
+                precioPorNocheText.text = "Precio por noche S/${hotel.price_per_person.toInt()}"
+                precioPorPersonaText.text = "Precio por persona S/${hotel.price_per_person.toInt()}"
+                // Load image using Glide
+                if (hotel.image_url != null) {
+                    Glide.with(itemView.context)
+                        .load(hotel.image_url)
+                        .centerCrop()
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(hotelImageView)
+                } else {
+                    // Use a colored placeholder if no image URL is available
+                    hotelImageView.setImageDrawable(ColorDrawable(ContextCompat.getColor(itemView.context, R.color.placeholder_color)))
+                }
+                // Configurar el clic en el botón "Ver reserva"
                 verReservaButton.setOnClickListener {
-                    onReservaClick(hotel)
+                    onReservaClick(hotel) // Llamar al callback definido en el adaptador
                 }
             }
+
         }
     }
 

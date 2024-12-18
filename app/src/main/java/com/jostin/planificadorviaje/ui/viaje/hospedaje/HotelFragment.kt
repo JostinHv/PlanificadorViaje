@@ -36,7 +36,7 @@ class HotelFragment : Fragment() {
         setupToolbar()
         setupDatePickers()
         setupPersonCounter()
-        setupClassSelector()
+//        setupClassSelector()
         setupSearchButton()
     }
 
@@ -86,18 +86,18 @@ class HotelFragment : Fragment() {
         }
     }
 
-    private fun setupClassSelector() {
-        binding.classCard.setOnClickListener {
-            val classOptions = arrayOf("Económica", "Primera Clase")
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Seleccionar clase")
-                .setItems(classOptions) { _, which ->
-                    selectedClass = classOptions[which]
-                    binding.classText.text = selectedClass
-                }
-                .show()
-        }
-    }
+//    private fun setupClassSelector() {
+//        binding.classCard.setOnClickListener {
+//            val classOptions = arrayOf("Económica", "Primera Clase")
+//            MaterialAlertDialogBuilder(requireContext())
+//                .setTitle("Seleccionar clase")
+//                .setItems(classOptions) { _, which ->
+//                    selectedClass = classOptions[which]
+//                    binding.classText.text = selectedClass
+//                }
+//                .show()
+//        }
+//    }
 
     private fun setupSearchButton() {
         binding.searchButton.setOnClickListener {
@@ -109,17 +109,16 @@ class HotelFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (selectedClass == "Seleccionar") {
-                Toast.makeText(requireContext(), "Por favor selecciona una clase", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+//            if (selectedClass == "Seleccionar") {
+//                Toast.makeText(requireContext(), "Por favor selecciona una clase", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
 
             // Navegar al fragmento ResultadosHospedajeFragment
             val action = HotelFragmentDirections.actionHospedajeToResultadosHospedaje(
                 checkInDate = checkInDate,
                 checkOutDate = checkOutDate,
-                personCount = personCount,
-                selectedClass = selectedClass
+                personCount = personCount
             )
             findNavController().navigate(action)
 

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.jostin.planificadorviaje.databinding.FragmentResultadosHospedajeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -21,7 +22,7 @@ class ResultadosHospedajeFragment : Fragment() {
     private lateinit var adapter: HotelesAdapter
 
     // Recibir los argumentos del fragmento anterior
-    //private val args: ResultadosHospedajeFragmentArgs by navArgs()
+    private val args: ResultadosHospedajeFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,11 +36,10 @@ class ResultadosHospedajeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        // Usar argumentos pasados
-//        val checkInDate = args.checkInDate
-//        val checkOutDate = args.checkOutDate
-//        val personCount = args.personCount
-//        val selectedClass = args.selectedClass
+//         Usar argumentos pasados
+        val checkInDate = args.checkInDate
+        val checkOutDate = args.checkOutDate
+        val personCount = args.personCount
 //
 //        // Configurar el título de la barra de herramientas
 //        binding.toolbar.title = "Resultados para $personCount persona(s)"
@@ -67,7 +67,12 @@ class ResultadosHospedajeFragment : Fragment() {
         adapter = HotelesAdapter { hotel ->
             // Navegar al fragmento de Confirmar Reserva
             findNavController().navigate(
-                ResultadosHospedajeFragmentDirections.actionToConfirmarReserva(hotel.id)
+                ResultadosHospedajeFragmentDirections.actionToConfirmarReserva(
+                    hotel.id,
+                    args.checkInDate,
+                    args.checkOutDate,
+                    args.personCount
+                )
             )
         }
 
