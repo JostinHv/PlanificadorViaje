@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +46,16 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
         setupFab()
         observeViewModel()
+
+        binding.button.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToAdminHotelFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.button2.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToRestaurantesFragment()
+            findNavController().navigate(action)
+        }
     }
 
     override fun onResume() {
@@ -58,7 +69,7 @@ class HomeFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.itinerariesRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = itineraryAdapter
+            //adapter = itineraryAdapter
         }
     }
 
@@ -76,7 +87,7 @@ class HomeFragment : Fragment() {
      */
     private fun observeViewModel() {
         homeViewModel.itineraries.observe(viewLifecycleOwner) { itineraries ->
-            itineraryAdapter.submitList(itineraries)
+           // itineraryAdapter.submitList(itineraries)
             toggleEmptyState(itineraries.isEmpty())
         }
 

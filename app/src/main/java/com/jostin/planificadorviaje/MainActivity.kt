@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         // Escuchar cambios en el destino y ajustar la visibilidad del BottomNavigationView
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.loginFragment -> {
+                R.id.loginFragment, R.id.adminHotelFragment, R.id.restaurantesFragment -> {
                     // Ocultar el BottomNavigationView en el login
                     bottomNavigationView.visibility = View.GONE
                 }

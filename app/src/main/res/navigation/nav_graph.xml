@@ -20,6 +20,26 @@
         <action
             android:id="@+id/action_homeFragment_to_itineraryDetailFragment"
             app:destination="@id/itineraryDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_adminHotelFragment"
+            app:destination="@id/adminHotelFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_restaurantesFragment"
+            app:destination="@id/restaurantesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/restaurantesFragment"
+        android:name="com.jostin.planificadorviaje.berpi.ui.restaurantes.RestaurantesFragment"
+        android:label="Restaurantes"
+        tools:layout="@layout/fragment_restaurantes">
+    </fragment>
+
+    <fragment
+        android:id="@+id/adminHotelFragment"
+        android:name="com.jostin.planificadorviaje.berpi.ui.AdminHotelFragment"
+        android:label="Administrar Hoteles"
+        tools:layout="@layout/fragment_admin_hotel">
     </fragment>
 
 

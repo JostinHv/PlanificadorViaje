@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etHotelName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del hotel"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etHotelCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ciudad"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etHotelPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Precio"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/etHotelPuntaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Puntaje del Hotel"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/etHotelImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="URL de la imagen (opcional)"
+        android:inputType="textUri" />
+</LinearLayout>

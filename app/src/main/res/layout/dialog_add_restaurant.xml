@@ -1,0 +1,48 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Nombre del restaurante -->
+    <EditText
+        android:id="@+id/etRestaurantName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del restaurante"
+        android:inputType="text" />
+
+    <!-- Ciudad del restaurante -->
+    <EditText
+        android:id="@+id/etRestaurantCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ciudad"
+        android:inputType="text" />
+
+    <!-- Precio promedio -->
+    <EditText
+        android:id="@+id/etRestaurantPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Precio promedio (S/)"
+        android:inputType="numberDecimal" />
+
+    <!-- Puntaje -->
+    <EditText
+        android:id="@+id/etRestaurantRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Puntaje (1.0 - 5.0)"
+        android:inputType="numberDecimal" />
+
+    <!-- Imagen del restaurante -->
+    <EditText
+        android:id="@+id/etRestaurantImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="URL de la imagen"
+        android:inputType="textUri" />
+
+</LinearLayout>
