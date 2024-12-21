@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.data.local.AppDatabase
 import com.jostin.planificadorviaje.databinding.FragmentItineraryDetailBinding
 import com.jostin.planificadorviaje.data.model.Itinerary
 import com.jostin.planificadorviaje.data.repository.ItineraryRepository
+import com.jostin.planificadorviaje.ui.plan.PlanAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,7 +26,7 @@ class ItineraryDetailFragment : Fragment() {
     private var _binding: FragmentItineraryDetailBinding? = null
     private val binding get() = _binding!!
     private val args: ItineraryDetailFragmentArgs by navArgs()
-
+    private lateinit var planAdapter: PlanAdapter
     private val viewModel: ItineraryDetailViewModel by viewModels()
 
     override fun onCreateView(
@@ -33,6 +35,13 @@ class ItineraryDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentItineraryDetailBinding.inflate(inflater, container, false)
+        // Set up RecyclerView
+        planAdapter = PlanAdapter(emptyList()) // Initialize with empty list
+        binding.recyclerViewPlans.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = planAdapter
+        }
+        loadItineraryDetails()
         return binding.root
     }
 
@@ -56,6 +65,29 @@ class ItineraryDetailFragment : Fragment() {
         }
     }
 
+    private fun loadItineraryDetails() {
+
+        viewModel.getItineraryDetails(args.itineraryId).observe(viewLifecycleOwner) { itineraryWithPlans ->
+            val itinerary = itineraryWithPlans.itinerary
+            binding.textViewItineraryName.text = itinerary.name
+            binding.textViewDestination.text = itinerary.destination
+            binding.textViewDateRange.text = "${itinerary.startDate} - ${itinerary.endDate}"
+            binding.textViewDescription.text = itinerary.description
+
+            // Configure shared users
+            binding.travelersChipGroup.removeAllViews()
+            itinerary.sharedWith.forEach { user ->
+                val chip = Chip(requireContext()).apply {
+                    text = user.name
+                    isCheckable = false
+                }
+                binding.travelersChipGroup.addView(chip)
+            }
+            // Update the plans in the adapter
+            planAdapter = PlanAdapter(itineraryWithPlans.plans)
+            binding.recyclerViewPlans.adapter = planAdapter
+        }
+    }
 
     private fun displayItineraryDetails(itinerary: Itinerary) {
         binding.apply {
@@ -78,7 +110,11 @@ class ItineraryDetailFragment : Fragment() {
 
     private fun setupFab() {
         binding.fabAddPlan.setOnClickListener {
-            findNavController().navigate(R.id.action_itineraryDetailFragment_to_selectPlanTypeFragment)
+            findNavController().navigate(
+                ItineraryDetailFragmentDirections.actionItineraryDetailFragmentToSelectPlanTypeFragment(
+                    args.itineraryId
+                )
+            )
         }
     }
 

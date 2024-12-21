@@ -2,6 +2,7 @@ package com.jostin.planificadorviaje.data.repository
 
 import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
 import com.jostin.planificadorviaje.data.model.Itinerary
+import com.jostin.planificadorviaje.data.model.relations.ItineraryWithPlans
 import com.jostin.planificadorviaje.utils.SampleDataGenerator
 
 class ItineraryRepository(private val localDataSource: LocalDataSource) {
@@ -12,7 +13,6 @@ class ItineraryRepository(private val localDataSource: LocalDataSource) {
 
     suspend fun getItinerary(itineraryId: String): Itinerary {
         return localDataSource.getItinerary(itineraryId)
-            ?: throw IllegalArgumentException("Itinerary not found")
     }
 
     suspend fun createItinerary(itinerary: Itinerary) {
@@ -33,6 +33,10 @@ class ItineraryRepository(private val localDataSource: LocalDataSource) {
 
     suspend fun getItinerariesForUser(userId: String): List<Itinerary> {
         return localDataSource.getItineraries().filter { it.userId == userId }
+    }
+
+    suspend fun getItineraryWithPlans(itineraryId: String): ItineraryWithPlans {
+        return localDataSource.getItineraryWithPlans(itineraryId)
     }
 
     suspend fun initializeSampleData() {

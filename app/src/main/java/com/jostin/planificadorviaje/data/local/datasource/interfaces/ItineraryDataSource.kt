@@ -1,6 +1,7 @@
 package com.jostin.planificadorviaje.data.local.datasource.interfaces
 
 import com.jostin.planificadorviaje.data.model.Itinerary
+import com.jostin.planificadorviaje.data.model.relations.ItineraryWithPlans
 
 interface ItineraryDataSource {
     suspend fun getItineraries(): List<Itinerary>
@@ -8,4 +9,5 @@ interface ItineraryDataSource {
     suspend fun createItinerary(itinerary: Itinerary)
     suspend fun updateItinerary(itinerary: Itinerary)
     suspend fun deleteItinerary(id: String)
+    suspend fun getItineraryWithPlans(itineraryId: String): ItineraryWithPlans
 }

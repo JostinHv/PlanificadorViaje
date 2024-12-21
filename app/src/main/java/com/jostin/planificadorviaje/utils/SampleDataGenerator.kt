@@ -57,7 +57,7 @@ object SampleDataGenerator {
         )
     }
 
-    private fun generateSamplePlans(): List<Plan> {
+    private fun  generateSamplePlans(): List<Plan> {
         return listOf(
             Plan(
                 id = "1",

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jostin.planificadorviaje.data.model.PlanType
 import com.jostin.planificadorviaje.databinding.FragmentSelectPlanTypeBinding
@@ -15,6 +16,7 @@ class SelectPlanTypeFragment : Fragment() {
 
     private var _binding: FragmentSelectPlanTypeBinding? = null
     private val binding get() = _binding!!
+    private val args: SelectPlanTypeFragmentArgs by navArgs()
 
     private val planTypes = listOf(
         PlanType.FLIGHT,
@@ -27,7 +29,11 @@ class SelectPlanTypeFragment : Fragment() {
         PlanType.PACKAGE_TRIP,
     )
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentSelectPlanTypeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,14 +49,36 @@ class SelectPlanTypeFragment : Fragment() {
             when (planType) {
                 PlanType.PACKAGE_TRIP -> {
                     // Si selecciona "Plan de Viaje Paquete", redirige a ViajesFragment
-                    val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToViajesFragment()
+                    val action =
+                        SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToViajesFragment()
                     findNavController().navigate(action)
                 }
+
+                PlanType.RESTAURANT -> {
+                    // Si selecciona "Restaurante", redirige a RestaurantFormFragment
+                    val action =
+                        SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToRestaurantFormFragment(
+                            args.itineraryId
+                        )
+                    findNavController().navigate(action)
+                }
+
+                PlanType.ACCOMMODATION -> {
+                    // Si selecciona "Alojamiento", redirige a HotelFormFragment
+                    val action =
+                        SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToHotelFormFragment(
+                            args.itineraryId
+                        )
+                    findNavController().navigate(action)
+                }
+
                 else -> {
                     // Para otros tipos, redirige a CreatePlanFragment
-                    val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToCreatePlanFragment(
-                        getString(planType.nameRes)
-                    )
+                    val action =
+                        SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToCreatePlanFragment(
+                            getString(planType.nameRes),
+                            args.itineraryId
+                        )
                     findNavController().navigate(action)
                 }
             }

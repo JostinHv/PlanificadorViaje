@@ -28,13 +28,80 @@
         android:name="com.jostin.planificadorviaje.ui.plan.SelectPlanTypeFragment"
         android:label="Select Plan Type"
         tools:layout="@layout/fragment_select_plan_type">
+        <argument
+            android:name="itineraryId"
+            app:argType="string" />
         <action
             android:id="@+id/action_selectPlanTypeFragment_to_createPlanFragment"
             app:destination="@id/createPlanFragment" />
         <action
             android:id="@+id/action_selectPlanTypeFragment_to_viajesFragment"
             app:destination="@id/viajesFragment" />
+        <!-- Acción hacia RestaurantFormFragment -->
+        <action
+            android:id="@+id/actionSelectPlanTypeFragmentToRestaurantFormFragment"
+            app:destination="@id/restaurantFormFragment" />
+        <!-- Acción hacia HotelFormFragment -->
+        <action
+            android:id="@+id/actionSelectPlanTypeFragmentToHotelFormFragment"
+            app:destination="@id/hotelFormFragment" />
     </fragment>
+
+    <!-- RestaurantFormFragment -->
+    <fragment
+        android:id="@+id/restaurantFormFragment"
+        android:name="com.jostin.planificadorviaje.ui.plan.restaurant.RestaurantFormFragment"
+        android:label="Restaurant Form"
+        tools:layout="@layout/fragment_restaurant_form">
+        <!-- Opcional: Puedes definir acciones desde este fragmento -->
+        <argument
+            android:name="itineraryId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_restaurantFormFragment_to_restaurantMapFragment"
+            app:destination="@id/restaurantMapFragment" />
+        <action
+            android:id="@+id/action_restaurantFormFragment_to_itineraryDetailFragment"
+            app:destination="@id/itineraryDetailFragment" />
+    </fragment>
+
+    <!-- RestaurantMapFragment -->
+    <fragment
+        android:id="@+id/restaurantMapFragment"
+        android:name="com.jostin.planificadorviaje.ui.plan.restaurant.map.RestaurantMapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_restaurant_map">
+
+    </fragment>
+
+
+    <!-- RestaurantFormFragment -->
+    <fragment
+        android:id="@+id/hotelFormFragment"
+        android:name="com.jostin.planificadorviaje.ui.plan.hotel.HotelFormFragment"
+        android:label="Hotel Form"
+        tools:layout="@layout/fragment_hotel_form">
+        <!-- Opcional: Puedes definir acciones desde este fragmento -->
+        <argument
+            android:name="itineraryId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_hotelFormFragment_to_hotelMapFragment"
+            app:destination="@id/hotelMapFragment" />
+        <action
+            android:id="@+id/action_hotelFormFragment_to_itineraryDetailFragment"
+            app:destination="@id/itineraryDetailFragment" />
+    </fragment>
+
+    <!-- RestaurantMapFragment -->
+    <fragment
+        android:id="@+id/hotelMapFragment"
+        android:name="com.jostin.planificadorviaje.ui.plan.hotel.map.HotelMapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_hotel_map">
+
+    </fragment>
+
 
     <fragment
         android:id="@+id/itineraryFragment"
@@ -115,6 +182,9 @@
         tools:layout="@layout/fragment_create_plan">
         <argument
             android:name="planType"
+            app:argType="string" />
+        <argument
+            android:name="itineraryId"
             app:argType="string" />
         <action
             android:id="@+id/action_createPlanFragment_to_itineraryFragment"

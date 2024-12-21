@@ -14,7 +14,8 @@ data class Itinerary(
     val endDate: Date,
     val description: String,
     val coverImage: String,
-    val plans: List<Plan>,
+    val coverImageUrl: String,
     val sharedWith: List<User>,
-    val coverImageUrl: String
+    val plans: List<Plan>
 )
+

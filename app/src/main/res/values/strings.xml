@@ -12,7 +12,6 @@
     <string name="email">Correo Electronico</string>
     <string name="name">Nombre</string>
     <string name="add_plan">Agregar plan</string>
-    <string name="plan_name">Nombre del plan</string>
     <string name="plan_type">Tipo de plan</string>
     <string name="plan_date">Fecha del plan</string>
     <string name="plan_details">Detalles del plan</string>
@@ -68,4 +67,41 @@
     <!-- Other string resources -->
     <string name="price_per_night">S/%d por noche</string>
     <string name="price_per_person">S/%d por persona</string>
+    <string name="plans">Mis planes</string>
+    <string name="date">Fecha</string>
+    <string name="meal_type">Tipo de comida</string>
+    <string name="time">Hora</string>
+    <string name="restaurant">Restaurante</string>
+    <string name="add_or_change_location">Agregar o cambiar lugar</string>
+    <string name="show_nearby_restaurants">Buscar restaurantes cercanos</string>
+    <string name="save_restaurant_plan">Guardar plan</string>
+    <string name="restaurant_form">Formulario para Restaurante</string>
+    <string name="nearby_restaurants">Restaurantes cercanos</string>
+    <string name="cancel">Cancelar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="restaurant_image">Imagen del Restaurante</string>
+    <string name="location_icon">Icono de la ubicación</string>
+    <string name="nearby_hotels">Hoteles cercanos</string>
+    <string name="check_in_date">Fecha de Check-in</string>
+    <string name="check_out_date">Fecha de Check-out</string>
+    <string name="hotel_location">Ubicación del Hotel</string>
+    <string name="add_or_change_hotel">Agregar o Cambiar Hotel</string>
+    <string name="save_hotel_plan">Guardar Plan de Hotel</string>
+    <string name="hotel_image">Imagen del Hotel</string>
+    <string name="error_plan_name_required">El nombre del plan es requerido</string>
+    <string name="error_invalid_dates">Las fechas seleccionadas no son válidas</string>
+    <string name="error_hotel_required">Debe seleccionar un hotel</string>
+    <string name="plan_saved">Plan guardado exitosamente</string>
+    <string name="hotel_form">Formulario Hotel</string>
+    <string name="add_hotel_plan">Agregar Plan de Hotel</string>
+    <string name="add_hotel">Agregar Hotel</string>
+    <string name="basic_info">Información Básica</string>
+
+    <string name="plan_name">Nombre del Plan</string>
+    <string name="change_hotel">Cambiar Hotel</string>
+    <string name="hotel_info">Información del Hotel</string>
+    <string name="view_details">Ver Detalles</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="pool">Piscina</string>
+
 </resources>

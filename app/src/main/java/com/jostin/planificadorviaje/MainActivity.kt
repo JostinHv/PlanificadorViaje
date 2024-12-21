@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar) // Esta línea resuelve el problema
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
         // Setup the bottom navigation view with navController
@@ -48,6 +49,31 @@ class MainActivity : AppCompatActivity() {
                     // Ocultar el BottomNavigationView en el login
                     bottomNavigationView.visibility = View.GONE
                 }
+
+                R.id.restaurantMapFragment -> {
+                    // Ocultar el BottomNavigationView en el mapa de restaurantes
+                    bottomNavigationView.visibility = View.GONE
+                }
+                R.id.hotelMapFragment -> {
+                    // Ocultar el BottomNavigationView en el mapa de hoteles
+                    bottomNavigationView.visibility = View.GONE
+                }
+                R.id.restaurantFormFragment -> {
+                    // Ocultar el BottomNavigationView en el formulario de restaurantes
+                    bottomNavigationView.visibility = View.GONE
+                }
+
+                R.id.hotelFormFragment -> {
+                    // Ocultar el BottomNavigationView en el formulario de hoteles
+                    bottomNavigationView.visibility = View.GONE
+                }
+
+                R.id.selectPlanTypeFragment -> {
+                    // Ocultar el BottomNavigationView en el formulario de hoteles
+                    bottomNavigationView.visibility = View.GONE
+                }
+
+
                 else -> {
                     // Mostrar el BottomNavigationView en otros fragmentos
                     bottomNavigationView.visibility = View.VISIBLE

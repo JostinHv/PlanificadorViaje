@@ -3,6 +3,7 @@ package com.jostin.planificadorviaje.data.local.datasource.implementation
 import com.jostin.planificadorviaje.data.local.AppDatabase
 import com.jostin.planificadorviaje.data.local.datasource.interfaces.ItineraryDataSource
 import com.jostin.planificadorviaje.data.model.Itinerary
+import com.jostin.planificadorviaje.data.model.relations.ItineraryWithPlans
 
 class ItineraryLocalDataSource(private val database: AppDatabase) : ItineraryDataSource {
     override suspend fun getItineraries(): List<Itinerary> {
@@ -24,4 +25,9 @@ class ItineraryLocalDataSource(private val database: AppDatabase) : ItineraryDat
     override suspend fun deleteItinerary(id: String) {
         database.itineraryDao().deleteById(id)
     }
+
+    override suspend fun getItineraryWithPlans(itineraryId: String): ItineraryWithPlans {
+        return database.itineraryDao().getItineraryWithPlans(itineraryId)
+    }
+
 }

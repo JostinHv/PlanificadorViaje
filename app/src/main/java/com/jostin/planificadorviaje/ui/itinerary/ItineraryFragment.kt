@@ -42,7 +42,6 @@ class ItineraryFragment : Fragment() {
 
     private fun setupViews() {
         binding.addPlanFab.setOnClickListener {
-            // Lógica para agregar un plan
             Toast.makeText(requireContext(), "Agregar plan", Toast.LENGTH_SHORT).show()
         }
     }

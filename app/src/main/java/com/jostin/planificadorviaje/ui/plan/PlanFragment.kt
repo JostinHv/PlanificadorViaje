@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.databinding.FragmentPlanBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PlanFragment : Fragment() {
     private lateinit var binding: FragmentPlanBinding
     private val viewModel: PlanViewModel by viewModels()

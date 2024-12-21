@@ -90,7 +90,9 @@
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:text="john@a.com"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Campo de contraseña -->
@@ -107,7 +109,9 @@
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:text="1234"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Botón de inicio de sesión -->

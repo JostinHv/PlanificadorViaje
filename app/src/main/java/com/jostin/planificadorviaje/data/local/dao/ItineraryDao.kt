@@ -3,6 +3,7 @@ package com.jostin.planificadorviaje.data.local.dao
 // data/local/ItineraryDao.kt
 import androidx.room.*
 import com.jostin.planificadorviaje.data.model.Itinerary
+import com.jostin.planificadorviaje.data.model.relations.ItineraryWithPlans
 
 @Dao
 interface ItineraryDao {
@@ -20,4 +21,9 @@ interface ItineraryDao {
 
     @Query("DELETE FROM itineraries WHERE id = :id")
     suspend fun deleteById(id: String)
+
+    @Transaction
+    @Query("SELECT * FROM itineraries WHERE id = :itineraryId")
+    suspend fun getItineraryWithPlans(itineraryId: String): ItineraryWithPlans
+
 }

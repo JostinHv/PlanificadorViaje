@@ -30,7 +30,8 @@ object AppModule {
             UserLocalDataSource(database),
             PlaceLocalDataSource(database),
             HotelLocalDataSource(database),
-            ReservaLocalDataSource(database)
+            ReservaLocalDataSource(database),
+            PlanLocalDataSource(database)
         )
     }
 
@@ -62,5 +63,11 @@ object AppModule {
     @Provides
     fun provideReservaRepository(localDataSource: LocalDataSource): ReservaRepository {
         return ReservaRepository(localDataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun providePlanRepository(localDataSource: LocalDataSource): PlanRepository {
+        return PlanRepository(localDataSource)
     }
 }

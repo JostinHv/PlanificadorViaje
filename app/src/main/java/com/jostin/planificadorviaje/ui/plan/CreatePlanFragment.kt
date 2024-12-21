@@ -4,28 +4,35 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
 import com.jostin.planificadorviaje.R
+import com.jostin.planificadorviaje.data.model.Plan
 import com.jostin.planificadorviaje.data.model.PlanType
 import com.jostin.planificadorviaje.databinding.FragmentCreatePlanBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import java.util.UUID
 
+@AndroidEntryPoint
 class CreatePlanFragment : Fragment() {
 
     private var _binding: FragmentCreatePlanBinding? = null
     private val binding get() = _binding!!
     private val args: CreatePlanFragmentArgs by navArgs()
-
+    private val viewModel: CreatePlanViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,11 +52,35 @@ class CreatePlanFragment : Fragment() {
 
         // Set up form fields based on plan type
         setupFormFields(args.planType)
-
+        savePlan()
         binding.createPlanButton.setOnClickListener {
-            // TODO: Validate and save plan
+
             findNavController().navigate(R.id.action_createPlanFragment_to_homeFragment)
         }
+    }
+
+    private fun savePlan() {
+        val planDetails = mutableMapOf<String, Any>()
+        binding.dynamicFieldsContainer.children.forEach { view ->
+            val inputField = view.findViewById<EditText>(R.id.text_input_edit_text)
+            val hint = view.findViewById<TextInputLayout>(R.id.text_input_layout).hint.toString()
+            planDetails[hint] = inputField.text.toString()
+        }
+        val type = getPlanTypeByNameRes(args.planType)
+        val plan = Plan(
+            id = UUID.randomUUID().toString(),
+            itineraryId = args.itineraryId, // Recibido por Safe Args
+            type = type ?: PlanType.FLIGHT,
+            name = planDetails["Nombre"]?.toString() ?: "Plan",
+            date = Date(), // Cambiar si tienes una fecha específica
+            details = planDetails
+        )
+        Log.d("CreatePlanFragment", "Plan: ${plan.details}")
+        viewModel.savePlan(plan)
+    }
+
+    private fun getPlanTypeByNameRes(planNombre: String): PlanType? {
+        return PlanType.entries.find { getString(it.nameRes) == planNombre }
     }
 
     private fun setupFormFields(planType: String) {

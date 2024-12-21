@@ -7,11 +7,21 @@ import com.jostin.planificadorviaje.data.model.Plan
 interface PlanDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(plan: Plan)
+    suspend fun createPlan(plan: Plan)
+
+    @Query("SELECT * FROM plans WHERE itineraryId = :itineraryId")
+    suspend fun getPlansForItinerary(itineraryId: String): List<Plan>
+
+    @Query("SELECT * FROM plans WHERE id = :id")
+    suspend fun getPlan(id: String): Plan
 
     @Update
-    suspend fun update(plan: Plan)
+    suspend fun updatePlan(plan: Plan)
 
     @Delete
-    suspend fun delete(plan: Plan)
+    suspend fun deletePlan(plan: Plan)
+
+    @Query("DELETE FROM plans WHERE id = :id")
+    suspend fun deletePlanById(id: String)
+
 }
