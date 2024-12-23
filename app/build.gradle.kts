@@ -77,14 +77,17 @@ dependencies {
     // Google Maps
     implementation("com.google.android.gms:play-services-maps:19.0.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
-    implementation ("com.google.maps.android:android-maps-utils:3.8.0")
-    implementation ("com.google.android.libraries.places:places:4.1.0")
+    implementation("com.google.maps.android:android-maps-utils:3.8.0")
+    implementation("com.google.android.libraries.places:places:4.1.0")
     // Volley
     implementation("com.android.volley:volley:1.2.1")
     // Lottie
-    implementation ("com.airbnb.android:lottie:5.2.0")
+    implementation("com.airbnb.android:lottie:5.2.0")
     // CircleImageView
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+    // JBCrypt
+    implementation("org.mindrot:jbcrypt:0.4")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

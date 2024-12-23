@@ -38,7 +38,7 @@ class PlanificadorViajeApplication : Application() {
 
         // Cargar datos de ejemplo al iniciar la aplicación
         CoroutineScope(Dispatchers.IO).launch {
-            initializeSampleData()
+//            initializeSampleData()
         }
 
 //        val firestore = FirebaseFirestore.getInstance()

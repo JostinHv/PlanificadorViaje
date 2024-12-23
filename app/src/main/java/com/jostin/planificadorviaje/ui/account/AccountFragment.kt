@@ -92,7 +92,7 @@ class AccountFragment : Fragment() {
         dialogBinding.nameInput.setText(currentUser.name)
         dialogBinding.lastnameInput.setText(currentUser.lastname)
         dialogBinding.emailInput.setText(currentUser.email)
-        dialogBinding.passwordInput.setText(currentUser.password)
+        dialogBinding.passwordInput.setText("")
         // Crear y configurar el diálogo
         val dialog = MaterialAlertDialogBuilder(requireContext())
             .setView(dialogBinding.root)
@@ -105,7 +105,11 @@ class AccountFragment : Fragment() {
                 name = dialogBinding.nameInput.text.toString(),
                 lastname = dialogBinding.lastnameInput.text.toString(),
                 email = dialogBinding.emailInput.text.toString(),
-                password = dialogBinding.passwordInput.text.toString(),
+                password = if (dialogBinding.passwordInput.text?.isNotEmpty() == true) {
+                    dialogBinding.passwordInput.text.toString()
+                } else {
+                    currentUser.password
+                },
                 role = currentUser.role,
             )
             accountViewModel.updateUser(updatedUser, requireContext())
