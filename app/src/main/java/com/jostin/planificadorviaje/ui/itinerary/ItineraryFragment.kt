@@ -10,9 +10,6 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.utils.DateUtils.formatDate
 import com.jostin.planificadorviaje.R
-import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
-import com.jostin.planificadorviaje.data.local.AppDatabase
-import com.jostin.planificadorviaje.data.repository.ItineraryRepository
 import com.jostin.planificadorviaje.databinding.FragmentItineraryBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,7 +51,7 @@ class ItineraryFragment : Fragment() {
 
             // Actualiza la imagen de portada
             Glide.with(this)
-                .load(itinerary.coverImageUrl)
+                .load(itinerary.imageUrl)
                 .into(binding.itineraryCoverImage)
 
             // Actualiza el nombre del itinerario

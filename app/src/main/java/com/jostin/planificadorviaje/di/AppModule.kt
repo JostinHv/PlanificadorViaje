@@ -70,4 +70,10 @@ object AppModule {
     fun providePlanRepository(localDataSource: LocalDataSource): PlanRepository {
         return PlanRepository(localDataSource)
     }
+
+    @Singleton
+    @Provides
+    fun provideCityRepository(): CityRepository {
+        return CityRepository()
+    }
 }

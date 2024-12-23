@@ -9,8 +9,11 @@ import com.jostin.planificadorviaje.data.repository.ItineraryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class CreateItineraryViewModel(private val repository: ItineraryRepository) : ViewModel() {
+@HiltViewModel
+class CreateItineraryViewModel @Inject constructor(private val itineraryRepository: ItineraryRepository) :
+    ViewModel() {
 
     fun createItinerary(
         name: String,
@@ -30,15 +33,14 @@ class CreateItineraryViewModel(private val repository: ItineraryRepository) : Vi
             startDate = startDate,
             endDate = endDate,
             description = description,
-            coverImage = "",
             plans = plans,
             sharedWith = sharedWith,
-            coverImageUrl = ""
+            imageUrl = ""
         )
 
         //Imprime en consola todos mis itinerarios creados
         viewModelScope.launch {
-            repository.createItinerary(itinerary)
+            itineraryRepository.createItinerary(itinerary)
 //            val itineraries = repository.getItineraries()
 //            itineraries.forEach { itinerary ->
 //                Log.d("ItineraryLog", "ID: ${itinerary.id}")

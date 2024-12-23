@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.bumptech.glide.Glide
@@ -36,6 +37,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.button.MaterialButton
@@ -53,14 +55,13 @@ class RestaurantMapFragment : Fragment(), OnMapReadyCallback {
     private var locationPermissionGranted = false
     private var lastKnownLocation: Location? = null
     private var currentMarker: Marker? = null
+    private val args: RestaurantMapFragmentArgs by navArgs()
 
     private val defaultLocation = LatLng(-33.8523341, 151.2106085)
     private val DEFAULT_ZOOM = 15f
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_restaurant_map, container, false)
     }
@@ -84,6 +85,32 @@ class RestaurantMapFragment : Fragment(), OnMapReadyCallback {
         getLocationPermission()
         updateLocationUI()
         getDeviceLocation()
+
+        // Definir un radio para abarcar toda la ciudad
+        val cityLocation = LatLng(args.city.latitude, args.city.longitude)
+        val bounds = LatLngBounds.builder()
+            .include(
+                LatLng(
+                    cityLocation.latitude + 0.1,
+                    cityLocation.longitude + 0.1
+                )
+            ) // Extremo superior derecho
+            .include(
+                LatLng(
+                    cityLocation.latitude - 0.1,
+                    cityLocation.longitude - 0.1
+                )
+            ) // Extremo inferior izquierdo
+            .build()
+
+        // Centrar y ajustar el mapa al área definida
+        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
+
+        // Agregar un marcador para la ciudad
+        map.addMarker(
+            MarkerOptions().position(cityLocation).title("Ciudad: ${args.city.name}")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+        )
 
         map.setOnMapClickListener { latLng ->
             placeMarker(latLng)
@@ -110,18 +137,15 @@ class RestaurantMapFragment : Fragment(), OnMapReadyCallback {
                             map.moveCamera(
                                 CameraUpdateFactory.newLatLngZoom(
                                     LatLng(
-                                        lastKnownLocation!!.latitude,
-                                        lastKnownLocation!!.longitude
-                                    ),
-                                    DEFAULT_ZOOM
+                                        lastKnownLocation!!.latitude, lastKnownLocation!!.longitude
+                                    ), DEFAULT_ZOOM
                                 )
                             )
                         }
                     } else {
                         map.moveCamera(
                             CameraUpdateFactory.newLatLngZoom(
-                                defaultLocation,
-                                DEFAULT_ZOOM
+                                defaultLocation, DEFAULT_ZOOM
                             )
                         )
                         map.uiSettings.isMyLocationButtonEnabled = false
@@ -135,24 +159,21 @@ class RestaurantMapFragment : Fragment(), OnMapReadyCallback {
 
     private fun getLocationPermission() {
         if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            == PackageManager.PERMISSION_GRANTED
+                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
             locationPermissionGranted = true
         } else {
             ActivityCompat.requestPermissions(
-                requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
             )
         }
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
+        requestCode: Int, permissions: Array<String>, grantResults: IntArray
     ) {
         locationPermissionGranted = false
         when (requestCode) {
@@ -192,16 +213,12 @@ class RestaurantMapFragment : Fragment(), OnMapReadyCallback {
                 // Usar el ícono personalizado para la ubicación actual
                 val icon = BitmapDescriptorFactory.fromBitmap(
                     ImagenUtils.vectorToBitmap(
-                        R.drawable.current_location_icon,
-                        requireContext()
+                        R.drawable.current_location_icon, requireContext()
                     )
                 )
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, DEFAULT_ZOOM))
                 map.addMarker(
-                    MarkerOptions()
-                        .position(currentLatLng)
-                        .title("Mi ubicación actual")
-                        .icon(icon)
+                    MarkerOptions().position(currentLatLng).title("Mi ubicación actual").icon(icon)
                 )
             }
         }
@@ -218,56 +235,44 @@ class RestaurantMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun showNearbyRestaurants() {
-        val location = currentMarker?.position ?: (lastKnownLocation?.let {
-            LatLng(
-                it.latitude,
-                it.longitude
-            )
-        })
-        location?.let { fetchNearbyRestaurants(it) }
+        val location = currentMarker?.position ?: LatLng(args.city.latitude, args.city.longitude)
+        fetchNearbyRestaurants(location)
     }
 
     private fun fetchNearbyRestaurants(location: LatLng) {
         val url =
             "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.latitude},${location.longitude}&radius=1000&type=restaurant&key=AIzaSyDMA96lOlSMlnmikyellEzToDvg9JZdMSY"
 
-        val stringRequest = StringRequest(Request.Method.GET, url,
-            { response ->
-                val jsonObject = JSONObject(response)
-                val results = jsonObject.getJSONArray("results")
+        val stringRequest = StringRequest(Request.Method.GET, url, { response ->
+            val jsonObject = JSONObject(response)
+            val results = jsonObject.getJSONArray("results")
 
-                map.clear()
-                // Convertir el ícono del restaurante en un Bitmap
-                val restaurantIcon = BitmapDescriptorFactory.fromBitmap(
-                    ImagenUtils.vectorToBitmap(
-                        R.drawable.ic_restaurant,
-                        requireContext()
-                    )
+            map.clear()
+            // Convertir el ícono del restaurante en un Bitmap
+            val restaurantIcon = BitmapDescriptorFactory.fromBitmap(
+                ImagenUtils.vectorToBitmap(
+                    R.drawable.ic_restaurant, requireContext()
                 )
+            )
 
-                for (i in 0 until results.length()) {
-                    val place = results.getJSONObject(i)
-                    val name = place.getString("name")
-                    val placeId = place.getString("place_id")
-                    val lat =
-                        place.getJSONObject("geometry").getJSONObject("location").getDouble("lat")
-                    val lng =
-                        place.getJSONObject("geometry").getJSONObject("location").getDouble("lng")
-                    val restaurantLocation = LatLng(lat, lng)
+            for (i in 0 until results.length()) {
+                val place = results.getJSONObject(i)
+                val name = place.getString("name")
+                val placeId = place.getString("place_id")
+                val lat = place.getJSONObject("geometry").getJSONObject("location").getDouble("lat")
+                val lng = place.getJSONObject("geometry").getJSONObject("location").getDouble("lng")
+                val restaurantLocation = LatLng(lat, lng)
 
-                    val marker =
-                        map.addMarker(
-                            MarkerOptions().position(restaurantLocation).title(name)
-                                .icon(restaurantIcon)
-                        )
-                    if (marker != null) {
-                        marker.tag = placeId
-                    }
+                val marker = map.addMarker(
+                    MarkerOptions().position(restaurantLocation).title(name).icon(restaurantIcon)
+                )
+                if (marker != null) {
+                    marker.tag = placeId
                 }
-            },
-            { _ ->
-                // Handle error
-            })
+            }
+        }, { _ ->
+            // Handle error
+        })
 
         // Add the request to the RequestQueue
         RequestQueueSingleton.getInstance(requireContext()).addToRequestQueue(stringRequest)
@@ -277,44 +282,36 @@ class RestaurantMapFragment : Fragment(), OnMapReadyCallback {
         val url =
             "https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&fields=name,formatted_address,rating,geometry,photos&key=AIzaSyDMA96lOlSMlnmikyellEzToDvg9JZdMSY"
 
-        val stringRequest = StringRequest(Request.Method.GET, url,
-            { response ->
-                val jsonObject = JSONObject(response)
-                val result = jsonObject.getJSONObject("result")
+        val stringRequest = StringRequest(Request.Method.GET, url, { response ->
+            val jsonObject = JSONObject(response)
+            val result = jsonObject.getJSONObject("result")
 
-                val name = result.getString("name")
-                val address = result.getString("formatted_address")
-                val rating = result.optDouble("rating", 0.0)
-                val location = result.getJSONObject("geometry").getJSONObject("location")
-                val lat = location.getDouble("lat")
-                val lng = location.getDouble("lng")
-                // Obtener la referencia de la foto
-                var photoUrl: String? = null
-                if (result.has("photos")) {
-                    val photosArray = result.getJSONArray("photos")
-                    if (photosArray.length() > 0) {
-                        val photoReference =
-                            photosArray.getJSONObject(0).getString("photo_reference")
-                        photoUrl =
-                            "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=AIzaSyDMA96lOlSMlnmikyellEzToDvg9JZdMSY"
-                    }
+            val name = result.getString("name")
+            val address = result.getString("formatted_address")
+            val rating = result.optDouble("rating", 0.0)
+            val location = result.getJSONObject("geometry").getJSONObject("location")
+            val lat = location.getDouble("lat")
+            val lng = location.getDouble("lng")
+            // Obtener la referencia de la foto
+            var photoUrl: String? = null
+            if (result.has("photos")) {
+                val photosArray = result.getJSONArray("photos")
+                if (photosArray.length() > 0) {
+                    val photoReference = photosArray.getJSONObject(0).getString("photo_reference")
+                    photoUrl =
+                        "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=AIzaSyDMA96lOlSMlnmikyellEzToDvg9JZdMSY"
                 }
-                showConfirmationDialog(name, address, rating, lat, lng, photoUrl)
-            },
-            { error ->
-                // Handle error
-            })
+            }
+            showConfirmationDialog(name, address, rating, lat, lng, photoUrl)
+        }, { error ->
+            // Handle error
+        })
 
         RequestQueueSingleton.getInstance(requireContext()).addToRequestQueue(stringRequest)
     }
 
     private fun showConfirmationDialog(
-        name: String,
-        address: String,
-        rating: Double,
-        lat: Double,
-        lng: Double,
-        photoUrl: String?
+        name: String, address: String, rating: Double, lat: Double, lng: Double, photoUrl: String?
     ) {
         val dialog = Dialog(requireContext(), R.style.FullWidthDialog)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -323,8 +320,7 @@ class RestaurantMapFragment : Fragment(), OnMapReadyCallback {
         // Make dialog width match parent with margins
         dialog.window?.apply {
             setLayout(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
             )
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
@@ -346,8 +342,7 @@ class RestaurantMapFragment : Fragment(), OnMapReadyCallback {
 
         // Cargar imagen usando Glide
         if (!photoUrl.isNullOrEmpty()) {
-            Glide.with(requireContext())
-                .load(photoUrl)
+            Glide.with(requireContext()).load(photoUrl)
                 .placeholder(R.drawable.restaurant_placeholder) // Imagen de marcador de posición
                 .into(restaurantImage)
         } else {

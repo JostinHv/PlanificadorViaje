@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.data.model.Itinerary
+import com.jostin.planificadorviaje.data.repository.CityRepository
 import com.jostin.planificadorviaje.databinding.ItemItineraryBinding
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class ItineraryAdapter(private val onItemClick: (Itinerary) -> Unit) :
     ListAdapter<Itinerary, ItineraryAdapter.ItineraryViewHolder>(ItineraryDiffCallback()) {
@@ -30,7 +33,7 @@ class ItineraryAdapter(private val onItemClick: (Itinerary) -> Unit) :
         fun bind(itinerary: Itinerary) {
             binding.apply {
                 Glide.with(root)
-                    .load(itinerary.coverImageUrl)
+                    .load(R.drawable.item_itinerary_bg)
                     .centerCrop()
                     .into(itineraryImage)
                 itineraryName.text = itinerary.name

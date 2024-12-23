@@ -4,19 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.data.model.User
 import com.jostin.planificadorviaje.databinding.FragmentAccountBinding
+import com.jostin.planificadorviaje.databinding.DialogEditProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AccountFragment : Fragment() {
-    private lateinit var binding: FragmentAccountBinding
 
+    private lateinit var binding: FragmentAccountBinding
     private val accountViewModel: AccountViewModel by viewModels()
 
     override fun onCreateView(
@@ -33,42 +36,88 @@ class AccountFragment : Fragment() {
 
         setupViews()
         observeViewModel()
-
-        // Cargar el usuario actual
-        accountViewModel.loadUser(requireContext())
+        accountViewModel.loadUser()
     }
 
     private fun setupViews() {
-        binding.saveButton.setOnClickListener {
-            val name = binding.nameEditText.text.toString()
-            val email = binding.emailEditText.text.toString()
-
-            if (name.isEmpty() || email.isEmpty()) {
-                Toast.makeText(
-                    requireContext(),
-                    "Por favor llena todos los campos",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            }
-
-            accountViewModel.updateUser(User(name = name, email = email), requireContext())
+        binding.logoutButton.setOnClickListener {
+            accountViewModel.logout(requireContext())
+            Toast.makeText(requireContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_accountFragment_to_loginFragment)
         }
 
-
-        binding.logoutButton.setOnClickListener {
-            accountViewModel.logout(requireContext()) // Pasa el contexto para limpiar la sesión
-            Toast.makeText(requireContext(), "Cierre de sesión exitoso", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_accountFragment_to_loginFragment)
+        binding.editProfileButton.setOnClickListener {
+            showEditProfileDialog()
         }
     }
 
     private fun observeViewModel() {
         accountViewModel.user.observe(viewLifecycleOwner) { user ->
             user?.let {
-                binding.nameEditText.setText(it.name)
-                binding.emailEditText.setText(it.email)
+                updateProfileInfo(it)
             }
         }
+
+        accountViewModel.updateResult.observe(viewLifecycleOwner) { result ->
+            if (result.success) {
+                Toast.makeText(requireContext(), "Perfil actualizado", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Error al actualizar: ${result.error}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private fun updateProfileInfo(user: User) {
+        binding.nameText.text = "${user.name} ${user.lastname}"
+        binding.roleText.text = user.role
+        val itemBinding = binding.root.findViewById<View>(R.id.itemProfileInfo)
+
+        // Actualizar los TextViews dentro de item_profile_info
+        val fullNameText = itemBinding.findViewById<TextView>(R.id.fullNameText)
+        val emailText = itemBinding.findViewById<TextView>(R.id.emailText)
+
+        fullNameText.text = "${user.name} ${user.lastname}"
+        emailText.text = user.email
+    }
+
+    private fun showEditProfileDialog() {
+        val dialogBinding = DialogEditProfileBinding.inflate(layoutInflater)
+        val currentUser = accountViewModel.user.value ?: return
+
+        // Rellenar los datos actuales del usuario en el formulario del diálogo
+        dialogBinding.nameInput.setText(currentUser.name)
+        dialogBinding.lastnameInput.setText(currentUser.lastname)
+        dialogBinding.emailInput.setText(currentUser.email)
+        dialogBinding.passwordInput.setText(currentUser.password)
+        // Crear y configurar el diálogo
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setView(dialogBinding.root)
+            .create()
+
+        // Configurar los botones del diseño del diálogo
+        dialogBinding.saveButton.setOnClickListener {
+            val updatedUser = currentUser.copy(
+                id = currentUser.id,
+                name = dialogBinding.nameInput.text.toString(),
+                lastname = dialogBinding.lastnameInput.text.toString(),
+                email = dialogBinding.emailInput.text.toString(),
+                password = dialogBinding.passwordInput.text.toString(),
+                role = currentUser.role,
+            )
+            accountViewModel.updateUser(updatedUser, requireContext())
+            updateProfileInfo(updatedUser)
+            dialog.dismiss()
+        }
+
+        dialogBinding.cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // Mostrar el diálogo
+        dialog.show()
     }
 }

@@ -2,27 +2,43 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.home.HomeFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="?attr/colorPrimary"
-            app:title="@string/aplicacion_name">
+            android:layout_height="250dp"
+            app:collapsedTitleTextAppearance="@style/CollapsedAppBarTextAppearance"
+            app:collapsedTitleTextColor="@color/black"
+            app:contentScrim="@color/white"
+            app:expandedTitleTextAppearance="@style/ExpandedAppBarTextAppearance"
+            app:expandedTitleTextColor="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:statusBarScrim="@android:color/transparent"
+            app:title="WizGo">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/travel_background"
+                android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
+                android:src="@drawable/bg_home"
+                app:layout_collapseMode="parallax" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/scrim_gradient"
                 app:layout_collapseMode="parallax" />
 
             <com.google.android.material.appbar.MaterialToolbar
@@ -30,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
+                android:backgroundTint="@color/white"
                 app:menu="@menu/home_menu" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -47,93 +64,46 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Empty state layout -->
-            <LinearLayout
+            <include
                 android:id="@+id/emptyStateLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="16dp"
-                android:visibility="gone">
+                layout="@layout/layout_empty_state" />
 
-                <TextView
-                    android:id="@+id/emptyStateMessage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no_trips_available"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:gravity="center"
-                    android:padding="16dp" />
+            <include
+                android:id="@+id/upcomingTripCard"
+                layout="@layout/layout_upcoming_trip" />
 
-            </LinearLayout>
-
-            <!-- Upcoming trip layout -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
-
-                <LinearLayout
-                    android:id="@+id/upcomingTripLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/upcoming_trip"
-                        android:textAppearance="?attr/textAppearanceHeadline6" />
-
-                    <TextView
-                        android:id="@+id/upcomingTripName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textAppearance="?attr/textAppearanceBody1" />
-
-                    <TextView
-                        android:id="@+id/upcomingTripDates"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textAppearance="?attr/textAppearanceBody2" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Your itineraries title -->
             <TextView
                 android:id="@+id/yourItinerariesTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/your_itineraries"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:layout_marginBottom="8dp" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="@color/black" />
 
-            <!-- RecyclerView for itineraries -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/itinerariesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_itinerary" />
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/addItineraryFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/add_itinerary"
-        app:srcCompat="@drawable/ic_add" />
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="24dp"
+        android:text="@string/add_itinerary"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/black"
+        app:icon="@drawable/ic_add"
+        app:iconTint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+

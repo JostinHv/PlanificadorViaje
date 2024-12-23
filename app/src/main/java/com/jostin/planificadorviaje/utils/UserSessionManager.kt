@@ -11,8 +11,9 @@ object UserSessionManager {
     private const val KEY_EMAIL = "userEmail"
     private const val KEY_ROLE = "userRole"
     private const val KEY_PROFILE_PICTURE = "userProfilePicture"
+    private const val KEY_PASSWORD = "userPassword"
 
-    private var currentUser: User? = null
+    private lateinit var currentUser: User
 
     // Inicializar los datos del usuario desde SharedPreferences
     fun init(context: Context) {
@@ -20,6 +21,7 @@ object UserSessionManager {
         val id = sharedPreferences.getString(KEY_ID, null)
         val name = sharedPreferences.getString(KEY_NAME, null)
         val email = sharedPreferences.getString(KEY_EMAIL, null)
+        val password = sharedPreferences.getString(KEY_PASSWORD, null)
         val role = sharedPreferences.getString(KEY_ROLE, null)
         val profilePicture = sharedPreferences.getString(KEY_PROFILE_PICTURE, null)
 
@@ -37,13 +39,14 @@ object UserSessionManager {
             putString(KEY_EMAIL, user.email)
             putString(KEY_ROLE, user.role)
             putString(KEY_PROFILE_PICTURE, user.profilePicture)
+            putString(KEY_PASSWORD, user.password)
             apply()
         }
         currentUser = user
     }
 
     // Obtener el usuario actual
-    fun getCurrentUser(): User? {
+    fun getCurrentUser(): User {
         return currentUser
     }
 
@@ -54,11 +57,11 @@ object UserSessionManager {
             clear()
             apply()
         }
-        currentUser = null
+        currentUser = User("", "", "")
     }
 
     // Verificar si hay un usuario autenticado
     fun isLoggedIn(): Boolean {
-        return currentUser != null
+        return currentUser != User("", "", "")
     }
 }

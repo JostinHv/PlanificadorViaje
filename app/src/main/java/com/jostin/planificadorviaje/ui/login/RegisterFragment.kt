@@ -8,23 +8,22 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.jostin.planificadorviaje.databinding.FragmentRegistroUsuarioBinding
-import com.jostin.planificadorviaje.ui.login.LoginViewModel
+import com.jostin.planificadorviaje.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegistroUsuarioFragment : Fragment() {
+class RegisterFragment : Fragment() {
 
     private val loginViewModel: LoginViewModel by viewModels()
 
-    private var _binding: FragmentRegistroUsuarioBinding? = null
+    private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentRegistroUsuarioBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         // Cuando se hace clic en el botón de registro
         binding.btnRegisterUser.setOnClickListener {

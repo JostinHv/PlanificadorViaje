@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene 
+<MotionScene
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000"
+        motion:duration="1500"
         motion:autoTransition="animateToEnd">
-       <KeyFrameSet>
-       </KeyFrameSet>
+        <KeyFrameSet>
+            <!-- Staggered animation for letters -->
+            <KeyAttribute
+                motion:motionTarget="@+id/letterW"
+                motion:framePosition="50"
+                android:alpha="0"
+                android:translationY="50dp"/>
+            <KeyAttribute
+                motion:motionTarget="@+id/letterI"
+                motion:framePosition="60"
+                android:alpha="0"
+                android:translationY="50dp"/>
+            <KeyAttribute
+                motion:motionTarget="@+id/letterZ"
+                motion:framePosition="70"
+                android:alpha="0"
+                android:translationY="50dp"/>
+            <KeyAttribute
+                motion:motionTarget="@+id/letterG"
+                motion:framePosition="80"
+                android:alpha="0"
+                android:translationY="50dp"/>
+            <KeyAttribute
+                motion:motionTarget="@+id/letterO"
+                motion:framePosition="90"
+                android:alpha="0"
+                android:translationY="50dp"/>
+        </KeyFrameSet>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -35,16 +61,6 @@
             android:scaleY="0"
             android:alpha="0" />
         <Constraint
-            android:id="@+id/blue_logo"
-            android:scaleX="0"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:scaleY="0" />
-        <Constraint
             android:id="@+id/white_logo"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="100dp"
@@ -52,17 +68,54 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:scaleX="1" />
-        <Constraint
-            android:id="@+id/white_logo"
             android:scaleX="1"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
             android:scaleY="1" />
+        <!-- Start constraints for letters -->
+        <Constraint
+            android:id="@+id/letterW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/blue_logo"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toStartOf="@id/letterI"
+            android:alpha="0"
+            android:translationY="50dp" />
+        <Constraint
+            android:id="@+id/letterI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/blue_logo"
+            motion:layout_constraintStart_toEndOf="@id/letterW"
+            motion:layout_constraintEnd_toStartOf="@id/letterZ"
+            android:alpha="0"
+            android:translationY="50dp" />
+        <Constraint
+            android:id="@+id/letterZ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/blue_logo"
+            motion:layout_constraintStart_toEndOf="@id/letterI"
+            motion:layout_constraintEnd_toStartOf="@id/letterG"
+            android:alpha="0"
+            android:translationY="50dp" />
+        <Constraint
+            android:id="@+id/letterG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/blue_logo"
+            motion:layout_constraintStart_toEndOf="@id/letterZ"
+            motion:layout_constraintEnd_toStartOf="@id/letterO"
+            android:alpha="0"
+            android:translationY="50dp" />
+        <Constraint
+            android:id="@+id/letterO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/blue_logo"
+            motion:layout_constraintStart_toEndOf="@id/letterG"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:alpha="0"
+            android:translationY="50dp" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -98,5 +151,52 @@
             motion:layout_constraintStart_toStartOf="parent"
             android:scaleX="0"
             android:scaleY="0" />
+        <!-- End constraints for letters -->
+        <Constraint
+            android:id="@+id/letterW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/blue_logo"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toStartOf="@id/letterI"
+            android:alpha="1"
+            android:translationY="0dp" />
+        <Constraint
+            android:id="@+id/letterI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/blue_logo"
+            motion:layout_constraintStart_toEndOf="@id/letterW"
+            motion:layout_constraintEnd_toStartOf="@id/letterZ"
+            android:alpha="1"
+            android:translationY="0dp" />
+        <Constraint
+            android:id="@+id/letterZ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/blue_logo"
+            motion:layout_constraintStart_toEndOf="@id/letterI"
+            motion:layout_constraintEnd_toStartOf="@id/letterG"
+            android:alpha="1"
+            android:translationY="0dp" />
+        <Constraint
+            android:id="@+id/letterG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/blue_logo"
+            motion:layout_constraintStart_toEndOf="@id/letterZ"
+            motion:layout_constraintEnd_toStartOf="@id/letterO"
+            android:alpha="1"
+            android:translationY="0dp" />
+        <Constraint
+            android:id="@+id/letterO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/blue_logo"
+            motion:layout_constraintStart_toEndOf="@id/letterG"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:alpha="1"
+            android:translationY="0dp" />
     </ConstraintSet>
 </MotionScene>
+

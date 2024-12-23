@@ -10,7 +10,7 @@
     <string name="logout">Cerrar Sesión</string>
     <string name="save_changes">Guardar Cambios</string>
     <string name="email">Correo Electronico</string>
-    <string name="name">Nombre</string>
+    <string name="name">Nombres</string>
     <string name="add_plan">Agregar plan</string>
     <string name="plan_type">Tipo de plan</string>
     <string name="plan_date">Fecha del plan</string>
@@ -28,7 +28,7 @@
     <string name="sort">Ordenar</string>
     <string name="settings">Configuración</string>
     <string name="upcoming_trip">Viaje proximo</string>
-    <string name="your_itineraries">Tu itinerario</string>
+    <string name="your_itineraries">Tus itinerarios</string>
     <string name="itinerary">Itinerario</string>
     <string name="home">Inicio</string>
     <string name="plan">Plan</string>
@@ -104,4 +104,37 @@
     <string name="wifi">Wi-Fi</string>
     <string name="pool">Piscina</string>
 
+
+    <string name="welcome_traveler">¡Bienvenido, Viajero!</string>
+    <string name="discover_places">Descubre lugares cerca tuyo</string>
+    <string name="search_hint">Busca un resutaurante o una actividad</string>
+    <string name="top_destinations">Mejores destinos</string>
+    <string name="local_spots">Lugares de interés</string>
+    <string name="explore">Explorar</string>
+    <string name="restaurant_info">Información del Restaurante</string>
+    <string name="change_restaurant">Cambiar Restaurante</string>
+    <string name="add_restaurant_plan">Agregar Plan de Restaurante</string>
+    <string name="view_trip">Ver Detalles</string>
+    <string name="create_first_trip">Crea tu primer Itinerario</string>
+    <string name="delete_itinerary">Eliminar Itinerario</string>
+    <string name="confirm_delete">Confirmar</string>
+    <string name="confirm_delete_message">¿Esta seguro de eliminar el itinerario?</string>
+    <string name="itinerary_deleted">Itinerario Eliminado</string>
+    <string name="error_deleting_itinerary">Error al eliminar el Itinerario</string>
+    <string name="delete_selected_plans">Eliminar Planes Seleccionados</string>
+    <string name="eliminar_planes">Eliminar Planes</string>
+    <string name="profile">Perfil</string>
+    <string name="password">Contraseña</string>
+    <string name="personal_info">Información Personal</string>
+    <string name="edit_profile">Editar Perfil</string>
+    <string name="lastname">Apellidos</string>
+    <string name="save">Guardar</string>
+    <string name="user_role">Rol</string>
+    <string name="full_name">Nombre Completo</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="bienvenido_viajero">¡Bienvenido Viajero!</string>
+    <string name="unete_a_nosotros">¡Únete a Nosotros!</string>
+    <string name="popular_plan_categories">Categorias Populares</string>
+    <string name="all_plan_types">Todas las categorias</string>
 </resources>

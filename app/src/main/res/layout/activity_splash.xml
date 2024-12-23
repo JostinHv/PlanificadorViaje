@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="visible"
     app:layoutDescription="@xml/activity_splash_scene"
     tools:context=".ui.splash.SplashActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <View
         android:id="@+id/bg_constraint"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -23,7 +22,7 @@
         android:id="@+id/blue_logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ic_logo_wizgo"
+        android:src="@drawable/ic_logo_wizgo_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +36,72 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/letterW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="W"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/blue_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/letterI"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/letterI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="i"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/blue_logo"
+        app:layout_constraintStart_toEndOf="@id/letterW"
+        app:layout_constraintEnd_toStartOf="@id/letterZ"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/letterZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="z"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/blue_logo"
+        app:layout_constraintStart_toEndOf="@id/letterI"
+        app:layout_constraintEnd_toStartOf="@id/letterG"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/letterG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="g"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/blue_logo"
+        app:layout_constraintStart_toEndOf="@id/letterZ"
+        app:layout_constraintEnd_toStartOf="@id/letterO"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/letterO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="o"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/blue_logo"
+        app:layout_constraintStart_toEndOf="@id/letterG"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
+

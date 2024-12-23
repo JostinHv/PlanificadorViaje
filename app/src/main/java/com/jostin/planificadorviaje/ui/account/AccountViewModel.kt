@@ -11,6 +11,7 @@ import com.jostin.planificadorviaje.utils.UserSessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class AccountViewModel @Inject constructor(private val userRepository: UserRepository) :
     ViewModel() {
@@ -18,30 +19,31 @@ class AccountViewModel @Inject constructor(private val userRepository: UserRepos
     private val _user = MutableLiveData<User>()
     val user: LiveData<User> = _user
 
-    fun loadUser(context: Context) {
-        viewModelScope.launch {
-            val currentUser = UserSessionManager.getCurrentUser()
-            _user.value = currentUser ?: User(
-                id = "",
-                name = "Invitado",
-                email = "guest@example.com",
-                profilePicture = ""
-            )
-        }
+    private val _updateResult = MutableLiveData<Result>()
+    val updateResult: LiveData<Result> = _updateResult
+
+    fun loadUser() {
+        // Cargar el usuario actual desde el UserSessionManager
+        _user.value = UserSessionManager.getCurrentUser()
     }
 
     fun updateUser(user: User, context: Context) {
         viewModelScope.launch {
-            userRepository.updateUser(user) // Actualiza en el repositorio
-            UserSessionManager.saveUser(context, user) // Actualiza la sesión activa
-            _user.value = user // Actualiza el `LiveData` para reflejar los cambios en la UI
+            try {
+                userRepository.updateUser(user) // Actualiza en el repositorio
+                UserSessionManager.saveUser(context, user) // Actualiza la sesión activa
+                _user.value = user // Reflejar cambios en la UI
+                _updateResult.value = Result(success = true)
+            } catch (e: Exception) {
+                _updateResult.value = Result(success = false, error = e.message)
+            }
         }
     }
-
 
     fun logout(context: Context) {
-        viewModelScope.launch {
-            UserSessionManager.clearUserSession(context) // Limpia la sesión en preferencias
-        }
+        UserSessionManager.clearUserSession(context)
+        _user.value = User("", "", "") // Restablece el estado de usuario
     }
 }
+
+data class Result(val success: Boolean, val error: String? = null)

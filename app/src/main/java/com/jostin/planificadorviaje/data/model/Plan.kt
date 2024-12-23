@@ -22,5 +22,5 @@ data class Plan(
     val type: PlanType,
     val name: String,
     val date: Date,
-    val details: Map<String, Any>
+    val details: Map<String, Any>,
 )

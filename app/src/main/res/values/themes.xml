@@ -15,7 +15,20 @@
         <item name="colorOnError">@color/on_error</item>
         <item name="android:statusBarColor">@color/primary_variant</item>
     </style>
+    <!-- Add this style to your existing styles.xml file -->
+    <style name="ChipTextAppearance" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textSize">12sp</item>
+    </style>
 
+    <style name="ExpandedAppBarTextAppearance" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CollapsedAppBarTextAppearance" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/white</item>
+    </style>
     <!-- Toolbar title style -->
     <style name="ToolbarTitleStyle" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textColor">@color/text_primary</item>

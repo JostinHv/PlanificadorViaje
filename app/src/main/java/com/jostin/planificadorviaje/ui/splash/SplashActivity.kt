@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish() // Finaliza la SplashActivity
-        }, 1200) // 1 segundo de espera, por ejemplo
+        }, 2000) // 1 segundo de espera, por ejemplo
 
         // Si el usuario toca la imagen, puede ir a la MainActivity de inmediato
 //        binding.introBtn.setOnClickListener {

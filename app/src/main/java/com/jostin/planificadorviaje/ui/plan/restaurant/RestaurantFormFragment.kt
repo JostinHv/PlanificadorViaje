@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.fragment.app.viewModels
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jostin.planificadorviaje.R
+import com.jostin.planificadorviaje.data.model.City
 import com.jostin.planificadorviaje.data.model.Place
 import com.jostin.planificadorviaje.data.model.Plan
 import com.jostin.planificadorviaje.data.model.PlanType
@@ -90,7 +92,9 @@ class RestaurantFormFragment : Fragment() {
     private fun setupAddPlaceButton() {
         binding.btnAddPlace.setOnClickListener {
             findNavController().navigate(
-                RestaurantFormFragmentDirections.actionRestaurantFormFragmentToRestaurantMapFragment()
+                RestaurantFormFragmentDirections.actionRestaurantFormFragmentToRestaurantMapFragment(
+                    args.city
+                )
             )
         }
     }
@@ -129,7 +133,6 @@ class RestaurantFormFragment : Fragment() {
             val dateText = binding.etDate.text.toString()
             val timeText = binding.etTime.text.toString()
 
-            // Validar que tanto la fecha como la hora sean ingresadas
             if (dateText.isEmpty() || timeText.isEmpty()) {
                 Toast.makeText(
                     requireContext(),
@@ -144,25 +147,27 @@ class RestaurantFormFragment : Fragment() {
             val dateTimeFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
             val parsedDate = dateTimeFormat.parse(dateTimeText)
 
+            // Crear el mapa de detalles solo con valores no nulos y no vacíos
+            val details = mutableMapOf<String, String>()
+            viewModel.selectedPlace.value?.let { place ->
+                if (place.name.isNotBlank()) details["Restaurante"] = place.name
+                if (place.address.isNotBlank()) details["Dirección"] = place.address
+            }
+            if (timeText.isNotBlank()) details["Hora"] = timeText
+            if (dateText.isNotBlank()) details["Día"] = dateText
+            if (binding.actvMealType.text.toString().isNotBlank()) details["Tipo de Comida"] =
+                binding.actvMealType.text.toString()
+
             // Crear el plan con los datos ingresados
             val plan = Plan(
                 id = UUID.randomUUID().toString(),
                 type = PlanType.RESTAURANT,
                 name = binding.etPlanName.text.toString(),
                 date = parsedDate!!, // El parse asegura que no sea null
-                details = mapOf(
-                    "time" to timeText,
-                    "mealType" to binding.actvMealType.text.toString(),
-                    "name" to (viewModel.selectedPlace.value?.name ?: ""),
-                    "address" to (viewModel.selectedPlace.value?.address ?: ""),
-                    "latitude" to (viewModel.selectedPlace.value?.latitude ?: 0.0),
-                    "longitude" to (viewModel.selectedPlace.value?.longitude ?: 0.0)
-                ),
+                details = details,
                 itineraryId = args.itineraryId
             )
-
             viewModel.savePlan(plan)
-
             Toast.makeText(requireContext(), "Plan guardado exitosamente", Toast.LENGTH_SHORT)
                 .show()
 

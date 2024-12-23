@@ -13,5 +13,6 @@ data class Place(
     val longitude: Double,
     val imageUrl: String? = null,
     val rating: Float? = 0f,
-    val details: List<String> = emptyList()
+    val details: List<String> = emptyList(),
+    val price: Double? = 0.0,
 ) : Serializable

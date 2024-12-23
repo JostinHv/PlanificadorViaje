@@ -3,7 +3,6 @@ package com.jostin.planificadorviaje
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -24,9 +23,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Configurar la Toolbar como ActionBar
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar) // Esta línea resuelve el problema
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -35,12 +31,6 @@ class MainActivity : AppCompatActivity() {
         // Setup the bottom navigation view with navController
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView.setupWithNavController(navController)
-
-        // Setup the ActionBar with navController and 3 top level destinations
-        appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment, R.id.itineraryFragment, R.id.accountFragment)
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
 
         // Escuchar cambios en el destino y ajustar la visibilidad del BottomNavigationView
         navController.addOnDestinationChangedListener { _, destination, _ ->

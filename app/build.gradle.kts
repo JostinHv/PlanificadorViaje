@@ -81,7 +81,10 @@ dependencies {
     implementation ("com.google.android.libraries.places:places:4.1.0")
     // Volley
     implementation("com.android.volley:volley:1.2.1")
-
+    // Lottie
+    implementation ("com.airbnb.android:lottie:5.2.0")
+    // CircleImageView
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

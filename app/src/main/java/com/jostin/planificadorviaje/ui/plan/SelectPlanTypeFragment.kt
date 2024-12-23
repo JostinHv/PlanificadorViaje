@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jostin.planificadorviaje.data.model.PlanType
 import com.jostin.planificadorviaje.databinding.FragmentSelectPlanTypeBinding
 
@@ -18,7 +19,7 @@ class SelectPlanTypeFragment : Fragment() {
     private val binding get() = _binding!!
     private val args: SelectPlanTypeFragmentArgs by navArgs()
 
-    private val planTypes = listOf(
+    private val allPlanTypes = listOf(
         PlanType.FLIGHT,
         PlanType.ACCOMMODATION,
         PlanType.CAR_RENTAL,
@@ -26,7 +27,13 @@ class SelectPlanTypeFragment : Fragment() {
         PlanType.ACTIVITY,
         PlanType.RESTAURANT,
         PlanType.TRANSPORT,
-        PlanType.PACKAGE_TRIP,
+        //PlanType.PACKAGE_TRIP,
+    )
+
+    private val popularPlanTypes = listOf(
+        //PlanType.PACKAGE_TRIP,
+        PlanType.ACCOMMODATION,
+        PlanType.RESTAURANT,
     )
 
     override fun onCreateView(
@@ -44,47 +51,48 @@ class SelectPlanTypeFragment : Fragment() {
         binding.toolbarSelectPlanType.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+        setupPopularPlanTypes()
+        setupAllPlanTypes()
+    }
 
-        val adapter = PlanTypeAdapter(planTypes) { planType: PlanType ->
-            when (planType) {
-                PlanType.PACKAGE_TRIP -> {
-                    // Si selecciona "Plan de Viaje Paquete", redirige a ViajesFragment
-                    val action =
-                        SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToViajesFragment()
-                    findNavController().navigate(action)
-                }
+    private fun setupPopularPlanTypes() {
+        val popularAdapter = PlanTypeAdapter(popularPlanTypes, ::onPlanTypeSelected)
+        binding.popularPlanTypesRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.popularPlanTypesRecyclerView.adapter = popularAdapter
+    }
 
-                PlanType.RESTAURANT -> {
-                    // Si selecciona "Restaurante", redirige a RestaurantFormFragment
-                    val action =
-                        SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToRestaurantFormFragment(
-                            args.itineraryId
-                        )
-                    findNavController().navigate(action)
-                }
+    private fun setupAllPlanTypes() {
+        val allTypesAdapter = PlanTypeAdapter(allPlanTypes, ::onPlanTypeSelected)
+        binding.planTypesRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.planTypesRecyclerView.adapter = allTypesAdapter
+    }
 
-                PlanType.ACCOMMODATION -> {
-                    // Si selecciona "Alojamiento", redirige a HotelFormFragment
-                    val action =
-                        SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToHotelFormFragment(
-                            args.itineraryId
-                        )
-                    findNavController().navigate(action)
-                }
-
-                else -> {
-                    // Para otros tipos, redirige a CreatePlanFragment
-                    val action =
-                        SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToCreatePlanFragment(
-                            getString(planType.nameRes),
-                            args.itineraryId
-                        )
-                    findNavController().navigate(action)
-                }
+    private fun onPlanTypeSelected(planType: PlanType) {
+        when (planType) {
+            PlanType.PACKAGE_TRIP -> {
+                val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToViajesFragment()
+                findNavController().navigate(action)
+            }
+            PlanType.RESTAURANT -> {
+                val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToRestaurantFormFragment(
+                    args.itineraryId, args.city
+                )
+                findNavController().navigate(action)
+            }
+            PlanType.ACCOMMODATION -> {
+                val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToHotelFormFragment(
+                    args.itineraryId, args.city
+                )
+                findNavController().navigate(action)
+            }
+            else -> {
+                val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToCreatePlanFragment(
+                    getString(planType.nameRes),
+                    args.itineraryId
+                )
+                findNavController().navigate(action)
             }
         }
-        binding.planTypesRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.planTypesRecyclerView.adapter = adapter
     }
 
     override fun onDestroyView() {

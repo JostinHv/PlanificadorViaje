@@ -31,6 +31,9 @@
         <argument
             android:name="itineraryId"
             app:argType="string" />
+        <argument
+            android:name="city"
+            app:argType="com.jostin.planificadorviaje.data.model.City" />
         <action
             android:id="@+id/action_selectPlanTypeFragment_to_createPlanFragment"
             app:destination="@id/createPlanFragment" />
@@ -57,6 +60,9 @@
         <argument
             android:name="itineraryId"
             app:argType="string" />
+        <argument
+            android:name="city"
+            app:argType="com.jostin.planificadorviaje.data.model.City" />
         <action
             android:id="@+id/action_restaurantFormFragment_to_restaurantMapFragment"
             app:destination="@id/restaurantMapFragment" />
@@ -71,6 +77,9 @@
         android:name="com.jostin.planificadorviaje.ui.plan.restaurant.map.RestaurantMapFragment"
         android:label="Map"
         tools:layout="@layout/fragment_restaurant_map">
+        <argument
+            android:name="city"
+            app:argType="com.jostin.planificadorviaje.data.model.City" />
 
     </fragment>
 
@@ -85,6 +94,9 @@
         <argument
             android:name="itineraryId"
             app:argType="string" />
+        <argument
+            android:name="city"
+            app:argType="com.jostin.planificadorviaje.data.model.City" />
         <action
             android:id="@+id/action_hotelFormFragment_to_hotelMapFragment"
             app:destination="@id/hotelMapFragment" />
@@ -99,7 +111,9 @@
         android:name="com.jostin.planificadorviaje.ui.plan.hotel.map.HotelMapFragment"
         android:label="Map"
         tools:layout="@layout/fragment_hotel_map">
-
+        <argument
+            android:name="city"
+            app:argType="com.jostin.planificadorviaje.data.model.City" />
     </fragment>
 
 
@@ -173,6 +187,9 @@
         <action
             android:id="@+id/action_itineraryDetailFragment_to_selectPlanTypeFragment"
             app:destination="@id/selectPlanTypeFragment" />
+        <action
+            android:id="@+id/action_itineraryDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment

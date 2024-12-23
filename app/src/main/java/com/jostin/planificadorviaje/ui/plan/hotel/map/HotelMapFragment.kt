@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.bumptech.glide.Glide
@@ -41,6 +42,7 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
     private var locationPermissionGranted = false
     private var lastKnownLocation: Location? = null
     private var currentMarker: Marker? = null
+    private val args: HotelMapFragmentArgs by navArgs()
 
     private val defaultLocation = LatLng(-33.8523341, 151.2106085)
     private val DEFAULT_ZOOM = 15f
@@ -73,6 +75,32 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
         updateLocationUI()
         getDeviceLocation()
 
+        // Centrar el mapa en las coordenadas de la ciudad
+        val cityLocation = LatLng(args.city.latitude, args.city.longitude)
+        val bounds = LatLngBounds.builder()
+            .include(
+                LatLng(
+                    cityLocation.latitude + 0.1,
+                    cityLocation.longitude + 0.1
+                )
+            ) // Extremo superior derecho
+            .include(
+                LatLng(
+                    cityLocation.latitude - 0.1,
+                    cityLocation.longitude - 0.1
+                )
+            ) // Extremo inferior izquierdo
+            .build()
+
+        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
+
+        // Agregar marcador para la ciudad
+        map.addMarker(
+            MarkerOptions()
+                .position(cityLocation)
+                .title("Ciudad: ${args.city.name}")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+        )
         map.setOnMapClickListener { latLng ->
             placeMarker(latLng)
         }
@@ -190,11 +218,10 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun showNearbyHotels() {
-        val location = currentMarker?.position ?: (lastKnownLocation?.let {
-            LatLng(it.latitude, it.longitude)
-        })
-        location?.let { fetchNearbyHotels(it) }
+        val location = currentMarker?.position ?: LatLng(args.city.latitude, args.city.longitude)
+        fetchNearbyHotels(location)
     }
+
 
     private fun fetchNearbyHotels(location: LatLng) {
         val url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
@@ -279,7 +306,9 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
                     }
                 }
                 val amenities = generateRandomAmenities() // Genera amenidades aleatorias
-                showConfirmationDialog(name, address, rating, lat, lng, photoUrl, amenities)
+                val price = (50..150).filter { it % 5 == 0 }.random()
+                    .toDouble() // Generates a random price divisible by 5
+                showConfirmationDialog(name, address, rating, lat, lng, photoUrl, amenities, price)
             },
             { error ->
                 Toast.makeText(
@@ -299,7 +328,8 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
         lat: Double,
         lng: Double,
         photoUrl: String?,
-        amenities: List<String>
+        amenities: List<String>,
+        price: Double,
     ) {
 
         val dialog = Dialog(requireContext(), R.style.FullWidthDialog)
@@ -320,6 +350,7 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
         val ratingValue = dialog.findViewById<TextView>(R.id.tvRatingValue)
         val chipGroupAmenities = dialog.findViewById<ChipGroup>(R.id.chipGroupAmenities)
         val hotelAddress = dialog.findViewById<TextView>(R.id.tvHotelAddress)
+        val priceView = dialog.findViewById<TextView>(R.id.precioHotel)
         val btnCancel = dialog.findViewById<MaterialButton>(R.id.btnCancel)
         val btnConfirm = dialog.findViewById<MaterialButton>(R.id.btnConfirm)
 
@@ -327,6 +358,7 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
         hotelAddress.text = address
         ratingBar.rating = rating.toFloat()
         ratingValue.text = String.format("%.1f", rating)
+        priceView.text = "S/ $price" // Mostrar precio
 
         // Agrega las amenidades al ChipGroup
         chipGroupAmenities.removeAllViews()
@@ -341,16 +373,6 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
 
         btnCancel.setOnClickListener {
             dialog.dismiss()
-        }
-        // Agrega las amenidades al ChipGroup
-        chipGroupAmenities.removeAllViews()
-        for (amenity in amenities) {
-            val chip = Chip(requireContext()).apply {
-                text = amenity
-                isClickable = false
-                isCheckable = false
-            }
-            chipGroupAmenities.addView(chip)
         }
         // Cargar imagen usando Glide
         if (!photoUrl.isNullOrEmpty()) {
@@ -370,7 +392,8 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
                 longitude = lng,
                 imageUrl = photoUrl,
                 rating = rating.toFloat(),
-                details = amenities
+                details = amenities,
+                price = price // Agregar el precio al objeto Place
             )
             navigateBackWithResult(place)
             dialog.dismiss()
