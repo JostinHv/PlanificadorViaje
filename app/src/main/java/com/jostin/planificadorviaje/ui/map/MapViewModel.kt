@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jostin.planificadorviaje.data.model.City
+import com.jostin.planificadorviaje.model.City
 import com.jostin.planificadorviaje.data.repository.CityRepository
 import com.jostin.planificadorviaje.data.repository.ItineraryRepository
 import com.jostin.planificadorviaje.utils.UserSessionManager

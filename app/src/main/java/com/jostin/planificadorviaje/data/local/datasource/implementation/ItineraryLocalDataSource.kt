@@ -2,8 +2,8 @@ package com.jostin.planificadorviaje.data.local.datasource.implementation
 
 import com.jostin.planificadorviaje.data.local.AppDatabase
 import com.jostin.planificadorviaje.data.local.datasource.interfaces.ItineraryDataSource
-import com.jostin.planificadorviaje.data.model.Itinerary
-import com.jostin.planificadorviaje.data.model.relations.ItineraryWithPlans
+import com.jostin.planificadorviaje.model.Itinerary
+import com.jostin.planificadorviaje.model.ItineraryWithPlans
 
 class ItineraryLocalDataSource(private val database: AppDatabase) : ItineraryDataSource {
 

@@ -2,7 +2,7 @@ package com.jostin.planificadorviaje.data.repository
 
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.jostin.planificadorviaje.data.model.City
+import com.jostin.planificadorviaje.model.City
 import kotlinx.coroutines.tasks.await
 
 class CityRepository {

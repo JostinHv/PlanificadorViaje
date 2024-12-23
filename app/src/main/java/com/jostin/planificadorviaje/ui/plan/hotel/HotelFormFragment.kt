@@ -15,9 +15,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.chip.Chip
 import com.google.firebase.Timestamp
 import com.jostin.planificadorviaje.R
-import com.jostin.planificadorviaje.data.model.Place
-import com.jostin.planificadorviaje.data.model.Plan
-import com.jostin.planificadorviaje.data.model.PlanType
+import com.jostin.planificadorviaje.model.Place
+import com.jostin.planificadorviaje.model.Plan
+import com.jostin.planificadorviaje.model.PlanType
 import com.jostin.planificadorviaje.databinding.FragmentHotelFormBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat

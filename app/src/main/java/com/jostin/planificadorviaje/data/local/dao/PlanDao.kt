@@ -1,7 +1,7 @@
 package com.jostin.planificadorviaje.data.local.dao
 
 import androidx.room.*
-import com.jostin.planificadorviaje.data.model.Plan
+import com.jostin.planificadorviaje.model.Plan
 
 @Dao
 interface PlanDao {

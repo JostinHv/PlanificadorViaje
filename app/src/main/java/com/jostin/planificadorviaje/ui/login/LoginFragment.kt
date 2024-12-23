@@ -88,12 +88,12 @@ class LoginFragment : Fragment() {
 
                 // Deja comentado el flujo de administrador para implementar en el futuro
                 "admin" -> {
-//                    findNavController().navigate(R.id.action_loginFragment_to_adminHomeFragment)
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Inicio de sesión como administrador exitoso",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
+                   findNavController().navigate(R.id.action_loginFragment_to_adminHomeFragment)
+                    Toast.makeText(
+                        requireContext(),
+                        "Inicio de sesión como administrador exitoso",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
 

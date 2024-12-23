@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jostin.planificadorviaje.data.model.User
+import com.jostin.planificadorviaje.model.User
 import com.jostin.planificadorviaje.data.repository.LoginRepository
 import com.jostin.planificadorviaje.utils.UserSessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,6 +30,29 @@ class LoginViewModel @Inject constructor(
 
     fun login(email: String, password: String, context: Context) {
         viewModelScope.launch {
+            // Caso especial para el administrador
+            if (email == "admin@a.com") {
+                if (password == "1234") {
+                    val adminUser = User(
+                        id = "admin",
+                        name = "Admin",
+                        lastname = "Admin",
+                        email = "admin@a.com",
+                        password = "1234", // Contraseña no hasheada
+                        role = "admin"
+                    )
+                    UserSessionManager.saveUser(context, adminUser)
+                    _currentUser.value = adminUser
+                    _loginResult.value = adminUser.role // Retorna "Administrador"
+                    return@launch
+                } else {
+                    _currentUser.value = null
+                    _loginResult.value = null
+                    return@launch
+                }
+            }
+
+            // Validación para usuarios normales
             val user = loginRepository.getUserByEmail(email)
             if (user != null && verifyPassword(password, user.password)) {
                 UserSessionManager.saveUser(context, user)

@@ -2,7 +2,7 @@ package com.jostin.planificadorviaje.data.local.datasource.implementation
 
 import com.jostin.planificadorviaje.data.local.AppDatabase
 import com.jostin.planificadorviaje.data.local.datasource.interfaces.PlanDataSource
-import com.jostin.planificadorviaje.data.model.Plan
+import com.jostin.planificadorviaje.model.Plan
 import javax.inject.Inject
 
 class PlanLocalDataSource @Inject constructor(private val database: AppDatabase) : PlanDataSource {

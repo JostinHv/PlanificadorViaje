@@ -2,7 +2,7 @@ package com.jostin.planificadorviaje.data.local.datasource.implementation
 
 import com.jostin.planificadorviaje.data.local.AppDatabase
 import com.jostin.planificadorviaje.data.local.datasource.interfaces.HotelDataSource
-import com.jostin.planificadorviaje.data.model.Hotel
+import com.jostin.planificadorviaje.model.Hotel
 
 
 class HotelLocalDataSource(private val database: AppDatabase) : HotelDataSource {

@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.jostin.planificadorviaje.R
-import com.jostin.planificadorviaje.data.model.City
+import com.jostin.planificadorviaje.model.City
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

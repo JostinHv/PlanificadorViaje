@@ -3,9 +3,9 @@ package com.jostin.planificadorviaje.ui.viaje.hospedaje
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jostin.planificadorviaje.data.model.Hotel
-import com.jostin.planificadorviaje.data.model.Reserva
-import com.jostin.planificadorviaje.data.model.TipoHabitacion
+import com.jostin.planificadorviaje.model.Hotel
+import com.jostin.planificadorviaje.model.Reserva
+import com.jostin.planificadorviaje.model.TipoHabitacion
 import com.jostin.planificadorviaje.data.repository.HotelRepository
 import com.jostin.planificadorviaje.data.repository.ReservaRepository
 import com.jostin.planificadorviaje.utils.UserSessionManager

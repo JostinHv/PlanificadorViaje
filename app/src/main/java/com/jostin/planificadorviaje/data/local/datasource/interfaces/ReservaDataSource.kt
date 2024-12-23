@@ -1,6 +1,6 @@
 package com.jostin.planificadorviaje.data.local.datasource.interfaces
 
-import com.jostin.planificadorviaje.data.model.Reserva
+import com.jostin.planificadorviaje.model.Reserva
 
 interface ReservaDataSource {
     suspend fun getReservas(): List<Reserva>

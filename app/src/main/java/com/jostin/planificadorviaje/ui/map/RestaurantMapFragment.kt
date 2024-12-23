@@ -38,7 +38,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.button.MaterialButton
 import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.RequestQueueSingleton
-import com.jostin.planificadorviaje.data.model.Place
+import com.jostin.planificadorviaje.model.Place
 import com.jostin.planificadorviaje.utils.ImagenUtils
 import org.json.JSONObject
 import java.util.*

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.jostin.planificadorviaje.R
-import com.jostin.planificadorviaje.data.model.Hotel
+import com.jostin.planificadorviaje.model.Hotel
 import com.jostin.planificadorviaje.databinding.ItemHotelBinding
 
 // HotelesAdapter.kt

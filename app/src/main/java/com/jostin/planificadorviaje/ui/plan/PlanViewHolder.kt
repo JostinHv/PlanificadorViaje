@@ -5,8 +5,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.jostin.planificadorviaje.R
-import com.jostin.planificadorviaje.data.model.Plan
-import com.jostin.planificadorviaje.data.model.PlanType
+import com.jostin.planificadorviaje.model.Plan
+import com.jostin.planificadorviaje.model.PlanType
 import com.jostin.planificadorviaje.databinding.ItemPlanBinding
 import java.text.NumberFormat
 import java.text.SimpleDateFormat

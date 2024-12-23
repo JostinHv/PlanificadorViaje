@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.jostin.planificadorviaje.R
-import com.jostin.planificadorviaje.data.model.Itinerary
+import com.jostin.planificadorviaje.model.Itinerary
 import com.jostin.planificadorviaje.databinding.FragmentHomeBinding
-import com.jostin.planificadorviaje.ui.adapter.ItineraryAdapter
+import com.jostin.planificadorviaje.adapter.ItineraryAdapter
 import com.jostin.planificadorviaje.utils.DateUtils.Companion.formatDateRange
 import dagger.hilt.android.AndroidEntryPoint
 

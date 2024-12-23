@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jostin.planificadorviaje.data.model.Place
-import com.jostin.planificadorviaje.data.model.Plan
+import com.jostin.planificadorviaje.model.Place
+import com.jostin.planificadorviaje.model.Plan
 import com.jostin.planificadorviaje.data.repository.PlanRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

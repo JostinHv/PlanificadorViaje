@@ -1,7 +1,7 @@
 package com.jostin.planificadorviaje.data.repository
 
 import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
-import com.jostin.planificadorviaje.data.model.Place
+import com.jostin.planificadorviaje.model.Place
 import com.jostin.planificadorviaje.utils.SampleDataGenerator
 
 class PlaceRepository(private val localDataSource: LocalDataSource) {

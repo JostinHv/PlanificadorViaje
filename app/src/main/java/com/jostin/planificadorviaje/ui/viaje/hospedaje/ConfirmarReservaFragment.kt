@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.jostin.planificadorviaje.data.model.Reserva
+import com.jostin.planificadorviaje.model.Reserva
 import com.jostin.planificadorviaje.databinding.FragmentConfirmarReservaBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

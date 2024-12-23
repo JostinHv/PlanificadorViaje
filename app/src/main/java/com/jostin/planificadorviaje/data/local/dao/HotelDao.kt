@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.jostin.planificadorviaje.data.model.Hotel
+import com.jostin.planificadorviaje.model.Hotel
 
 @Dao
 interface HotelDao {

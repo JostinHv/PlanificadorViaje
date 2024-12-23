@@ -2,7 +2,7 @@ package com.jostin.planificadorviaje.data.local.datasource.implementation
 
 import com.jostin.planificadorviaje.data.local.AppDatabase
 import com.jostin.planificadorviaje.data.local.datasource.interfaces.UserDataSource
-import com.jostin.planificadorviaje.data.model.User
+import com.jostin.planificadorviaje.model.User
 
 
 class UserLocalDataSource(private val database: AppDatabase) : UserDataSource {

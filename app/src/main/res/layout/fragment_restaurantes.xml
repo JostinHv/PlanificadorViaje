@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
-    tools:context=".berpi.ui.restaurantes.RestaurantesFragment">
+    tools:context=".ui.admin.RestaurantesFragment">
 
     <!-- Search Bar -->
     <androidx.appcompat.widget.SearchView

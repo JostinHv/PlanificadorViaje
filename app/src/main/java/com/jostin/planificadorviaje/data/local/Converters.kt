@@ -5,8 +5,8 @@ import com.google.firebase.Timestamp
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import com.google.gson.reflect.TypeToken
-import com.jostin.planificadorviaje.data.model.Plan
-import com.jostin.planificadorviaje.data.model.User
+import com.jostin.planificadorviaje.model.Plan
+import com.jostin.planificadorviaje.model.User
 import java.util.Date
 
 class Converters {

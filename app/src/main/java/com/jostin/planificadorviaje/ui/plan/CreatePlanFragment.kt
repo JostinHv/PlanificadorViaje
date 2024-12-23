@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +16,8 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Timestamp
 import com.jostin.planificadorviaje.R
-import com.jostin.planificadorviaje.data.model.Plan
-import com.jostin.planificadorviaje.data.model.PlanType
+import com.jostin.planificadorviaje.model.Plan
+import com.jostin.planificadorviaje.model.PlanType
 import com.jostin.planificadorviaje.databinding.FragmentCreatePlanBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat

@@ -2,7 +2,7 @@ package com.jostin.planificadorviaje.data.local.datasource.implementation
 
 import com.jostin.planificadorviaje.data.local.AppDatabase
 import com.jostin.planificadorviaje.data.local.datasource.interfaces.PlaceDataSource
-import com.jostin.planificadorviaje.data.model.Place
+import com.jostin.planificadorviaje.model.Place
 
 class PlaceLocalDataSource(private val database: AppDatabase) : PlaceDataSource {
     override suspend fun getPlaces(): List<Place> {

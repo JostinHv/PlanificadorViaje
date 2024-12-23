@@ -2,7 +2,7 @@ package com.jostin.planificadorviaje.di
 
 import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
-import com.jostin.planificadorviaje.berpi.repository.AdminHotelRepository
+import com.jostin.planificadorviaje.data.repository.AdminHotelRepository
 import com.jostin.planificadorviaje.data.local.AppDatabase
 import com.jostin.planificadorviaje.data.local.datasource.FirestoreItineraryDataSource
 import com.jostin.planificadorviaje.data.local.datasource.FirestorePlanDataSource

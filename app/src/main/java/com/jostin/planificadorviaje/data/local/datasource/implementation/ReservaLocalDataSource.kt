@@ -2,7 +2,7 @@ package com.jostin.planificadorviaje.data.local.datasource.implementation
 
 import com.jostin.planificadorviaje.data.local.AppDatabase
 import com.jostin.planificadorviaje.data.local.datasource.interfaces.ReservaDataSource
-import com.jostin.planificadorviaje.data.model.Reserva
+import com.jostin.planificadorviaje.model.Reserva
 
 class ReservaLocalDataSource(private val database: AppDatabase) : ReservaDataSource {
     override suspend fun getReservas(): List<Reserva> {

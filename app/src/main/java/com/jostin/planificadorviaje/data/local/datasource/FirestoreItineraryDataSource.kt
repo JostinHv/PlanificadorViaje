@@ -2,9 +2,9 @@ package com.jostin.planificadorviaje.data.local.datasource
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
-import com.jostin.planificadorviaje.data.model.Itinerary
-import com.jostin.planificadorviaje.data.model.Plan
-import com.jostin.planificadorviaje.data.model.relations.ItineraryWithPlans
+import com.jostin.planificadorviaje.model.Itinerary
+import com.jostin.planificadorviaje.model.Plan
+import com.jostin.planificadorviaje.model.ItineraryWithPlans
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 

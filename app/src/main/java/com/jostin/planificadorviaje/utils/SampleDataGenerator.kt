@@ -1,6 +1,13 @@
 package com.jostin.planificadorviaje.utils
 
-import com.jostin.planificadorviaje.data.model.*
+import com.jostin.planificadorviaje.model.City
+import com.jostin.planificadorviaje.model.Hotel
+import com.jostin.planificadorviaje.model.Itinerary
+import com.jostin.planificadorviaje.model.Place
+import com.jostin.planificadorviaje.model.Plan
+import com.jostin.planificadorviaje.model.Reserva
+import com.jostin.planificadorviaje.model.TipoHabitacion
+import com.jostin.planificadorviaje.model.User
 import java.util.Date
 
 object SampleDataGenerator {

@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jostin.planificadorviaje.R
-import com.jostin.planificadorviaje.data.model.User
+import com.jostin.planificadorviaje.model.User
 import com.jostin.planificadorviaje.databinding.FragmentAccountBinding
 import com.jostin.planificadorviaje.databinding.DialogEditProfileBinding
 import dagger.hilt.android.AndroidEntryPoint

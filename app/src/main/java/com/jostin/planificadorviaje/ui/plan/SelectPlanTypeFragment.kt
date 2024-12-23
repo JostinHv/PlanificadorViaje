@@ -10,9 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jostin.planificadorviaje.data.model.PlanType
+import com.jostin.planificadorviaje.model.PlanType
 import com.jostin.planificadorviaje.databinding.FragmentSelectPlanTypeBinding
-import com.jostin.planificadorviaje.ui.adapter.PlanTypeAdapter
+import com.jostin.planificadorviaje.adapter.PlanTypeAdapter
 
 class SelectPlanTypeFragment : Fragment() {
 

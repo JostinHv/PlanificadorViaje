@@ -3,10 +3,9 @@ package com.jostin.planificadorviaje.data.local.datasource
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.jostin.planificadorviaje.data.local.datasource.interfaces.PlanDataSource
-import com.jostin.planificadorviaje.data.model.Plan
-import com.jostin.planificadorviaje.data.model.PlanType
+import com.jostin.planificadorviaje.model.Plan
+import com.jostin.planificadorviaje.model.PlanType
 import kotlinx.coroutines.tasks.await
-import java.util.*
 
 class FirestorePlanDataSource(private val firestore: FirebaseFirestore) : PlanDataSource {
 
@@ -59,7 +58,7 @@ class FirestorePlanDataSource(private val firestore: FirebaseFirestore) : PlanDa
         return mapOf(
             "id" to id,
             "itineraryId" to itineraryId,
-            "type" to PlanType.toString(type),
+            "type" to com.jostin.planificadorviaje.model.PlanType.toString(type),
             "name" to name,
             "date" to date.toDate(), // Almacenar Date como timestamp en Firestore
             "details" to details

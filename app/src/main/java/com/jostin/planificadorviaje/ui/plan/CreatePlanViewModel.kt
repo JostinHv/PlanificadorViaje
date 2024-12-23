@@ -2,7 +2,7 @@ package com.jostin.planificadorviaje.ui.plan
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jostin.planificadorviaje.data.model.Plan
+import com.jostin.planificadorviaje.model.Plan
 import com.jostin.planificadorviaje.data.repository.ItineraryRepository
 import com.jostin.planificadorviaje.data.repository.PlanRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

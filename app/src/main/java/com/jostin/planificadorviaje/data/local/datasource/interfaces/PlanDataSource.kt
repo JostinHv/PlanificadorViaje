@@ -1,6 +1,6 @@
 package com.jostin.planificadorviaje.data.local.datasource.interfaces
 
-import com.jostin.planificadorviaje.data.model.Plan
+import com.jostin.planificadorviaje.model.Plan
 
 
 interface PlanDataSource {

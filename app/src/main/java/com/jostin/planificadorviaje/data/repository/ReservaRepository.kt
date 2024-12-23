@@ -2,7 +2,7 @@ package com.jostin.planificadorviaje.data.repository
 
 import android.util.Log
 import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
-import com.jostin.planificadorviaje.data.model.Reserva
+import com.jostin.planificadorviaje.model.Reserva
 import com.jostin.planificadorviaje.utils.SampleDataGenerator
 
 class ReservaRepository(private val localDataSource: LocalDataSource) {

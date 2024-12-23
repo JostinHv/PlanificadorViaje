@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.jostin.planificadorviaje.data.model.Reserva
+import com.jostin.planificadorviaje.model.Reserva
 
 @Dao
 interface ReservaDao {

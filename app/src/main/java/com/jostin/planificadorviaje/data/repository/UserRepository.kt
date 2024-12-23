@@ -3,7 +3,7 @@ package com.jostin.planificadorviaje.data.repository
 
 import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
 import com.jostin.planificadorviaje.data.local.datasource.interfaces.UserDataSource
-import com.jostin.planificadorviaje.data.model.User
+import com.jostin.planificadorviaje.model.User
 
 class UserRepository(
     private val localDataSource: LocalDataSource,

@@ -12,12 +12,12 @@ import com.jostin.planificadorviaje.data.local.dao.PlaceDao
 import com.jostin.planificadorviaje.data.local.dao.PlanDao
 import com.jostin.planificadorviaje.data.local.dao.ReservaDao
 import com.jostin.planificadorviaje.data.local.dao.UserDao
-import com.jostin.planificadorviaje.data.model.Hotel
-import com.jostin.planificadorviaje.data.model.Itinerary
-import com.jostin.planificadorviaje.data.model.Place
-import com.jostin.planificadorviaje.data.model.Plan
-import com.jostin.planificadorviaje.data.model.Reserva
-import com.jostin.planificadorviaje.data.model.User
+import com.jostin.planificadorviaje.model.Hotel
+import com.jostin.planificadorviaje.model.Itinerary
+import com.jostin.planificadorviaje.model.Place
+import com.jostin.planificadorviaje.model.Plan
+import com.jostin.planificadorviaje.model.Reserva
+import com.jostin.planificadorviaje.model.User
 
 @Database(
     entities = [Itinerary::class, Plan::class, User::class, Place::class, Hotel::class, Reserva::class],

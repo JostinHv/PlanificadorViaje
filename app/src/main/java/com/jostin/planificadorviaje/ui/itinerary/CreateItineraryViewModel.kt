@@ -2,9 +2,9 @@ package com.jostin.planificadorviaje.ui.itinerary
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jostin.planificadorviaje.data.model.Itinerary
-import com.jostin.planificadorviaje.data.model.Plan
-import com.jostin.planificadorviaje.data.model.User
+import com.jostin.planificadorviaje.model.Itinerary
+import com.jostin.planificadorviaje.model.Plan
+import com.jostin.planificadorviaje.model.User
 import com.jostin.planificadorviaje.data.repository.ItineraryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

@@ -22,6 +22,35 @@
             app:destination="@id/itineraryDetailFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/adminHomeFragment"
+        android:name="com.jostin.planificadorviaje.ui.admin.AdminHomeFragment"
+        android:label="fragment_admin_home"
+        tools:layout="@layout/fragment_admin_home">
+        <action
+            android:id="@+id/action_adminHomeFragment_to_restaurantesFragment"
+            app:destination="@id/restaurantesFragment" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_adminHotelFragment"
+            app:destination="@id/adminHotelesFragment" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/adminHotelesFragment"
+        android:name="com.jostin.planificadorviaje.ui.admin.AdminHotelFragment"
+        android:label="fragment_admin_hotel"
+        tools:layout="@layout/fragment_admin_hotel">
+    </fragment>
+
+    <fragment
+        android:id="@+id/restaurantesFragment"
+        android:name="com.jostin.planificadorviaje.ui.admin.RestaurantesFragment"
+        android:label="fragment_restaurantes"
+        tools:layout="@layout/fragment_restaurantes">
+    </fragment>
 
     <fragment
         android:id="@+id/selectPlanTypeFragment"
@@ -33,7 +62,7 @@
             app:argType="string" />
         <argument
             android:name="city"
-            app:argType="com.jostin.planificadorviaje.data.model.City" />
+            app:argType="com.jostin.planificadorviaje.model.City" />
         <action
             android:id="@+id/action_selectPlanTypeFragment_to_createPlanFragment"
             app:destination="@id/createPlanFragment" />
@@ -62,7 +91,7 @@
             app:argType="string" />
         <argument
             android:name="city"
-            app:argType="com.jostin.planificadorviaje.data.model.City" />
+            app:argType="com.jostin.planificadorviaje.model.City" />
         <action
             android:id="@+id/action_restaurantFormFragment_to_restaurantMapFragment"
             app:destination="@id/restaurantMapFragment" />
@@ -79,7 +108,7 @@
         tools:layout="@layout/fragment_restaurant_map">
         <argument
             android:name="city"
-            app:argType="com.jostin.planificadorviaje.data.model.City" />
+            app:argType="com.jostin.planificadorviaje.model.City" />
 
     </fragment>
 
@@ -96,7 +125,7 @@
             app:argType="string" />
         <argument
             android:name="city"
-            app:argType="com.jostin.planificadorviaje.data.model.City" />
+            app:argType="com.jostin.planificadorviaje.model.City" />
         <action
             android:id="@+id/action_hotelFormFragment_to_hotelMapFragment"
             app:destination="@id/hotelMapFragment" />
@@ -113,7 +142,7 @@
         tools:layout="@layout/fragment_hotel_map">
         <argument
             android:name="city"
-            app:argType="com.jostin.planificadorviaje.data.model.City" />
+            app:argType="com.jostin.planificadorviaje.model.City" />
     </fragment>
 
 
@@ -177,6 +206,11 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_adminHomeFragment"
+            app:destination="@id/adminHomeFragment"
+            app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
 

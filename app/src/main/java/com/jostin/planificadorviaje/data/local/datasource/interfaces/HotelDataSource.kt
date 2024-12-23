@@ -1,6 +1,6 @@
 package com.jostin.planificadorviaje.data.local.datasource.interfaces
 
-import com.jostin.planificadorviaje.data.model.Hotel
+import com.jostin.planificadorviaje.model.Hotel
 
 interface HotelDataSource {
     suspend fun getHotels(): List<Hotel>

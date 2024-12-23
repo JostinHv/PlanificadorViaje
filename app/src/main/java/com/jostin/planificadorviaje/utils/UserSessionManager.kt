@@ -1,7 +1,7 @@
 package com.jostin.planificadorviaje.utils
 
 import android.content.Context
-import com.jostin.planificadorviaje.data.model.User
+import com.jostin.planificadorviaje.model.User
 
 object UserSessionManager {
 

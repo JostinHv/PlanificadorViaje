@@ -1,6 +1,6 @@
 package com.jostin.planificadorviaje.data.local.datasource.interfaces
 
-import com.jostin.planificadorviaje.data.model.Place
+import com.jostin.planificadorviaje.model.Place
 
 interface PlaceDataSource {
     suspend fun getPlaces(): List<Place>

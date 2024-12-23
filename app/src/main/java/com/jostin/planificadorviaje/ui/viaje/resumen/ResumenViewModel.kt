@@ -3,7 +3,7 @@ package com.jostin.planificadorviaje.ui.viaje.resumen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.LatLng
-import com.jostin.planificadorviaje.data.model.Reserva
+import com.jostin.planificadorviaje.model.Reserva
 import com.jostin.planificadorviaje.data.repository.HotelRepository
 import com.jostin.planificadorviaje.data.repository.ReservaRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,16 +14,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.Timestamp
 import com.jostin.planificadorviaje.R
-import com.jostin.planificadorviaje.data.model.City
-import com.jostin.planificadorviaje.data.model.Place
-import com.jostin.planificadorviaje.data.model.Plan
-import com.jostin.planificadorviaje.data.model.PlanType
+import com.jostin.planificadorviaje.model.Place
+import com.jostin.planificadorviaje.model.Plan
+import com.jostin.planificadorviaje.model.PlanType
 import com.jostin.planificadorviaje.databinding.FragmentRestaurantFormBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 import java.util.UUID
 

@@ -2,8 +2,8 @@ package com.jostin.planificadorviaje.data.local.dao
 
 // data/local/ItineraryDao.kt
 import androidx.room.*
-import com.jostin.planificadorviaje.data.model.Itinerary
-import com.jostin.planificadorviaje.data.model.relations.ItineraryWithPlans
+import com.jostin.planificadorviaje.model.Itinerary
+import com.jostin.planificadorviaje.model.ItineraryWithPlans
 
 @Dao
 interface ItineraryDao {

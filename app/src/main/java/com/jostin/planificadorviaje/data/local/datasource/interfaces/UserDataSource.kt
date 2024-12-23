@@ -1,6 +1,6 @@
 package com.jostin.planificadorviaje.data.local.datasource.interfaces
 
-import com.jostin.planificadorviaje.data.model.User
+import com.jostin.planificadorviaje.model.User
 
 interface UserDataSource {
     suspend fun getAllUsers(): List<User>

@@ -2,7 +2,7 @@ package com.jostin.planificadorviaje.data.local.datasource
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.jostin.planificadorviaje.data.local.datasource.interfaces.UserDataSource
-import com.jostin.planificadorviaje.data.model.User
+import com.jostin.planificadorviaje.model.User
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 

@@ -1,9 +1,8 @@
 package com.jostin.planificadorviaje.data.repository
 
-import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
 import com.jostin.planificadorviaje.data.local.datasource.FirestoreItineraryDataSource
-import com.jostin.planificadorviaje.data.model.Itinerary
-import com.jostin.planificadorviaje.data.model.relations.ItineraryWithPlans
+import com.jostin.planificadorviaje.model.Itinerary
+import com.jostin.planificadorviaje.model.ItineraryWithPlans
 
 class ItineraryRepository(
     private val remoteDataSource: FirestoreItineraryDataSource

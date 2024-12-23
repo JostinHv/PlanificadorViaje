@@ -1,7 +1,7 @@
 package com.jostin.planificadorviaje.data.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.jostin.planificadorviaje.data.model.City
+import com.jostin.planificadorviaje.model.City
 
 class CitySeeder(private val firestore: FirebaseFirestore) {
 
