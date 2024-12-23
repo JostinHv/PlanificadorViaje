@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.chip.Chip
+import com.google.firebase.Timestamp
 import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.data.model.Place
 import com.jostin.planificadorviaje.data.model.Plan
@@ -182,7 +183,7 @@ class HotelFormFragment : Fragment() {
             id = UUID.randomUUID().toString(),
             type = PlanType.ACCOMMODATION,
             name = binding.etPlanName.text.toString(),
-            date = viewModel.checkInDate.value!!,
+            date = Timestamp(viewModel.checkInDate.value ?: Date()), // Usa la fecha actual si es nulo
             details = details,
             itineraryId = args.itineraryId
         )

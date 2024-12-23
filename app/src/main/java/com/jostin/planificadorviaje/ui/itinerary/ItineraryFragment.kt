@@ -47,7 +47,7 @@ class ItineraryFragment : Fragment() {
         viewModel.itinerary.observe(viewLifecycleOwner) { itineraries ->
             // Para este ejemplo, asumimos que tomas el primer itinerario de la lista
             // Actualiza esta lógica según tus necesidades
-            val itinerary = itineraries.firstOrNull() ?: return@observe
+            val itinerary = itineraries?.firstOrNull() ?: return@observe
 
             // Actualiza la imagen de portada
             Glide.with(this)

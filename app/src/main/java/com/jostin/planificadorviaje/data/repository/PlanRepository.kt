@@ -1,36 +1,36 @@
-// data/repository/PlanRepository.kt
 package com.jostin.planificadorviaje.data.repository
 
+import com.jostin.planificadorviaje.data.local.datasource.FirestorePlanDataSource
 import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
+import com.jostin.planificadorviaje.data.local.datasource.interfaces.PlanDataSource
 import com.jostin.planificadorviaje.data.model.Plan
 
-class PlanRepository(private val localDataSource: LocalDataSource) {
+class PlanRepository(
+    private val remoteDataSource: FirestorePlanDataSource
+) {
 
     suspend fun getPlansForItinerary(itineraryId: String): List<Plan> {
-        return localDataSource.getPlansForItinerary(itineraryId)
+        val remotePlans = remoteDataSource.getPlansForItinerary(itineraryId)
+        return remotePlans
     }
 
     suspend fun getPlan(id: String): Plan {
-        return localDataSource.getPlan(id)
+        return remoteDataSource.getPlan(id)
     }
 
     suspend fun updatePlan(plan: Plan) {
-        localDataSource.updatePlan(plan)
+        remoteDataSource.updatePlan(plan)
     }
 
     suspend fun createPlan(plan: Plan) {
-        localDataSource.createPlan(plan)
+        remoteDataSource.createPlan(plan)
     }
 
     suspend fun deletePlanById(id: String) {
-        localDataSource.deletePlanById(id)
+        remoteDataSource.deletePlanById(id)
     }
 
     suspend fun deletePlan(plan: Plan) {
-        localDataSource.deletePlan(plan)
+        remoteDataSource.deletePlan(plan)
     }
-
-
-
-
 }

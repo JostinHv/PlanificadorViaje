@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.firebase.Timestamp
 import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.data.model.City
 import com.jostin.planificadorviaje.data.model.Place
@@ -23,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
@@ -168,7 +170,7 @@ class RestaurantFormFragment : Fragment() {
                 id = UUID.randomUUID().toString(),
                 type = PlanType.RESTAURANT,
                 name = binding.etPlanName.text.toString(),
-                date = parsedDate!!, // El parse asegura que no sea null
+                date = Timestamp(parsedDate!!), // Usa la fecha actual si es nulo
                 details = details,
                 itineraryId = args.itineraryId
             )

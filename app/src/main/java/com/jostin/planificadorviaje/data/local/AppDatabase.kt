@@ -21,7 +21,7 @@ import com.jostin.planificadorviaje.data.model.User
 
 @Database(
     entities = [Itinerary::class, Plan::class, User::class, Place::class, Hotel::class, Reserva::class],
-    version = 12,
+    version = 13,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

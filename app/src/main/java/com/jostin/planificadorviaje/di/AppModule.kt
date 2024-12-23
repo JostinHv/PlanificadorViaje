@@ -2,7 +2,10 @@ package com.jostin.planificadorviaje.di
 
 import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
+import com.jostin.planificadorviaje.berpi.repository.AdminHotelRepository
 import com.jostin.planificadorviaje.data.local.AppDatabase
+import com.jostin.planificadorviaje.data.local.datasource.FirestoreItineraryDataSource
+import com.jostin.planificadorviaje.data.local.datasource.FirestorePlanDataSource
 import com.jostin.planificadorviaje.data.local.datasource.FirestoreUserDataSource
 import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
 import com.jostin.planificadorviaje.data.local.datasource.implementation.*
@@ -45,8 +48,24 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideItineraryRepository(localDataSource: LocalDataSource): ItineraryRepository {
-        return ItineraryRepository(localDataSource)
+    fun provideItineraryRepository(
+        remoteDataSource: FirestoreItineraryDataSource
+    ): ItineraryRepository {
+        return ItineraryRepository(remoteDataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFirestoreItineraryDataSource(
+        firestore: FirebaseFirestore
+    ): FirestoreItineraryDataSource {
+        return FirestoreItineraryDataSource(firestore)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAdminHotelRepository(firestore: FirebaseFirestore): AdminHotelRepository {
+        return AdminHotelRepository(firestore)
     }
 
     @Singleton
@@ -77,8 +96,18 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providePlanRepository(localDataSource: LocalDataSource): PlanRepository {
-        return PlanRepository(localDataSource)
+    fun providePlanRepository(
+        remoteDataSource: FirestorePlanDataSource
+    ): PlanRepository {
+        return PlanRepository(remoteDataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFirestorePlanDataSource(
+        firestore: FirebaseFirestore
+    ): FirestorePlanDataSource {
+        return FirestorePlanDataSource(firestore)
     }
 
     @Singleton

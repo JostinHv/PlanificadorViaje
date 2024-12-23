@@ -3,6 +3,8 @@ package com.jostin.planificadorviaje.data.model
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.google.firebase.Timestamp
+import java.io.Serializable
 import java.util.Date
 
 @Entity(
@@ -19,8 +21,12 @@ import java.util.Date
 data class Plan(
     @PrimaryKey val id: String,
     val itineraryId: String,
-    val type: PlanType,
+    var type: PlanType,
     val name: String,
-    val date: Date,
+    val date: Timestamp = Timestamp.now(),
     val details: Map<String, Any>,
-)
+) : Serializable {
+    constructor() : this("", "", PlanType.ACTIVITY, "", Timestamp.now(), emptyMap())
+
+    fun getDateAsDate(): Date = date.toDate()
+}

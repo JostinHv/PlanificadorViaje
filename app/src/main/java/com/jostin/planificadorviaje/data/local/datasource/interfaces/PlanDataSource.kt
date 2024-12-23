@@ -4,7 +4,6 @@ import com.jostin.planificadorviaje.data.model.Plan
 
 
 interface PlanDataSource {
-    //los metodos para plan
     suspend fun getPlansForItinerary(itineraryId: String): List<Plan>
     suspend fun getPlan(id: String): Plan
     suspend fun updatePlan(plan: Plan)

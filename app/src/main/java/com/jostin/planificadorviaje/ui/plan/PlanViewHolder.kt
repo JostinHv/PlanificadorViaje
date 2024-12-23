@@ -11,6 +11,7 @@ import com.jostin.planificadorviaje.databinding.ItemPlanBinding
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
+
 class PlanViewHolder(
     private val binding: ItemPlanBinding,
     private val onPlanSelected: (Plan, Boolean) -> Unit
@@ -23,8 +24,13 @@ class PlanViewHolder(
         binding.apply {
             // Set plan name and date
             textViewPlanName.text = plan.name
-            textViewPlanDate.text = dateFormatter.format(plan.date)
-
+            // Convert Timestamp to Date and format it
+            val formattedDate = try {
+                dateFormatter.format(plan.getDateAsDate())
+            } catch (e: Exception) {
+                "Fecha no disponible"
+            }
+            textViewPlanDate.text = formattedDate
             // Set the icon based on the plan type
             val (iconResId, backgroundColor) = when (plan.type) {
                 PlanType.FLIGHT -> Pair(R.drawable.ic_flight, R.color.white)

@@ -17,12 +17,16 @@ class PlanificadorViajeApplication : Application() {
     // Inyectar los repositorios proporcionados por Hilt
     @Inject
     lateinit var itineraryRepository: ItineraryRepository
+
     @Inject
     lateinit var placeRepository: PlaceRepository
+
     @Inject
     lateinit var hotelRepository: HotelRepository
+
     @Inject
     lateinit var reservaRepository: ReservaRepository
+
     @Inject
     lateinit var userRepository: UserRepository
 
@@ -51,10 +55,10 @@ class PlanificadorViajeApplication : Application() {
 
     private suspend fun initializeSampleData() {
         // Agregar datos de ejemplo para itinerarios, lugares, hoteles y reservas
-        itineraryRepository.initializeSampleData()
-        placeRepository.initializeSampleData()
-        hotelRepository.initializeSampleData()
-        reservaRepository.initializeSampleData()
+        //itineraryRepository.initializeSampleData()
+        //placeRepository.initializeSampleData()
+        //hotelRepository.initializeSampleData()
+        // reservaRepository.initializeSampleData()
 
         // Agregar usuarios de ejemplo
         if (userRepository.getAllUsers().isEmpty()) {

@@ -6,6 +6,8 @@ import com.jostin.planificadorviaje.data.model.Itinerary
 import com.jostin.planificadorviaje.data.model.relations.ItineraryWithPlans
 
 class ItineraryLocalDataSource(private val database: AppDatabase) : ItineraryDataSource {
+
+
     override suspend fun getItineraries(): List<Itinerary> {
         return database.itineraryDao().getAll()
     }

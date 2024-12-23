@@ -207,31 +207,31 @@ object SampleDataGenerator {
 
     private fun generateSamplePlans(): List<Plan> {
         return listOf(
-            Plan(
-                id = "1",
-                type = PlanType.FLIGHT,
-                name = "Vuelo de ida",
-                date = Date(),
-                details = mapOf(
-                    "airline" to "Air France",
-                    "flightNumber" to "AF1234",
-                    "departureTime" to "10:00",
-                    "arrivalTime" to "12:00"
-                ),
-                itineraryId = "1"
-            ),
-            Plan(
-                id = "2",
-                type = PlanType.ACCOMMODATION,
-                name = "Hotel Le Grand",
-                date = Date(),
-                details = mapOf(
-                    "checkIn" to "15:00",
-                    "checkOut" to "11:00",
-                    "address" to "1 Rue de la Paix, 75002 Paris, France"
-                ),
-                itineraryId = "1"
-            )
+//            Plan(
+//                id = "1",
+//                type = PlanType.FLIGHT,
+//                name = "Vuelo de ida",
+//                date = Date(),
+//                details = mapOf(
+//                    "airline" to "Air France",
+//                    "flightNumber" to "AF1234",
+//                    "departureTime" to "10:00",
+//                    "arrivalTime" to "12:00"
+//                ),
+//                itineraryId = "1"
+//            ),
+//            Plan(
+//                id = "2",
+//                type = PlanType.ACCOMMODATION,
+//                name = "Hotel Le Grand",
+//                date = Date(),
+//                details = mapOf(
+//                    "checkIn" to "15:00",
+//                    "checkOut" to "11:00",
+//                    "address" to "1 Rue de la Paix, 75002 Paris, France"
+//                ),
+//                itineraryId = "1"
+//            )
         )
     }
 

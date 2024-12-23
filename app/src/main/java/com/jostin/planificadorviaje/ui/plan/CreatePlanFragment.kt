@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.Timestamp
 import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.data.model.Plan
 import com.jostin.planificadorviaje.data.model.PlanType
@@ -72,10 +73,9 @@ class CreatePlanFragment : Fragment() {
             itineraryId = args.itineraryId, // Recibido por Safe Args
             type = type ?: PlanType.FLIGHT,
             name = planDetails["Nombre"]?.toString() ?: "Plan",
-            date = Date(), // Cambiar si tienes una fecha específica
+            date = Timestamp.now(),
             details = planDetails
         )
-        Log.d("CreatePlanFragment", "Plan: ${plan.details}")
         viewModel.savePlan(plan)
     }
 

@@ -15,8 +15,8 @@ import javax.inject.Inject
 class ItineraryViewModel @Inject constructor(private val itineraryRepository: ItineraryRepository) :
     ViewModel() {
 
-    private val _itinerary = MutableLiveData<List<Itinerary>>()
-    val itinerary: LiveData<List<Itinerary>> get() = _itinerary
+    private val _itinerary = MutableLiveData<List<Itinerary>?>()
+    val itinerary: MutableLiveData<List<Itinerary>?> get() = _itinerary
 
     fun fetchItineraries() {
         viewModelScope.launch {
