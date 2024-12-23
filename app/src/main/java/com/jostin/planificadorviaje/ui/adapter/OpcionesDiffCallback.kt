@@ -1,4 +1,4 @@
-package com.jostin.planificadorviaje.ui.viaje.adapter
+package com.jostin.planificadorviaje.ui.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.jostin.planificadorviaje.data.model.OpcionViaje

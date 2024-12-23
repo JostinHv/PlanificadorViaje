@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jostin.planificadorviaje.data.model.OpcionViaje
 import com.jostin.planificadorviaje.databinding.FragmentViajeOpcionesBinding
-import com.jostin.planificadorviaje.ui.viaje.adapter.OpcionesAdapter
+import com.jostin.planificadorviaje.ui.adapter.OpcionesAdapter
 
 class ViajeOpcionesFragment : Fragment() {
 

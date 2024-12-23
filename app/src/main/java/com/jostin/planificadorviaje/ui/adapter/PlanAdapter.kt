@@ -1,10 +1,11 @@
-package com.jostin.planificadorviaje.ui.plan
+package com.jostin.planificadorviaje.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jostin.planificadorviaje.data.model.Plan
 import com.jostin.planificadorviaje.databinding.ItemPlanBinding
+import com.jostin.planificadorviaje.ui.plan.PlanViewHolder
 
 class PlanAdapter(
     private var plans: List<Plan>,

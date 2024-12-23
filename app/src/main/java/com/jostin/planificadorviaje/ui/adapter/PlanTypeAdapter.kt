@@ -1,4 +1,4 @@
-package com.jostin.planificadorviaje.ui.plan
+package com.jostin.planificadorviaje.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

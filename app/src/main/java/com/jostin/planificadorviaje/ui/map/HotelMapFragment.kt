@@ -1,4 +1,4 @@
-package com.jostin.planificadorviaje.ui.plan.hotel.map
+package com.jostin.planificadorviaje.ui.map
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -212,7 +212,7 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
         } else {
             ActivityCompat.requestPermissions(
                 requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                HotelMapFragment.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
+                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
             )
         }
     }

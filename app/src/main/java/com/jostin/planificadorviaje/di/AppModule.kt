@@ -1,7 +1,9 @@
 package com.jostin.planificadorviaje.di
 
 import android.content.Context
+import com.google.firebase.firestore.FirebaseFirestore
 import com.jostin.planificadorviaje.data.local.AppDatabase
+import com.jostin.planificadorviaje.data.local.datasource.FirestoreUserDataSource
 import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
 import com.jostin.planificadorviaje.data.local.datasource.implementation.*
 import com.jostin.planificadorviaje.data.repository.*
@@ -35,6 +37,12 @@ object AppModule {
         )
     }
 
+    @Provides
+    @Singleton
+    fun provideFirebaseFirestore(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
+    }
+
     @Singleton
     @Provides
     fun provideItineraryRepository(localDataSource: LocalDataSource): ItineraryRepository {
@@ -43,8 +51,10 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideUserRepository(localDataSource: LocalDataSource): UserRepository {
-        return UserRepository(localDataSource)
+    fun provideUserRepository(
+        localDataSource: LocalDataSource, remoteDataSource: FirestoreUserDataSource
+    ): UserRepository {
+        return UserRepository(localDataSource, remoteDataSource)
     }
 
     @Singleton

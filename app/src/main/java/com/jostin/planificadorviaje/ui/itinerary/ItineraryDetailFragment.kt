@@ -17,7 +17,7 @@ import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.data.model.City
 import com.jostin.planificadorviaje.databinding.FragmentItineraryDetailBinding
 import com.jostin.planificadorviaje.data.model.Itinerary
-import com.jostin.planificadorviaje.ui.plan.PlanAdapter
+import com.jostin.planificadorviaje.ui.adapter.PlanAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*

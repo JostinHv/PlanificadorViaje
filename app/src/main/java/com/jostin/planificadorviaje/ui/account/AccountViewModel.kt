@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jostin.planificadorviaje.data.model.Result
 import com.jostin.planificadorviaje.data.model.User
 import com.jostin.planificadorviaje.data.repository.UserRepository
 import com.jostin.planificadorviaje.utils.UserSessionManager
@@ -46,4 +47,3 @@ class AccountViewModel @Inject constructor(private val userRepository: UserRepos
     }
 }
 
-data class Result(val success: Boolean, val error: String? = null)

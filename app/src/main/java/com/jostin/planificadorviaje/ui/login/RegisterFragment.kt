@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,16 +25,19 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-
+        binding.tvLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
         // Cuando se hace clic en el botón de registro
         binding.btnRegisterUser.setOnClickListener {
             val name = binding.etName.text.toString()
+            val lastname = binding.etLastname.text.toString()
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
 
             if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
                 // Llamar al ViewModel para registrar al usuario en Firestore
-                loginViewModel.registerUser(name, email, password)
+                loginViewModel.registerUser(name, lastname, email, password, requireContext())
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -45,9 +49,8 @@ class RegisterFragment : Fragment() {
 
         loginViewModel.registrationResult.observe(viewLifecycleOwner) { isSuccess ->
             if (isSuccess) {
-                // Si el registro es exitoso, volver al LoginFragment
                 Toast.makeText(requireContext(), "Registro exitoso", Toast.LENGTH_SHORT).show()
-                findNavController().navigateUp() // Volver al LoginFragment
+                findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
             } else {
                 Toast.makeText(requireContext(), "Error al registrar usuario", Toast.LENGTH_SHORT)
                     .show()

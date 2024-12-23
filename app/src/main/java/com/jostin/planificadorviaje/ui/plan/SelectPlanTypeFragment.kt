@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jostin.planificadorviaje.data.model.PlanType
 import com.jostin.planificadorviaje.databinding.FragmentSelectPlanTypeBinding
+import com.jostin.planificadorviaje.ui.adapter.PlanTypeAdapter
 
 class SelectPlanTypeFragment : Fragment() {
 

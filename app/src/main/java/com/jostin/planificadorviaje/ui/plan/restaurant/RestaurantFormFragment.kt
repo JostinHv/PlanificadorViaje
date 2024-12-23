@@ -43,6 +43,7 @@ class RestaurantFormFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupToolbar()
         setupDatePicker()
         setupTimePicker()
         setupMealTypeDropdown()
@@ -114,6 +115,10 @@ class RestaurantFormFragment : Fragment() {
         viewModel.selectedPlace.observe(viewLifecycleOwner) { place ->
             updatePlaceUI(place)
         }
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
     }
 
     private fun updatePlaceUI(place: Place?) {

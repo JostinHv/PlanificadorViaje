@@ -40,14 +40,21 @@ class MainActivity : AppCompatActivity() {
                     bottomNavigationView.visibility = View.GONE
                 }
 
+                R.id.registerFragment -> {
+                    // Ocultar el BottomNavigationView en el registro
+                    bottomNavigationView.visibility = View.GONE
+                }
+
                 R.id.restaurantMapFragment -> {
                     // Ocultar el BottomNavigationView en el mapa de restaurantes
                     bottomNavigationView.visibility = View.GONE
                 }
+
                 R.id.hotelMapFragment -> {
                     // Ocultar el BottomNavigationView en el mapa de hoteles
                     bottomNavigationView.visibility = View.GONE
                 }
+
                 R.id.restaurantFormFragment -> {
                     // Ocultar el BottomNavigationView en el formulario de restaurantes
                     bottomNavigationView.visibility = View.GONE

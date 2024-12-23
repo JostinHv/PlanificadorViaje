@@ -18,7 +18,6 @@ import com.jostin.planificadorviaje.data.model.Place
 import com.jostin.planificadorviaje.data.model.Plan
 import com.jostin.planificadorviaje.data.model.PlanType
 import com.jostin.planificadorviaje.databinding.FragmentHotelFormBinding
-import com.jostin.planificadorviaje.ui.plan.restaurant.RestaurantFormFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -89,16 +88,6 @@ class HotelFormFragment : Fragment() {
             handle.getLiveData<Place>("selected_place").observe(viewLifecycleOwner) { place ->
                 viewModel.setSelectedPlace(place)
             }
-        }
-    }
-
-    private fun setupAddPlaceButton() {
-        binding.btnAddPlace.setOnClickListener {
-            findNavController().navigate(
-                RestaurantFormFragmentDirections.actionRestaurantFormFragmentToRestaurantMapFragment(
-                    args.city
-                )
-            )
         }
     }
 

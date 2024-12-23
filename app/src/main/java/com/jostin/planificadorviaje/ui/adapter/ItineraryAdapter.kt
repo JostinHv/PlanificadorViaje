@@ -1,4 +1,4 @@
-package com.jostin.planificadorviaje.ui.home
+package com.jostin.planificadorviaje.ui.adapter
 // ItineraryAdapter.kt
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.data.model.Itinerary
-import com.jostin.planificadorviaje.data.repository.CityRepository
 import com.jostin.planificadorviaje.databinding.ItemItineraryBinding
 import java.text.SimpleDateFormat
 import java.util.*

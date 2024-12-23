@@ -68,7 +68,7 @@
     </style>
     <!-- Base application theme. -->
     <style name="PBarTheme">
-        <item name="colorSecondary">#08A4BD</item>
+        <item name="colorPrimary">@color/black</item>
     </style>
 
     <style name="Theme.PlanificadorViaje" parent="Base.Theme.PlanificadorViaje" />

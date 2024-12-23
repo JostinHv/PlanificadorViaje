@@ -51,14 +51,17 @@ class LoginFragment : Fragment() {
         }
 
 
-
         // Configurar el botón de inicio de sesión
         binding.btnLogin.setOnClickListener {
             val correo = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString()
 
             if (correo.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Por favor, llena todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Por favor, llena todos los campos",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 showLoadingDialog()
                 loginViewModel.login(correo, password, requireContext())
@@ -66,32 +69,38 @@ class LoginFragment : Fragment() {
         }
 
         // Configurar el botón de registro
-//        binding.btnRegister.setOnClickListener {
-//            findNavController().navigate(R.id.action_loginFragment_to_registroUsuarioFragment)
-//        }
+        binding.btnRegister.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
 
         // Observa los resultados del inicio de sesión
         loginViewModel.loginResult.observe(viewLifecycleOwner, Observer { rol ->
             hideLoadingDialog()
 
             when (rol) {
-                "usuario" -> {
+                "Usuario" -> {
                     // Redirigir al flujo de usuario
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                    Toast.makeText(requireContext(), "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Inicio de sesión exitoso", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
                 // Deja comentado el flujo de administrador para implementar en el futuro
-                /*
                 "admin" -> {
-                    findNavController().navigate(R.id.action_loginFragment_to_adminHomeFragment)
-                    Toast.makeText(requireContext(), "Inicio de sesión como administrador exitoso", Toast.LENGTH_SHORT).show()
+//                    findNavController().navigate(R.id.action_loginFragment_to_adminHomeFragment)
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "Inicio de sesión como administrador exitoso",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
                 }
-                */
+
 
                 else -> {
                     // Si el rol es null o no es válido, muestra un mensaje de error
-                    Toast.makeText(requireContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         })
