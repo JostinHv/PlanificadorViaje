@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,9 +17,10 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Timestamp
 import com.jostin.planificadorviaje.R
+import com.jostin.planificadorviaje.databinding.FragmentCreatePlanBinding
 import com.jostin.planificadorviaje.model.Plan
 import com.jostin.planificadorviaje.model.PlanType
-import com.jostin.planificadorviaje.databinding.FragmentCreatePlanBinding
+import com.jostin.planificadorviaje.ui.plan.hotel.HotelFormFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -33,10 +35,9 @@ class CreatePlanFragment : Fragment() {
     private val binding get() = _binding!!
     private val args: CreatePlanFragmentArgs by navArgs()
     private val viewModel: CreatePlanViewModel by viewModels()
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCreatePlanBinding.inflate(inflater, container, false)
         return binding.root
@@ -45,173 +46,212 @@ class CreatePlanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Setup toolbar
         binding.toolbarCreatePlan.apply {
             title = "Crear ${args.planType}"
             setNavigationOnClickListener { findNavController().navigateUp() }
         }
 
-        // Set up form fields based on plan type
+        // Setup form fields dynamically
         setupFormFields(args.planType)
-        savePlan()
-        binding.createPlanButton.setOnClickListener {
 
-            findNavController().navigate(R.id.action_createPlanFragment_to_homeFragment)
+        // Configure date input to open a calendar
+        setupDateInput()
+
+        // Save Plan button
+        binding.createPlanButton.setOnClickListener { savePlan() }
+    }
+
+    private fun setupDateInput() {
+        binding.dateInput.editText?.apply {
+            inputType = InputType.TYPE_NULL // Disable manual input
+            setOnClickListener { showDatePicker(this) }
         }
+    }
+
+    private fun showDatePicker(editText: EditText) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+            calendar.set(selectedYear, selectedMonth, selectedDay)
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            editText.setText(dateFormat.format(calendar.time))
+        }, year, month, day).show()
     }
 
     private fun savePlan() {
         val planDetails = mutableMapOf<String, Any>()
+
+        // Collect data from dynamically created fields
         binding.dynamicFieldsContainer.children.forEach { view ->
-            val inputField = view.findViewById<EditText>(R.id.text_input_edit_text)
-            val hint = view.findViewById<TextInputLayout>(R.id.text_input_layout).hint.toString()
-            planDetails[hint] = inputField.text.toString()
+            if (view is TextInputLayout) {
+                val hint = view.hint?.toString() ?: ""
+                val inputValue = view.editText?.text?.toString() ?: ""
+                planDetails[hint] = inputValue
+            }
         }
-        val type = getPlanTypeByNameRes(args.planType)
+
+        val title = binding.titleInput.editText?.text?.toString() ?: ""
+        if (title.isBlank()) {
+            binding.titleInput.error = "El título es obligatorio"
+            return
+        }
+
+        val dateString = binding.dateInput.editText?.text?.toString() ?: ""
+        if (dateString.isBlank()) {
+            binding.dateInput.error = "La fecha es obligatoria"
+            return
+        }
+
+        val date = try {
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            sdf.parse(dateString) ?: Date()
+        } catch (e: Exception) {
+            binding.dateInput.error = "Formato de fecha no válido"
+            return
+        }
+
+        // Construct the plan object
+        val type =
+            PlanType.entries.find { getString(it.nameRes) == args.planType } ?: PlanType.FLIGHT
         val plan = Plan(
             id = UUID.randomUUID().toString(),
-            itineraryId = args.itineraryId, // Recibido por Safe Args
-            type = type ?: PlanType.FLIGHT,
-            name = planDetails["Nombre"]?.toString() ?: "Plan",
-            date = Timestamp.now(),
+            itineraryId = args.itineraryId,
+            type = type,
+            name = title,
+            date = Timestamp(date),
             details = planDetails
         )
-        viewModel.savePlan(plan)
-    }
 
-    private fun getPlanTypeByNameRes(planNombre: String): PlanType? {
-        return PlanType.entries.find { getString(it.nameRes) == planNombre }
+        // Save plan using ViewModel
+        viewModel.savePlan(plan)
+        Toast.makeText(context, getString(R.string.plan_saved), Toast.LENGTH_SHORT).show()
+        findNavController().navigate(
+            CreatePlanFragmentDirections.actionCreatePlanFragmentToItineraryDetailFragment(args.itineraryId)
+        )
     }
 
     private fun setupFormFields(planType: String) {
+        val dynamicFields = binding.dynamicFieldsContainer
+
         when (planType) {
-            getString(PlanType.FLIGHT.nameRes) -> setupFlightFields()
-            getString(PlanType.ACCOMMODATION.nameRes) -> setupAccommodationFields()
-            getString(PlanType.CAR_RENTAL.nameRes) -> setupCarRentalFields()
-            getString(PlanType.MEETING.nameRes) -> setupMeetingFields()
-            getString(PlanType.ACTIVITY.nameRes) -> setupActivityFields()
-            getString(PlanType.RESTAURANT.nameRes) -> setupRestaurantFields()
-            getString(PlanType.TRANSPORT.nameRes) -> setupTransportFields()
-            else -> { /* Do nothing */
+            getString(PlanType.FLIGHT.nameRes) -> {
+                dynamicFields.apply {
+                    addView(createInputField("Aerolínea"))
+                    addView(createInputField("Número de Vuelo"))
+                    addView(createInputField("Aeropuerto de Salida"))
+                    addView(createInputField("Aeropuerto de Llegada"))
+                    addView(createDateTimeField("Hora de Salida"))
+                    addView(createDateTimeField("Hora de Llegada"))
+                }
             }
-        }
-    }
 
-    //Quisiera hacer que mi plan de Viaje que al seleccionarlo tenga un flujo, donde pasara a otra vista para ingresar
-    private fun setupFlightFields() {
-        binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Aerolínea"))
-            addView(createInputField("Número de Vuelo"))
-            addView(createInputField("Aeropuerto de Salida"))
-            addView(createInputField("Aeropuerto de Llegada"))
-            addView(createDateTimeField("Hora de Salida"))
-            addView(createDateTimeField("Hora de Llegada"))
-        }
-    }
+            getString(PlanType.ACCOMMODATION.nameRes) -> {
+                dynamicFields.apply {
+                    addView(createInputField("Nombre del Hotel"))
+                    addView(createInputField("Dirección"))
+                    addView(createDateTimeField("Fecha de Check-in"))
+                    addView(createDateTimeField("Fecha de Check-out"))
+                }
+            }
 
-    private fun setupAccommodationFields() {
-        binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Nombre del Hotel"))
-            addView(createInputField("Dirección"))
-            addView(createDateTimeField("Fecha de Check-in"))
-            addView(createDateTimeField("Fecha de Check-out"))
-            addView(createInputField("Tipo de Habitación"))
-        }
-    }
+            getString(PlanType.CAR_RENTAL.nameRes) -> {
+                dynamicFields.apply {
+                    addView(createInputField("Compañía de Alquiler"))
+                    addView(createInputField("Modelo del Vehículo"))
+                    addView(createInputField("Lugar de Recogida"))
+                    addView(createInputField("Lugar de Devolución"))
+                    addView(createDateTimeField("Fecha y Hora de Recogida"))
+                    addView(createDateTimeField("Fecha y Hora de Devolución"))
+                }
+            }
 
-    private fun setupCarRentalFields() {
-        binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Compañía de Alquiler"))
-            addView(createInputField("Modelo del Coche"))
-            addView(createDateTimeField("Fecha de Recogida"))
-            addView(createDateTimeField("Fecha de Devolución"))
-            addView(createInputField("Lugar de Recogida"))
-            addView(createInputField("Lugar de Devolución"))
-        }
-    }
+            getString(PlanType.MEETING.nameRes) -> {
+                dynamicFields.apply {
+                    addView(createInputField("Título de la Reunión"))
+                    addView(createInputField("Ubicación"))
+                    addView(createDateTimeField("Fecha y Hora"))
+                    addView(createInputField("Participantes"))
+                }
+            }
 
-    private fun setupMeetingFields() {
-        binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Título de la Reunión"))
-            addView(createInputField("Ubicación"))
-            addView(createDateTimeField("Fecha y Hora"))
-            addView(createInputField("Asistentes"))
-        }
-    }
+            getString(PlanType.ACTIVITY.nameRes) -> {
+                dynamicFields.apply {
+                    addView(createInputField("Nombre de la Actividad"))
+                    addView(createInputField("Lugar"))
+                    addView(createDateTimeField("Fecha y Hora"))
+                    addView(createInputField("Duración (Horas)"))
+                }
+            }
 
-    private fun setupActivityFields() {
-        binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Nombre de la Actividad"))
-            addView(createInputField("Ubicación"))
-            addView(createDateTimeField("Fecha y Hora"))
-            addView(createInputField("Duración"))
-        }
-    }
+            getString(PlanType.RESTAURANT.nameRes) -> {
+                dynamicFields.apply {
+                    addView(createInputField("Nombre del Restaurante"))
+                    addView(createInputField("Dirección"))
+                    addView(createDateTimeField("Fecha y Hora de Reserva"))
+                    addView(createInputField("Número de Personas"))
+                }
+            }
 
-    private fun setupRestaurantFields() {
-        binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Nombre del Restaurante"))
-            addView(createInputField("Dirección"))
-            addView(createDateTimeField("Fecha y Hora"))
-            addView(createInputField("Tipo de Cocina"))
-        }
-    }
-
-    private fun setupTransportFields() {
-        binding.dynamicFieldsContainer.apply {
-            addView(createInputField("Tipo de Transporte"))
-            addView(createInputField("Desde"))
-            addView(createInputField("Hacia"))
-            addView(createDateTimeField("Hora de Salida"))
-            addView(createDateTimeField("Hora de Llegada"))
+            getString(PlanType.TRANSPORT.nameRes) -> {
+                dynamicFields.apply {
+                    addView(createInputField("Tipo de Transporte"))
+                    addView(createInputField("Origen"))
+                    addView(createInputField("Destino"))
+                    addView(createDateTimeField("Hora de Salida"))
+                    addView(createDateTimeField("Hora de Llegada"))
+                }
+            }
         }
     }
 
 
     private fun createInputField(hint: String): View {
-        val textInputLayout = layoutInflater.inflate(
-            R.layout.item_text_input,
-            binding.dynamicFieldsContainer,
-            false
+        val inputField = layoutInflater.inflate(
+            R.layout.item_text_input, binding.dynamicFieldsContainer, false
         ) as TextInputLayout
-        textInputLayout.hint = hint
-        return textInputLayout
+        inputField.hint = hint
+        return inputField
     }
 
     private fun createDateTimeField(hint: String): View {
-        val textInputLayout = layoutInflater.inflate(
-            R.layout.item_text_input,
-            binding.dynamicFieldsContainer,
-            false
+        val dateTimeField = layoutInflater.inflate(
+            R.layout.item_text_input, binding.dynamicFieldsContainer, false
         ) as TextInputLayout
-        textInputLayout.hint = hint
-        val editText = textInputLayout.editText
-        editText?.inputType = InputType.TYPE_NULL
-        editText?.setOnClickListener {
-            showDateTimePicker(editText)
+        dateTimeField.hint = hint
+
+        val editText = dateTimeField.editText
+        editText?.apply {
+            inputType = InputType.TYPE_NULL
+            setOnClickListener { showDateTimePicker(this) }
         }
-        return textInputLayout
+        return dateTimeField
     }
 
     private fun showDateTimePicker(editText: EditText) {
-        val currentDateTime = Calendar.getInstance()
-        val startYear = currentDateTime.get(Calendar.YEAR)
-        val startMonth = currentDateTime.get(Calendar.MONTH)
-        val startDay = currentDateTime.get(Calendar.DAY_OF_MONTH)
-        val startHour = currentDateTime.get(Calendar.HOUR_OF_DAY)
-        val startMinute = currentDateTime.get(Calendar.MINUTE)
+        val currentDate = Calendar.getInstance()
+        val year = currentDate.get(Calendar.YEAR)
+        val month = currentDate.get(Calendar.MONTH)
+        val day = currentDate.get(Calendar.DAY_OF_MONTH)
+        val hour = currentDate.get(Calendar.HOUR_OF_DAY)
+        val minute = currentDate.get(Calendar.MINUTE)
 
-        DatePickerDialog(requireContext(), { _, year, month, day ->
-            TimePickerDialog(requireContext(), { _, hour, minute ->
-                val pickedDateTime = Calendar.getInstance()
-                pickedDateTime.set(year, month, day, hour, minute)
-                editText.setText(pickedDateTime.time.format())
-            }, startHour, startMinute, false).show()
-        }, startYear, startMonth, startDay).show()
-    }
-
-    private fun Date.format(): String {
-        val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
-        return formatter.format(this)
+        DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+            TimePickerDialog(requireContext(), { _, selectedHour, selectedMinute ->
+                val selectedDateTime = Calendar.getInstance()
+                selectedDateTime.set(
+                    selectedYear, selectedMonth, selectedDay, selectedHour, selectedMinute
+                )
+                val formattedDateTime =
+                    SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(
+                        selectedDateTime.time
+                    )
+                editText.setText(formattedDateTime)
+            }, hour, minute, false).show()
+        }, year, month, day).show()
     }
 
     override fun onDestroyView() {

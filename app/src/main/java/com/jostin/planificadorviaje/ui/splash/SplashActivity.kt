@@ -25,9 +25,6 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Opcional: Puedes utilizar inyecciones de Hilt si las necesitas
-        // Ejemplo: @Inject lateinit var someDependency: SomeDependency
-
         // Simular un tiempo de espera para la Splash o ejecutar alguna lógica
         Handler(Looper.getMainLooper()).postDelayed({
             // Navegar a la MainActivity
@@ -35,13 +32,8 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
             finish() // Finaliza la SplashActivity
         }, 2000)
-        // 1 segundo de espera, por ejemplo
+        // 3 segundo de espera, por ejemplo
 
-        // Si el usuario toca la imagen, puede ir a la MainActivity de inmediato
-//        binding.introBtn.setOnClickListener {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish() // Cierra SplashActivity
-//        }
+
     }
 }

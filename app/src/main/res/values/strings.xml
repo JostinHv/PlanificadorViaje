@@ -138,4 +138,7 @@
     <string name="popular_plan_categories">Categorias Populares</string>
     <string name="all_plan_types">Todas las categorias</string>
     <string name="my_map">Mapa</string>
+    <string name="details">Detalles</string>
+    <string name="title">Título</string>
+    <string name="plan_information">Información del Plan</string>
 </resources>
