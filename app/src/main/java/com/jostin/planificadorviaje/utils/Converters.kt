@@ -1,4 +1,4 @@
-package com.jostin.planificadorviaje.data.local
+package com.jostin.planificadorviaje.utils
 
 import androidx.room.TypeConverter
 import com.google.firebase.Timestamp

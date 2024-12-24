@@ -1,17 +1,16 @@
-package com.jostin.planificadorviaje.data.local.datasource
+package com.jostin.planificadorviaje.data.remote
 
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
-import com.jostin.planificadorviaje.data.local.datasource.interfaces.PlanDataSource
 import com.jostin.planificadorviaje.model.Plan
 import com.jostin.planificadorviaje.model.PlanType
 import kotlinx.coroutines.tasks.await
 
-class FirestorePlanDataSource(private val firestore: FirebaseFirestore) : PlanDataSource {
+class FirestorePlanDataSource(private val firestore: FirebaseFirestore) {
 
     private val plansCollection = firestore.collection("plans")
 
-    override suspend fun getPlansForItinerary(itineraryId: String): List<Plan> {
+    suspend fun getPlansForItinerary(itineraryId: String): List<Plan> {
         val querySnapshot = plansCollection
             .whereEqualTo("itineraryId", itineraryId)
             .get()
@@ -27,7 +26,7 @@ class FirestorePlanDataSource(private val firestore: FirebaseFirestore) : PlanDa
         }
     }
 
-    override suspend fun getPlan(id: String): Plan {
+    suspend fun getPlan(id: String): Plan {
         val document = plansCollection.document(id).get().await()
         val plan = document.toObject(Plan::class.java)?.apply {
             type = PlanType.fromString(document.getString("type") ?: "ACTIVITY")
@@ -35,21 +34,21 @@ class FirestorePlanDataSource(private val firestore: FirebaseFirestore) : PlanDa
         return plan ?: throw Exception("Plan not found")
     }
 
-    override suspend fun updatePlan(plan: Plan) {
+    suspend fun updatePlan(plan: Plan) {
         val data = plan.toMap()
         plansCollection.document(plan.id).set(data).await()
     }
 
-    override suspend fun createPlan(plan: Plan) {
+    suspend fun createPlan(plan: Plan) {
         val data = plan.toMap()
         plansCollection.document(plan.id).set(data).await()
     }
 
-    override suspend fun deletePlan(plan: Plan) {
+    suspend fun deletePlan(plan: Plan) {
         plansCollection.document(plan.id).delete().await()
     }
 
-    override suspend fun deletePlanById(id: String) {
+    suspend fun deletePlanById(id: String) {
         plansCollection.document(id).delete().await()
     }
 
@@ -58,7 +57,7 @@ class FirestorePlanDataSource(private val firestore: FirebaseFirestore) : PlanDa
         return mapOf(
             "id" to id,
             "itineraryId" to itineraryId,
-            "type" to com.jostin.planificadorviaje.model.PlanType.toString(type),
+            "type" to PlanType.toString(type),
             "name" to name,
             "date" to date.toDate(), // Almacenar Date como timestamp en Firestore
             "details" to details

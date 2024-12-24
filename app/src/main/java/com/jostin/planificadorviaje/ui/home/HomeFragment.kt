@@ -119,11 +119,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun toggleEmptyState(isEmpty: Boolean) {
-        binding.emptyStateLayout.root.visibility = if (isEmpty) View.VISIBLE else View.GONE
-        binding.upcomingTripCard.root.visibility = if (isEmpty) View.GONE else View.VISIBLE
-        binding.yourItinerariesTitle.visibility = if (isEmpty) View.GONE else View.VISIBLE
-        binding.itinerariesRecyclerView.visibility = if (isEmpty) View.GONE else View.VISIBLE
-        binding.addItineraryFab.visibility = if (isEmpty) View.GONE else View.VISIBLE
+        // Actualiza la visibilidad de los elementos en función de si hay itinerarios
+        binding.apply {
+            emptyStateLayout.root.visibility = if (isEmpty) View.VISIBLE else View.GONE
+            upcomingTripCard.root.visibility = if (isEmpty) View.GONE else View.VISIBLE
+            yourItinerariesTitle.visibility = if (isEmpty) View.GONE else View.VISIBLE
+            itinerariesRecyclerView.visibility = if (isEmpty) View.GONE else View.VISIBLE
+            addItineraryFab.visibility = if (isEmpty) View.GONE else View.VISIBLE
+        }
     }
 
     private fun displayUpcomingItinerary(itinerary: Itinerary) {

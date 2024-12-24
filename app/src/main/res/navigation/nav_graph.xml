@@ -43,6 +43,7 @@
         android:name="com.jostin.planificadorviaje.ui.admin.AdminHotelFragment"
         android:label="fragment_admin_hotel"
         tools:layout="@layout/fragment_admin_hotel">
+
     </fragment>
 
     <fragment
@@ -50,6 +51,7 @@
         android:name="com.jostin.planificadorviaje.ui.admin.RestaurantesFragment"
         android:label="fragment_restaurantes"
         tools:layout="@layout/fragment_restaurantes">
+
     </fragment>
 
     <fragment
@@ -66,9 +68,6 @@
         <action
             android:id="@+id/action_selectPlanTypeFragment_to_createPlanFragment"
             app:destination="@id/createPlanFragment" />
-        <action
-            android:id="@+id/action_selectPlanTypeFragment_to_viajesFragment"
-            app:destination="@id/viajesFragment" />
         <!-- Acción hacia RestaurantFormFragment -->
         <action
             android:id="@+id/actionSelectPlanTypeFragmentToRestaurantFormFragment"
@@ -145,22 +144,6 @@
             app:argType="com.jostin.planificadorviaje.model.City" />
     </fragment>
 
-
-    <fragment
-        android:id="@+id/itineraryFragment"
-        android:name="com.jostin.planificadorviaje.ui.itinerary.ItineraryFragment"
-        android:label="@string/itinerary"
-        tools:layout="@layout/fragment_itinerary">
-        <action
-            android:id="@+id/action_itineraryFragment_to_planFragment"
-            app:destination="@id/planFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/planFragment"
-        android:name="com.jostin.planificadorviaje.ui.plan.PlanFragment"
-        android:label="@string/plan"
-        tools:layout="@layout/fragment_plan" />
 
     <fragment
         android:id="@+id/accountFragment"
@@ -258,125 +241,17 @@
             android:name="itineraryId"
             app:argType="string" />
         <action
-            android:id="@+id/action_createPlanFragment_to_itineraryFragment"
-            app:destination="@id/itineraryFragment" />
-        <action
             android:id="@+id/action_createPlanFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_createPlanFragment_to_viajesFragment"
-            app:destination="@id/viajesFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/viajeOpcionesFragment"
-        android:name="com.jostin.planificadorviaje.ui.viaje.opciones.ViajeOpcionesFragment"
-        android:label="Opciones de Viaje">
-        <argument
-            android:name="origen"
-            app:argType="string" />
-        <argument
-            android:name="destino"
-            app:argType="string" />
-        <argument
-            android:name="personCount"
-            app:argType="integer" />
-
-        <argument
-            android:name="selectedDate"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_viajeOpcionesFragment_to_hospedajeFragment"
-            app:destination="@id/hospedajeFragment">
-            <argument
-                android:name="opcionId"
-                app:argType="string" />
-        </action>
-    </fragment>
-
-    <!-- Hospedaje -->
-    <fragment
-        android:id="@+id/hospedajeFragment"
-        android:name="com.jostin.planificadorviaje.ui.viaje.hospedaje.HotelFragment"
-        android:label="Hospedaje">
-        <action
-            android:id="@+id/actionHospedajeToResultadosHospedaje"
-            app:destination="@id/resultadosHospedajeFragment"></action>
-    </fragment>
-
-    <!-- Resultados Hospedaje -->
-    <fragment
-        android:id="@+id/resultadosHospedajeFragment"
-        android:name="com.jostin.planificadorviaje.ui.viaje.hospedaje.ResultadosHospedajeFragment"
-        android:label="Resultados Hospedaje"
-        tools:layout="@layout/fragment_resultados_hospedaje">
-        <argument
-            android:name="checkInDate"
-            app:argType="string" />
-        <argument
-            android:name="checkOutDate"
-            app:argType="string" />
-        <argument
-            android:name="personCount"
-            app:argType="integer" />
-        <action
-            android:id="@+id/actionToConfirmarReserva"
-            app:destination="@id/confirmarReservaFragment" />
-    </fragment>
-
-    <!-- Confirmar Reserva -->
-    <fragment
-        android:id="@+id/confirmarReservaFragment"
-        android:name="com.jostin.planificadorviaje.ui.viaje.hospedaje.ConfirmarReservaFragment"
-        android:label="Confirmar Reserva">
-        <argument
-            android:name="hotelId"
-            app:argType="string" />
-        <argument
-            android:name="fechaEntrada"
-            app:argType="string" />
-        <argument
-            android:name="fechaSalida"
-            app:argType="string" />
-        <argument
-            android:name="personas"
-            app:argType="integer" />
-        <action
-            android:id="@+id/action_confirmarReservaFragment_to_resumenFragment"
-            app:destination="@id/resumenReservaFragment" />
-    </fragment>
-    <!-- Reserva Confirmada -->
-    <fragment
-        android:id="@+id/resumenReservaFragment"
-        android:name="com.jostin.planificadorviaje.ui.viaje.resumen.ResumenFragment"
-        android:label="Resumen Reserva">
-        <argument
-            android:name="reservaId"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/viajesFragment"
-        android:name="com.jostin.planificadorviaje.ui.viaje.ViajesFragment"
-        android:label="Planifica tu Viaje">
-        <action
-            android:id="@+id/action_viajesFragment_to_viajeOpcionesFragment"
-            app:destination="@id/viajeOpcionesFragment">
-            <argument
-                android:name="origen"
-                app:argType="string" />
-            <argument
-                android:name="destino"
-                app:argType="string" />
-
-        </action>
-    </fragment>
 
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.jostin.planificadorviaje.ui.map.MapFragment"
         android:label="Mapa"
         tools:layout="@layout/fragment_map">
+
     </fragment>
 
 </navigation>

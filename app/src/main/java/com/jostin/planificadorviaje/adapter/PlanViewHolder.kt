@@ -1,4 +1,4 @@
-package com.jostin.planificadorviaje.ui.plan
+package com.jostin.planificadorviaje.adapter
 
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
@@ -40,10 +40,6 @@ class PlanViewHolder(
                 PlanType.CAR_RENTAL -> Pair(R.drawable.ic_car, R.color.white)
                 PlanType.MEETING -> Pair(R.drawable.ic_meeting, R.color.white)
                 PlanType.TRANSPORT -> Pair(R.drawable.ic_transport, R.color.white)
-                PlanType.PACKAGE_TRIP -> Pair(
-                    R.drawable.ic_package_trip,
-                    R.color.white
-                )
             }
             imageViewPlanType.setImageResource(iconResId)
             imageViewPlanType.backgroundTintList =

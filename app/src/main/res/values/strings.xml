@@ -41,7 +41,7 @@
     <string name="select_plan_type">Tipo de plan</string>
     <string name="create_plan">Crear Plan</string>
     <string name="plan_type_flight">Vuelo</string>
-    <string name="plan_type_accommodation">Hospedaje</string>
+    <string name="plan_type_accommodation">Hotel</string>
     <string name="plan_type_car_rental">Alquilar Vehiculo</string>
     <string name="plan_type_meeting">Reunion</string>
     <string name="plan_type_activity">Actividad</string>
@@ -86,18 +86,18 @@
     <string name="check_out_date">Fecha de Check-out</string>
     <string name="hotel_location">Ubicación del Hotel</string>
     <string name="add_or_change_hotel">Agregar o Cambiar Hotel</string>
-    <string name="save_hotel_plan">Guardar Plan de Hotel</string>
+    <string name="save_hotel_plan">Guardar Hotel</string>
     <string name="hotel_image">Imagen del Hotel</string>
     <string name="error_plan_name_required">El nombre del plan es requerido</string>
     <string name="error_invalid_dates">Las fechas seleccionadas no son válidas</string>
     <string name="error_hotel_required">Debe seleccionar un hotel</string>
     <string name="plan_saved">Plan guardado exitosamente</string>
     <string name="hotel_form">Formulario Hotel</string>
-    <string name="add_hotel_plan">Agregar Plan de Hotel</string>
+    <string name="add_hotel_plan">Agregar Hotel</string>
     <string name="add_hotel">Agregar Hotel</string>
     <string name="basic_info">Información Básica</string>
 
-    <string name="plan_name">Nombre del Plan</string>
+    <string name="plan_name">Título</string>
     <string name="change_hotel">Cambiar Hotel</string>
     <string name="hotel_info">Información del Hotel</string>
     <string name="view_details">Ver Detalles</string>
@@ -113,7 +113,7 @@
     <string name="explore">Explorar</string>
     <string name="restaurant_info">Información del Restaurante</string>
     <string name="change_restaurant">Cambiar Restaurante</string>
-    <string name="add_restaurant_plan">Agregar Plan de Restaurante</string>
+    <string name="add_restaurant_plan">Agregar Restaurante</string>
     <string name="view_trip">Ver Detalles</string>
     <string name="create_first_trip">Crea tu primer Itinerario</string>
     <string name="delete_itinerary">Eliminar Itinerario</string>

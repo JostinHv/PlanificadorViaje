@@ -1,30 +1,29 @@
-package com.jostin.planificadorviaje.data.local.datasource
+package com.jostin.planificadorviaje.data.remote
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.jostin.planificadorviaje.data.local.datasource.interfaces.UserDataSource
 import com.jostin.planificadorviaje.model.User
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class FirestoreUserDataSource @Inject constructor(
     private val firestore: FirebaseFirestore
-) : UserDataSource {
+) {
     private val userCollection = firestore.collection("users")
 
-    override suspend fun getAllUsers(): List<User> {
+    suspend fun getAllUsers(): List<User> {
         return userCollection.get().await().toObjects(User::class.java)
     }
 
-    override suspend fun getUserByEmail(email: String): User? {
+    suspend fun getUserByEmail(email: String): User? {
         val querySnapshot = userCollection.whereEqualTo("email", email).get().await()
         return querySnapshot.documents.firstOrNull()?.toObject(User::class.java)
     }
 
-    override suspend fun createUser(user: User) {
+    suspend fun createUser(user: User) {
         userCollection.document(user.id).set(user).await()
     }
 
-    override suspend fun updateUser(user: User) {
+    suspend fun updateUser(user: User) {
         userCollection.document(user.id).update(
             mapOf(
                 "name" to user.name,
@@ -37,7 +36,7 @@ class FirestoreUserDataSource @Inject constructor(
         ).await()
     }
 
-    override suspend fun clearUsers() {
+    suspend fun clearUsers() {
         userCollection.get().await().documents.forEach {
             userCollection.document(it.id).delete().await()
         }

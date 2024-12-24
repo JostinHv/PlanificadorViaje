@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jostin.planificadorviaje.model.Plan
 import com.jostin.planificadorviaje.databinding.ItemPlanBinding
-import com.jostin.planificadorviaje.ui.plan.PlanViewHolder
 
 class PlanAdapter(
     private var plans: List<Plan>,

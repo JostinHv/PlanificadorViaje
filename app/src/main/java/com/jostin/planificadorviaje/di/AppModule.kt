@@ -1,44 +1,23 @@
 package com.jostin.planificadorviaje.di
 
-import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
+import com.jostin.planificadorviaje.data.remote.FirestoreItineraryDataSource
+import com.jostin.planificadorviaje.data.remote.FirestorePlanDataSource
+import com.jostin.planificadorviaje.data.remote.FirestoreUserDataSource
 import com.jostin.planificadorviaje.data.repository.AdminHotelRepository
-import com.jostin.planificadorviaje.data.local.AppDatabase
-import com.jostin.planificadorviaje.data.local.datasource.FirestoreItineraryDataSource
-import com.jostin.planificadorviaje.data.local.datasource.FirestorePlanDataSource
-import com.jostin.planificadorviaje.data.local.datasource.FirestoreUserDataSource
-import com.jostin.planificadorviaje.data.local.datasource.LocalDataSource
-import com.jostin.planificadorviaje.data.local.datasource.implementation.*
-import com.jostin.planificadorviaje.data.repository.*
+import com.jostin.planificadorviaje.data.repository.CityRepository
+import com.jostin.planificadorviaje.data.repository.ItineraryRepository
+import com.jostin.planificadorviaje.data.repository.PlanRepository
+import com.jostin.planificadorviaje.data.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
-    @Singleton
-    @Provides
-    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
-        return AppDatabase.getDatabase(context)
-    }
-
-    @Singleton
-    @Provides
-    fun provideLocalDataSource(database: AppDatabase): LocalDataSource {
-        return LocalDataSource(
-            ItineraryLocalDataSource(database),
-            UserLocalDataSource(database),
-            PlaceLocalDataSource(database),
-            HotelLocalDataSource(database),
-            ReservaLocalDataSource(database),
-            PlanLocalDataSource(database)
-        )
-    }
 
     @Provides
     @Singleton
@@ -71,28 +50,11 @@ object AppModule {
     @Singleton
     @Provides
     fun provideUserRepository(
-        localDataSource: LocalDataSource, remoteDataSource: FirestoreUserDataSource
+        remoteDataSource: FirestoreUserDataSource
     ): UserRepository {
-        return UserRepository(localDataSource, remoteDataSource)
+        return UserRepository(remoteDataSource)
     }
 
-    @Singleton
-    @Provides
-    fun providePlaceRepository(localDataSource: LocalDataSource): PlaceRepository {
-        return PlaceRepository(localDataSource)
-    }
-
-    @Singleton
-    @Provides
-    fun provideHotelRepository(localDataSource: LocalDataSource): HotelRepository {
-        return HotelRepository(localDataSource)
-    }
-
-    @Singleton
-    @Provides
-    fun provideReservaRepository(localDataSource: LocalDataSource): ReservaRepository {
-        return ReservaRepository(localDataSource)
-    }
 
     @Singleton
     @Provides
@@ -115,4 +77,6 @@ object AppModule {
     fun provideCityRepository(): CityRepository {
         return CityRepository()
     }
+
+
 }

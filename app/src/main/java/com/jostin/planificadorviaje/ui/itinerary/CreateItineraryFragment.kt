@@ -75,8 +75,8 @@ class CreateItineraryFragment : Fragment() {
             return
         }
 
-        val userId = UserSessionManager.getCurrentUser()?.id ?: ""
-        val sharedWith = listOf(UserSessionManager.getCurrentUser()!!)
+        val userId = UserSessionManager.getCurrentUser().id
+        val sharedWith = listOf(UserSessionManager.getCurrentUser())
         // Crear el itinerario usando el ViewModel
         viewModel.createItinerary(
             name,

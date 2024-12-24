@@ -23,6 +23,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private val viewModel: MapViewModel by viewModels()
     private lateinit var googleMap: GoogleMap
 
+    // Coordenadas del Perú (centro aproximado)
+    private val peruLocation = LatLng(-9.189967, -75.015152)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,13 +49,16 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     private fun observeData() {
         viewModel.citiesWithCoordinates.observe(viewLifecycleOwner) { cities ->
-            showMarkersOnMap(cities)
+            if (cities.isNotEmpty()) {
+                showMarkersOnMap(cities)
+            } else {
+                // Centrar el mapa en Perú si no hay marcadores
+                centerMapOnPeru()
+            }
         }
     }
 
     private fun showMarkersOnMap(cities: List<City>) {
-        if (cities.isEmpty()) return
-
         val boundsBuilder = LatLngBounds.Builder()
         cities.forEach { city ->
             val location = LatLng(city.latitude, city.longitude)
@@ -69,4 +75,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         )
     }
 
+    private fun centerMapOnPeru() {
+        googleMap.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(peruLocation, 5f) // Zoom nivel 5 para cubrir el país
+        )
+    }
 }

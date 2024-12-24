@@ -20,6 +20,7 @@
             app:title="@string/select_plan_type"
             app:titleTextColor="@color/black"
             app:navigationIcon="@drawable/ic_arrow_back"
+            app:titleTextAppearance="@style/ToolbarTitleStyle"
             app:navigationIconTint="@color/black"/>
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -1,6 +1,6 @@
 package com.jostin.planificadorviaje.data.repository
 
-import com.jostin.planificadorviaje.data.local.datasource.FirestorePlanDataSource
+import com.jostin.planificadorviaje.data.remote.FirestorePlanDataSource
 import com.jostin.planificadorviaje.model.Plan
 
 class PlanRepository(

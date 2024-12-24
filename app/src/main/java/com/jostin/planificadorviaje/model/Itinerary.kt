@@ -5,9 +5,8 @@ import androidx.room.PrimaryKey
 import com.google.firebase.firestore.DocumentId
 import java.util.Date
 
-@Entity(tableName = "itineraries")
 data class Itinerary(
-    @DocumentId @PrimaryKey val id: String = "",
+    @DocumentId val id: String = "",
     val name: String = "",
     val userId: String = "",
     val destination: String = "",

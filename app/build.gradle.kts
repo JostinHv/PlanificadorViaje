@@ -53,7 +53,9 @@ dependencies {
     // Room
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
+    // Firebase
     implementation(libs.firebase.crashlytics.buildtools)
+    // Navigation
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui.ktx)
     kapt("androidx.room:room-compiler:2.6.1") // Asegúrate de usar KAPT para Room Compiler

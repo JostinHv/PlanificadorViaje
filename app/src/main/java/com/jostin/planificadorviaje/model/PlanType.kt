@@ -10,8 +10,7 @@ enum class PlanType(@DrawableRes val iconRes: Int, val nameRes: Int) {
     MEETING(R.drawable.ic_meeting, R.string.plan_type_meeting),
     ACTIVITY(R.drawable.ic_activity, R.string.plan_type_activity),
     RESTAURANT(R.drawable.ic_restaurant, R.string.plan_type_restaurant),
-    TRANSPORT(R.drawable.ic_transport, R.string.plan_type_transport),
-    PACKAGE_TRIP(R.drawable.ic_package_trip, R.string.plan_type_package_trip);
+    TRANSPORT(R.drawable.ic_transport, R.string.plan_type_transport);
 
     companion object {
         fun fromString(name: String): PlanType {

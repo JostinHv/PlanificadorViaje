@@ -1,6 +1,6 @@
 package com.jostin.planificadorviaje.data.repository
 
-import com.jostin.planificadorviaje.data.local.datasource.FirestoreItineraryDataSource
+import com.jostin.planificadorviaje.data.remote.FirestoreItineraryDataSource
 import com.jostin.planificadorviaje.model.Itinerary
 import com.jostin.planificadorviaje.model.ItineraryWithPlans
 

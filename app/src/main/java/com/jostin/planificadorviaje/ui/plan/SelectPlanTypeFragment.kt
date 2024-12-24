@@ -28,11 +28,9 @@ class SelectPlanTypeFragment : Fragment() {
         PlanType.ACTIVITY,
         PlanType.RESTAURANT,
         PlanType.TRANSPORT,
-        //PlanType.PACKAGE_TRIP,
     )
 
     private val popularPlanTypes = listOf(
-        //PlanType.PACKAGE_TRIP,
         PlanType.ACCOMMODATION,
         PlanType.RESTAURANT,
     )
@@ -58,7 +56,8 @@ class SelectPlanTypeFragment : Fragment() {
 
     private fun setupPopularPlanTypes() {
         val popularAdapter = PlanTypeAdapter(popularPlanTypes, ::onPlanTypeSelected)
-        binding.popularPlanTypesRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.popularPlanTypesRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.popularPlanTypesRecyclerView.adapter = popularAdapter
     }
 
@@ -70,27 +69,28 @@ class SelectPlanTypeFragment : Fragment() {
 
     private fun onPlanTypeSelected(planType: PlanType) {
         when (planType) {
-            PlanType.PACKAGE_TRIP -> {
-                val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToViajesFragment()
-                findNavController().navigate(action)
-            }
             PlanType.RESTAURANT -> {
-                val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToRestaurantFormFragment(
-                    args.itineraryId, args.city
-                )
+                val action =
+                    SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToRestaurantFormFragment(
+                        args.itineraryId, args.city
+                    )
                 findNavController().navigate(action)
             }
+
             PlanType.ACCOMMODATION -> {
-                val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToHotelFormFragment(
-                    args.itineraryId, args.city
-                )
+                val action =
+                    SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToHotelFormFragment(
+                        args.itineraryId, args.city
+                    )
                 findNavController().navigate(action)
             }
+
             else -> {
-                val action = SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToCreatePlanFragment(
-                    getString(planType.nameRes),
-                    args.itineraryId
-                )
+                val action =
+                    SelectPlanTypeFragmentDirections.actionSelectPlanTypeFragmentToCreatePlanFragment(
+                        getString(planType.nameRes),
+                        args.itineraryId
+                    )
                 findNavController().navigate(action)
             }
         }

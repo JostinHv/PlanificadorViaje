@@ -1,4 +1,4 @@
-package com.jostin.planificadorviaje.data.local.datasource
+package com.jostin.planificadorviaje.data.remote
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject

@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationIconTint="@color/icon_color"
+            app:navigationIconTint="@color/black"
             app:title="@string/add_hotel_plan"
             app:titleTextAppearance="@style/ToolbarTitleStyle"
             app:titleTextColor="@color/text_primary">
@@ -215,11 +215,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:drawableStart="@drawable/ic_location"
                             android:drawablePadding="8dp"
-                            android:drawableTint="@color/icon_color"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                             android:textColor="@color/text_secondary"
+                            app:drawableStartCompat="@drawable/ic_location"
+                            app:drawableTint="@color/icon_color"
                             tools:text="Calle José Santos Chocano Mza. K, Lote 11, Sector B-8, Huarmey 02650, Peru" />
 
                         <TextView
@@ -227,11 +227,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:drawableStart="@drawable/ic_price"
                             android:drawablePadding="8dp"
-                            android:drawableTint="@color/icon_color"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                             android:textColor="@color/text_secondary"
+                            app:drawableStartCompat="@drawable/ic_price"
+                            app:drawableTint="@color/icon_color"
                             tools:text="$100 por noche" />
 
                         <com.google.android.material.chip.ChipGroup
@@ -272,21 +272,22 @@
                 android:padding="12dp"
                 android:text="@string/change_hotel"
                 android:textAllCaps="false"
+                android:textColor="@color/black"
                 app:cornerRadius="8dp"
                 app:icon="@drawable/ic_edit"
                 app:iconGravity="textStart"
-                app:iconTint="@color/primary_color"
+                app:iconTint="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cvPlace"
-                app:strokeColor="@color/primary_color" />
+                app:strokeColor="@color/black" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSave"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="@color/primary_color"
+                android:backgroundTint="@color/black"
                 android:padding="12dp"
                 android:text="@string/save_hotel_plan"
                 android:textAllCaps="false"
