@@ -16,6 +16,7 @@ import com.jostin.planificadorviaje.model.Itinerary
 import com.jostin.planificadorviaje.databinding.FragmentHomeBinding
 import com.jostin.planificadorviaje.adapter.ItineraryAdapter
 import com.jostin.planificadorviaje.utils.DateUtils.Companion.formatDateRange
+import com.jostin.planificadorviaje.utils.UserSessionManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,11 +44,16 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (!UserSessionManager.isLoggedIn()) {
+            redirectToLogin()
+        }
         setupToolbar()
         setupRecyclerView()
         setupFab()
         setupEmptyState()
         observeViewModel()
+
 
         binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             if (Math.abs(verticalOffset) == appBarLayout.totalScrollRange) {
@@ -69,6 +75,10 @@ class HomeFragment : Fragment() {
             }
         })
 
+    }
+
+    private fun redirectToLogin() {
+        findNavController().navigate(R.id.loginFragment)
     }
 
     override fun onResume() {

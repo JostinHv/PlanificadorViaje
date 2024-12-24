@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.navigation.findNavController
 import com.jostin.planificadorviaje.MainActivity
+import com.jostin.planificadorviaje.R
 import com.jostin.planificadorviaje.databinding.ActivitySplashBinding
+import com.jostin.planificadorviaje.utils.UserSessionManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +34,8 @@ class SplashActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish() // Finaliza la SplashActivity
-        }, 2000) // 1 segundo de espera, por ejemplo
+        }, 2000)
+        // 1 segundo de espera, por ejemplo
 
         // Si el usuario toca la imagen, puede ir a la MainActivity de inmediato
 //        binding.introBtn.setOnClickListener {

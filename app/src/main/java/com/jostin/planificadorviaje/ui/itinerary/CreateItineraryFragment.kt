@@ -146,13 +146,13 @@ class CreateItineraryFragment : Fragment() {
             // Ajustar la fecha inicial
             val startCalendar = Calendar.getInstance(timeZone)
             startCalendar.timeInMillis = dateRange.first ?: 0
-            startCalendar.add(Calendar.DAY_OF_MONTH, 1) // Sumar un día
+            startCalendar.add(Calendar.DAY_OF_MONTH, 0) // Sumar un día
             startDate = startCalendar.time
 
             // Ajustar la fecha final
             val endCalendar = Calendar.getInstance(timeZone)
             endCalendar.timeInMillis = dateRange.second ?: 0
-            endCalendar.add(Calendar.DAY_OF_MONTH, 1) // Sumar un día
+            endCalendar.add(Calendar.DAY_OF_MONTH, 0) // Sumar un día
             endDate = endCalendar.time
 
             // Formatear las fechas para mostrarlas

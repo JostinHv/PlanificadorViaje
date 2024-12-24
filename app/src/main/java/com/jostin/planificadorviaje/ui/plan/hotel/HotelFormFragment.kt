@@ -2,6 +2,7 @@ package com.jostin.planificadorviaje.ui.plan.hotel
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +46,7 @@ class HotelFormFragment : Fragment() {
         setupPlaceSelection()
         setupSaveButton()
         observeViewModel()
+
     }
 
     private fun setupToolbar() {
@@ -183,7 +185,9 @@ class HotelFormFragment : Fragment() {
             id = UUID.randomUUID().toString(),
             type = PlanType.ACCOMMODATION,
             name = binding.etPlanName.text.toString(),
-            date = Timestamp(viewModel.checkInDate.value ?: Date()), // Usa la fecha actual si es nulo
+            date = Timestamp(
+                viewModel.checkInDate.value ?: Date()
+            ), // Usa la fecha actual si es nulo
             details = details,
             itineraryId = args.itineraryId
         )

@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.core.app.ActivityCompat
@@ -57,7 +58,7 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.d("MapHotel", "setupPlaceSelection: ${args.city}")
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -91,7 +92,6 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
                 )
             ) // Extremo inferior izquierdo
             .build()
-
         map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
 
         // Agregar marcador para la ciudad

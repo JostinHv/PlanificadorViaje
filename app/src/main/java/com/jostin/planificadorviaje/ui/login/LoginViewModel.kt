@@ -84,10 +84,10 @@ class LoginViewModel @Inject constructor(
                 role = "Usuario"
             )
             val isRegistered = loginRepository.registerUser(user)
-            if (isRegistered) {
-                UserSessionManager.saveUser(context, user)
-                _currentUser.value = user
-            }
+//            if (isRegistered) {
+//                UserSessionManager.saveUser(context, user)
+//                _currentUser.value = user
+//            }
             _registrationResult.value = isRegistered
         }
     }
