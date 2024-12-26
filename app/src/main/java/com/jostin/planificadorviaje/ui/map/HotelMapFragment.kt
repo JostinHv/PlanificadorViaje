@@ -45,7 +45,7 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
     private var currentMarker: Marker? = null
     private val args: HotelMapFragmentArgs by navArgs()
 
-    private val defaultLocation = LatLng(-33.8523341, 151.2106085)
+    private val defaultLocation = LatLng(-9.18996, -75.015152)
     private val DEFAULT_ZOOM = 15f
 
     override fun onCreateView(
@@ -58,7 +58,6 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("MapHotel", "setupPlaceSelection: ${args.city}")
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -374,11 +373,11 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
         btnCancel.setOnClickListener {
             dialog.dismiss()
         }
-        // Cargar imagen usando Glide
+
         if (!photoUrl.isNullOrEmpty()) {
             Glide.with(requireContext())
                 .load(photoUrl)
-                .placeholder(R.drawable.hotel_placeholder) // Imagen de marcador de posición
+                .placeholder(R.drawable.hotel_placeholder)
                 .into(hotelImage)
         } else {
             hotelImage.setImageResource(R.drawable.hotel_placeholder)
@@ -393,7 +392,7 @@ class HotelMapFragment : Fragment(), OnMapReadyCallback {
                 imageUrl = photoUrl,
                 rating = rating.toFloat(),
                 details = amenities,
-                price = price // Agregar el precio al objeto Place
+                price = price
             )
             navigateBackWithResult(place)
             dialog.dismiss()

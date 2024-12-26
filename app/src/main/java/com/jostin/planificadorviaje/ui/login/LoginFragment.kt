@@ -80,22 +80,19 @@ class LoginFragment : Fragment() {
 
             when (rol) {
                 "Usuario" -> {
-                    // Redirigir al flujo de usuario
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                     Toast.makeText(requireContext(), "Inicio de sesión exitoso", Toast.LENGTH_SHORT)
                         .show()
                 }
 
-                // Deja comentado el flujo de administrador para implementar en el futuro
                 "admin" -> {
-                   findNavController().navigate(R.id.action_loginFragment_to_adminHomeFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_adminHomeFragment)
                     Toast.makeText(
                         requireContext(),
                         "Inicio de sesión como administrador exitoso",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
 
                 else -> {
                     // Si el rol es null o no es válido, muestra un mensaje de error
